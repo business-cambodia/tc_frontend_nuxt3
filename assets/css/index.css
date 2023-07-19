@@ -1,0 +1,8 @@
+* {
+    font-family: "Ubuntu", "Kantumruy Pro";
+  }
+  
+  ::selection {
+    background: #64c6ff;
+    color: white;
+  }
