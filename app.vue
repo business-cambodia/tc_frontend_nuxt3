@@ -4,4 +4,9 @@
   <NuxtPage />
 </template>
 
-<script setup></script>
+<script setup>
+import AOS from "aos";
+if (process.client) {
+  AOS.init();
+}
+</script>
