@@ -1,0 +1,93 @@
+<template>
+  <div class="">
+    <div
+      :style="{
+        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${useImg(
+          heroArticles[currentIndex].thumbnail
+        )})`,
+      }"
+      class="w-full h-hero object-cover bg-center bg-no-repeat bg-cover"
+    >
+      <div
+        class="h-full flex flex-col justify-center text-center px-6 lg:px-20"
+      >
+        <div
+          class="text-white text-2xl lg:text-4xl xl:text-5xl 2xl:text-5xl font-medium hero-title mt-4"
+        >
+          {{ heroArticles[currentIndex].title }}
+        </div>
+
+        <div
+          class="flex items-center flex-wrap justify-center w-full mt-2 text-xs lg:text-base text-gray-200"
+        >
+          <div class="flex">
+            <div class="font-light self-center">
+              {{ $formatDate(heroArticles[currentIndex].date_created) }}
+            </div>
+            <div class="text-lg mx-4">•</div>
+            <div class="font-light self-center">
+              {{ heroArticles[currentIndex].category.name }}
+            </div>
+            <div class="text-lg mx-4">•</div>
+            <div class="font-light transform hover:underline self-center">
+              {{
+                heroArticles[currentIndex].user_created.first_name +
+                " " +
+                heroArticles[currentIndex].user_created.last_name
+              }}
+            </div>
+          </div>
+          <div class="flex">
+            <div class="text-lg mx-4">•</div>
+            <div class="font-light self-center">
+              {{ heroArticles[currentIndex].views }} views
+            </div>
+            <div class="text-lg mx-4">•</div>
+            <div class="font-light self-center">
+              {{ $calculateReadTime(heroArticles[currentIndex].body) }}
+            </div>
+          </div>
+        </div>
+        <div class="mt-10">
+          <nuxt-link :to="'/articles/' + heroArticles[currentIndex].slug">
+            <button
+              class="text-white bg-primary font-bold px-10 py-2 text-base rounded-3xl transform transition duration-300 hover:scale-90"
+            >
+              បន្តការអាន
+            </button>
+          </nuxt-link>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { IArticle } from "types/article";
+
+const currentIndex = ref(0);
+
+const props = defineProps<{
+  heroArticles: IArticle[];
+}>();
+
+const autoPlayCarousel = () => {
+  setInterval(() => {
+    if (currentIndex.value == props.heroArticles.length - 1) {
+      currentIndex.value = 0;
+      return;
+    }
+    currentIndex.value += 1;
+  }, 5000);
+};
+
+onMounted(() => {
+  autoPlayCarousel();
+});
+</script>
+
+<style>
+.hero-title {
+  line-height: 1.5;
+}
+</style>
