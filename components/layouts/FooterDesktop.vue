@@ -11,24 +11,26 @@
         <i class="fab fa-telegram mx-4"></i>
       </div>
     </div>
-    <div class="grid grid-cols-3 pt-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 pt-10 gap-4">
       <div class="flex justify-center">
         <div>
-          <div class="font-semibold text-2xl">ស្វែងយល់អំពីពួកយើង</div>
-          <ul class="mt-6 list-none font-thin cursor-pointer">
+          <div class="font-semibold text-xl md:text-2xl">
+            ស្វែងយល់អំពីពួកយើង
+          </div>
+          <ul class="mt-3 md:mt-6 list-none font-thin cursor-pointer">
             <li class="transform hover:underline">
-              <nuxt-link to="" class="mx-2">About Us</nuxt-link>
+              <nuxt-link to="" class="mx-1 md:mx-2">About Us</nuxt-link>
             </li>
             <li class="transform hover:underline">
-              <nuxt-link class="mx-2">Our Services</nuxt-link>
+              <nuxt-link class="mx-1 md:mx-2">Our Services</nuxt-link>
             </li>
           </ul>
         </div>
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center ">
         <div>
-          <div class="font-semibold text-2xl">ផ្នែកដែលពេញនិយម</div>
-          <div class="flex justify-between mt-6">
+          <div class="font-semibold text-xl md:text-2xl">ផ្នែកដែលពេញនិយម</div>
+          <div class="flex sm:flex-row justify-between mt-3 md:mt-6">
             <ul class="list-none font-thin cursor-pointer">
               <li class="transform hover:underline">
                 <nuxt-link>អេឡិចត្រូនិក</nuxt-link>
@@ -56,8 +58,10 @@
       </div>
       <div class="flex justify-center">
         <div>
-          <div class="font-semibold text-2xl">ទំនាក់ទំនង​មក​ពួក​យើង</div>
-          <ul class="mt-6 list-none font-thin cursor-pointer">
+          <div class="font-semibold text-xl md:text-2xl">
+            ទំនាក់ទំនង​មក​ពួក​យើង
+          </div>
+          <ul class="mt-3 md:mt-6 list-none font-thin cursor-pointer">
             <li class="transform hover:underline">
               <a href="" target="_blank">
                 Address: Building 422 St. 271, Phum 1, <br />
@@ -70,9 +74,13 @@
         </div>
       </div>
     </div>
+
     <div class="flex flex-col items-center mt-8">
       <div>© 2022 Baksey Media. All Rights Reserved.</div>
-      <a href="https://www.facebook.com/p.both" class="transform hover:underline" target="_blank"
+      <a
+        href="https://www.facebook.com/p.both"
+        class="transform hover:underline"
+        target="_blank"
         >Developed by: Neak Panhboth</a
       >
     </div>
@@ -84,7 +92,7 @@ export default {};
 
 <style>
 .top-footer {
-  background-image: url('/footer/foot_bg.jpg');
+  background-image: url("/footer/foot_bg.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
