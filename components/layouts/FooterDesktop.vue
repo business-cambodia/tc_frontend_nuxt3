@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary dark:bg-gray-800 pb-4 text-white">
-    <div class="flex flex-col items-center justify-center top-footer py-20">
+    <div class="flex flex-col items-center justify-center top-footer-background-img py-20">
       <img src="/footer/logo2.png" alt="" class="h-44 w-44" />
       <div class="text-3xl font-bold">Technology Cambodia</div>
       <div class="text-xl font-extralight">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន</div>
@@ -11,28 +11,30 @@
         <i class="fab fa-telegram mx-4"></i>
       </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 pt-10 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 pt-10 gap-4">
       <div class="flex justify-center">
         <div>
           <div class="font-semibold text-xl md:text-2xl">
             ស្វែងយល់អំពីពួកយើង
           </div>
-          <ul class="mt-3 md:mt-6 list-none font-thin cursor-pointer">
-            <li class="transform hover:underline">
-              <nuxt-link to="" class="mx-1 md:mx-2">About Us</nuxt-link>
-            </li>
-            <li class="transform hover:underline">
-              <nuxt-link class="mx-1 md:mx-2">Our Services</nuxt-link>
-            </li>
-          </ul>
+            <ul
+              class="mt-3 md:mt-6 list-none font-thin cursor-pointer "
+            >
+              <li class="transform hover:underline">
+                <nuxt-link to="" class="mx-1 md:mx-2">About Us</nuxt-link>
+              </li>
+              <li class="transform hover:underline">
+                <nuxt-link class="mx-1 md:mx-2">Our Services</nuxt-link>
+              </li>
+            </ul>
         </div>
       </div>
-      <div class="flex justify-center ">
+      <div class="flex justify-center">
         <div>
           <div class="font-semibold text-xl md:text-2xl">ផ្នែកដែលពេញនិយម</div>
           <div class="flex sm:flex-row justify-between mt-3 md:mt-6">
             <ul class="list-none font-thin cursor-pointer">
-              <li class="transform hover:underline">
+              <li class="transform">
                 <nuxt-link>អេឡិចត្រូនិក</nuxt-link>
               </li>
               <li class="transform hover:underline">
@@ -58,10 +60,12 @@
       </div>
       <div class="flex justify-center">
         <div>
-          <div class="font-semibold text-xl md:text-2xl">
+          <div class="font-semibold text-center text-xl md:text-2xl">
             ទំនាក់ទំនង​មក​ពួក​យើង
           </div>
-          <ul class="mt-3 md:mt-6 list-none font-thin cursor-pointer">
+          <ul
+            class="mt-3 md:mt-6 list-none font-thin cursor-pointer text-center"
+          >
             <li class="transform hover:underline">
               <a href="" target="_blank">
                 Address: Building 422 St. 271, Phum 1, <br />
@@ -74,7 +78,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="flex flex-col items-center mt-8">
       <div>© 2022 Baksey Media. All Rights Reserved.</div>
       <a
@@ -91,7 +95,7 @@ export default {};
 </script>
 
 <style>
-.top-footer {
+.top-footer-background-img {
   background-image: url("/footer/foot_bg.jpg");
   background-attachment: fixed;
   background-position: center;
