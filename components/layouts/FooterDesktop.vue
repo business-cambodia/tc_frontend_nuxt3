@@ -1,7 +1,7 @@
 <template>
   <div class="bg-primary dark:bg-gray-800 pb-4 text-white">
     <div class="flex flex-col items-center justify-center top-footer py-20">
-      <img src="" alt="" class="h-44 w-44" />
+      <img src="/footer/logo2.png" alt="" class="h-44 w-44" />
       <div class="text-3xl font-bold">Technology Cambodia</div>
       <div class="text-xl font-extralight">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន</div>
       <div class="flex mt-2 justify-center items-center text-3xl">
@@ -72,7 +72,7 @@
     </div>
     <div class="flex flex-col items-center mt-8">
       <div>© 2022 Baksey Media. All Rights Reserved.</div>
-      <a href="" class="transform hover:underline" target="_blank"
+      <a href="https://www.facebook.com/p.both" class="transform hover:underline" target="_blank"
         >Developed by: Neak Panhboth</a
       >
     </div>
