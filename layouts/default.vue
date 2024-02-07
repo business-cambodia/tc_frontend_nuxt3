@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <LayoutsNavbar />
   </div>
 </template>

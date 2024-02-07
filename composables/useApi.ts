@@ -5,3 +5,5 @@ export const useApi = async <T>(endpoint: string, options: IAPIOption) => {
   const response = await axios<T>(baseUrl + endpoint, options);
   return response.data;
 };
+
+

@@ -38,7 +38,7 @@
         </ul>
       </div>
       <div class="flex items-center">
-        <form
+        <!-- <form
           class="mr-4 hidden lg:block"
           v-if="$route.path.includes('search')"
           @submit.prevent="handleSubmitSearch"
@@ -55,7 +55,7 @@
           >
             Search
           </button>
-        </form>
+        </form> -->
         <div class="mr-4">
           <NuxtLink to="search">
             <IconsSearch

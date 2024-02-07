@@ -80,10 +80,8 @@
     <div class="flex flex-col  items-center mt-8 ">
       <div>© 2022 Baksey Media. All Rights Reserved.</div>
       <a
-        href="https://www.facebook.com/p.both"
         class="transform hover:underline"
-        target="_blank">Developed by: Neak Panhboth</a
-      >
+        target="_blank">Developed by: Technology Camabodia Team</a>
     </div>
   </div>
 </template>
@@ -100,8 +98,14 @@ export default {};
   background-attachment: fixed;
   background-repeat: no-repeat;
   filter: brightness(1);
-
 }
+.mobile-respons-population li{
+  transition: all 0.3s ease-in-out;
+}
+.mobile-respons-population li:hover{
+    transform: scale(1.1);
+
+  }
 /* mobile responsive */
 @media (max-width: 774px) {
   .mobile-respon {
@@ -117,7 +121,7 @@ export default {};
   }
   .mobile-respons-population{
     display: flex;
-   padding: 10px 20px 0px 20px;
+    padding: 10px 20px 0px 20px;
   }
   .wrap-ul{
     display: flex;
