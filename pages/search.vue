@@ -26,7 +26,14 @@
             </button>
           </form>
         </div>
-        <div
+       
+        <!-- Error Message for No Articles Found -->
+        <div v-if="!searchFound" class="text-red-500">
+          មិនមានអត្ថបទត្រូវនឹងការស្វែងរករបស់អ្នក។
+        </div>
+      </div>
+    </div>
+    <div
         class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 justify-center gap-x-4 gap-y-8 mt-8 lg:px-20"
         v-if="articles != undefined && articles.length > 0"
       >
@@ -34,12 +41,6 @@
           <ReusablesArticleCard :article="a" />
         </div>
       </div>
-        <!-- Error Message for No Articles Found -->
-        <div v-if="!searchFound" class="text-red-500">
-          មិនមានអត្ថបទត្រូវនឹងការស្វែងរករបស់អ្នក។
-        </div>
-      </div>
-    </div>
   </div>
 </template>
   <script setup lang="ts">
@@ -73,7 +74,36 @@ const performSearch = async () => {
     }
     articles.value = [...response];
 };
+const handleScrollPagination = async () => {
+  let documentHeight = document.body.scrollHeight;
+  let currentScroll = window.scrollY + window.innerHeight;
+  // When user scroll to 80% of the screen then fetch 10 more articles
+  if (
+    currentScroll > 0.8 * documentHeight &&
+    !requesting &&
+    articles.value.length != 0
+  ) {
+    requesting = true;
+    currentPage = currentPage + 1;
+    const nextPageArticles: any = await useApi(
+      `/items/articles?filter[status]=published&sort=-date_created&limit=10&page=${currentPage}&search=${search.value}&fields=title, thumbnail, date_created,user_created.first_name, user_created.last_name, user_created.avatar,slug, category.slug, category.name,views`,
+      { method: "GET" }
+    );
+    if (nextPageArticles.data.length == 0) {
+      return;
+    }
+    articles.value = [...articles.value, ...nextPageArticles.data];
+    requesting = false;
+  }
+};
 
+onMounted(() => {
+  window.addEventListener("scroll", handleScrollPagination);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScrollPagination);
+});
 </script>
 <style>
 /* Custom styles if needed */
