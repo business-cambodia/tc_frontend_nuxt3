@@ -26,6 +26,14 @@
             </button>
           </form>
         </div>
+        <div
+        class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 justify-center gap-x-4 gap-y-8 mt-8 lg:px-20"
+        v-if="articles != undefined && articles.length > 0"
+      >
+        <div v-for="(a, n) in articles" :key="n" class="flex justify-center">
+          <ReusablesArticleCard :article="a" />
+        </div>
+      </div>
         <!-- Error Message for No Articles Found -->
         <div v-if="!searchFound" class="text-red-500">
           មិនមានអត្ថបទត្រូវនឹងការស្វែងរករបស់អ្នក។
@@ -59,11 +67,13 @@ const performSearch = async () => {
             )
         ))
     ).data;
+    // Check condition if not articles found
     if(response.length === 0){
         searchFound = false;
     }
     articles.value = [...response];
 };
+
 </script>
 <style>
 /* Custom styles if needed */
