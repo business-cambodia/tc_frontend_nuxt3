@@ -44,8 +44,9 @@
         </div>
       </div>
     </div>
+    <!-- show the articles -->
     <div
-      class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 justify-center gap-x-4 gap-y-8 mt-8 lg:px-20"
+      class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 justify-center mb-10 gap-x-4 gap-y-8 mt-8 lg:px-20"
       v-if="articles != undefined && articles.length > 0"
     >
       <div v-for="(a, n) in articles" :key="n" class="flex justify-center">
