@@ -1,10 +1,10 @@
 <template>
   <!-- search page -->
   <div>
-    <div class="flex justify-center items-center h-[30rem]">
+    <div class="flex justify-center items-center h-[35rem]">
       <div class="flex flex-col items-center">
         <img src="/footer/logo2.png" class="w-20 h-20" alt="Website Logo" />
-        <h1 class="text-blue-500 text-2xl font-bold mt-4">ស្វែងរកអត្ថបទ</h1>
+        <h1 class="text-blue-500 text-4xl font-bold mt-4">ស្វែងរកអត្ថបទ</h1>
         <p class="text-blue-500 text-lg text-center mt-2">
           ស្វែងរកអត្ថបទដែលអ្នកចង់អាននៅទីនេះ
         </p>
@@ -32,7 +32,7 @@
           v-if="!searchFound"
           class="text-red-500 flex flex-col items-center justify-center mt-10"
         >
-          <h2 class="text-4xl font-bold">
+          <h2 class="text-4xl font-bold max-[774px]:text-2xl">
             មិនមានអត្ថបទត្រូវនឹងការស្វែងរករបស់អ្នក <i class="fas fa-search mx-1" aria-hidden="true"></i>
           </h2>
           <a
@@ -89,7 +89,7 @@ const performSearch = async () => {
 const handleScrollPagination = async () => {
   let documentHeight = document.body.scrollHeight;
   let currentScroll = window.scrollY + window.innerHeight;
-  // When user scroll to 80% of the screen then fetch 10 more articles
+  // when scroll to the bottom of the page 80% will show 10 more articles
   if (
     currentScroll > 0.8 * documentHeight &&
     !requesting &&
