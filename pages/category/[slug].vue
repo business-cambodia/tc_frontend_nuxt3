@@ -14,6 +14,12 @@
           {{ currentCategory.description }}
         </div>
       </div>
+      <button class="text-white p-2 mx-20 rounded-lg bg-blue-500 mt-5 h-full flex items-center text-base  px-6 max-[774px]:text-sm max-[774px]:mx-8">
+        {{ currentCategory.name }}
+       ( {{ currentCategory.description }} )
+
+       
+      </button>
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 justify-center gap-4 mt-8 lg:px-20 px-6"
         v-if="articles != undefined && articles.length > 0"
