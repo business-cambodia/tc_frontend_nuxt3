@@ -1,8 +1,6 @@
 <template>
   <div class="bg-primary dark:bg-gray-800 pb-4 text-white">
-    <div
-      class="flex flex-col items-center justify-center top-footer-background-img py-20"
-    >
+    <div class="flex flex-col items-center justify-center top-footer-background-img py-20">
       <img src="/footer/logo2.png" alt="" class="h-44 w-44" />
       <div class="text-4xl font-bold">Technology Cambodia</div>
       <div class="text-2xl font-extralight">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន</div>
@@ -15,7 +13,7 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 pt-10 gap-4">
       <div class="flex justify-center ">
-        <div> 
+        <div>
           <div class="font-semibold text-xl md:text-2xl " id="aboutus">
             ស្វែងយល់អំពីពួកយើង
           </div>
@@ -34,27 +32,28 @@
           <div class="font-semibold text-xl md:text-2xl" id="population">ផ្នែកដែលពេញនិយម</div>
           <div class="wrap-ul flex sm:flex-row  justify-between mt-3 md:mt-6">
             <ul class="mobile-respons-population list-none font-thin cursor-pointer">
-              <li class="transform">
-                <nuxt-link >អេឡិចត្រូនិក</nuxt-link>
+              <li class="transform hover:underline">
+                <nuxt-link to="/category/gadget">អេឡិចត្រូនិក</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link >ច្នៃប្រឌិត</nuxt-link>
+                <nuxt-link to="/category/innovation">ច្នៃប្រឌិត</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link >យានយន្ត</nuxt-link>
+                <nuxt-link to="/category/automotive">យានយន្ត</nuxt-link>
               </li>
             </ul>
             <ul class="mobile-respons-population list-none font-thin cursor-pointer">
               <li class="transform hover:underline">
-                <nuxt-link >អាជីវកម្ម</nuxt-link>
+                <nuxt-link to="/category/business">អាជីវកម្ម</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link >វិទ្យាសាស្ត</nuxt-link>
+                <nuxt-link to="/category/science">វិទ្យាសាស្ត្រ</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link >គន្លឹះល្អៗ</nuxt-link>
+                <nuxt-link to="/category/tips">គន្លឹះល្អៗ</nuxt-link>
               </li>
             </ul>
+
           </div>
         </div>
       </div>
@@ -79,9 +78,7 @@
     </div>
     <div class="flex flex-col  items-center mt-8 ">
       <div>© 2022 Baksey Media. All Rights Reserved.</div>
-      <a
-        class="transform hover:underline"
-        target="_blank">Developed by: Technology Camabodia Team</a>
+      <a class="transform hover:underline" target="_blank">Developed by: Technology Camabodia Team</a>
     </div>
   </div>
 </template>
@@ -99,39 +96,47 @@ export default {};
   background-repeat: no-repeat;
   filter: brightness(1);
 }
-.mobile-respons-population li{
+
+.mobile-respons-population li {
   transition: all 0.3s ease-in-out;
 }
-.mobile-respons-population li:hover{
-    transform: scale(1.1);
 
-  }
+.mobile-respons-population li:hover {
+  transform: scale(1.1);
+
+}
+
 /* mobile responsive */
 @media (max-width: 774px) {
   .mobile-respon {
     display: flex;
     justify-content: space-evenly;
   }
-  #aboutus{
+
+  #aboutus {
     font-size: 1.7rem;
   }
-  #population{
+
+  #population {
     font-size: 1.7rem;
     text-align: center;
   }
-  .mobile-respons-population{
+
+  .mobile-respons-population {
     display: flex;
     padding: 10px 20px 0px 20px;
   }
-  .wrap-ul{
+
+  .wrap-ul {
     display: flex;
     flex-direction: column;
   }
-  .mobile-respons-population li{
+
+  .mobile-respons-population li {
     margin-left: 20px;
   }
-  #contactus{
+
+  #contactus {
     font-size: 1.7rem;
   }
-}
-</style>
+}</style>
