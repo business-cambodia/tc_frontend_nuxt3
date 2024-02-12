@@ -21,10 +21,10 @@
           </div>
           <ul class="mobile-respon mt-3 md:mt-6   list-none font-thin cursor-pointer">
             <li class="transform hover:underline">
-              <nuxt-link to="" class="mx-1 md:mx-2">About Us</nuxt-link>
+              <nuxt-link to="/about" class="mx-1 md:mx-2">About Us</nuxt-link>
             </li>
             <li class="transform hover:underline">
-              <nuxt-link class="mx-1 md:mx-2">Our Services</nuxt-link>
+              <nuxt-link to="/services" class="mx-1 md:mx-2">Our Services</nuxt-link>
             </li>
           </ul>
         </div>
@@ -35,24 +35,24 @@
           <div class="wrap-ul flex sm:flex-row  justify-between mt-3 md:mt-6">
             <ul class="mobile-respons-population list-none font-thin cursor-pointer">
               <li class="transform">
-                <nuxt-link>អេឡិចត្រូនិក</nuxt-link>
+                <nuxt-link >អេឡិចត្រូនិក</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link>ច្នៃប្រឌិត</nuxt-link>
+                <nuxt-link >ច្នៃប្រឌិត</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link>យានយន្ត</nuxt-link>
+                <nuxt-link >យានយន្ត</nuxt-link>
               </li>
             </ul>
             <ul class="mobile-respons-population list-none font-thin cursor-pointer">
               <li class="transform hover:underline">
-                <nuxt-link>អាជីវកម្ម</nuxt-link>
+                <nuxt-link >អាជីវកម្ម</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link>វិទ្យាសាស្ត</nuxt-link>
+                <nuxt-link >វិទ្យាសាស្ត</nuxt-link>
               </li>
               <li class="transform hover:underline">
-                <nuxt-link>គន្លឹះល្អៗ</nuxt-link>
+                <nuxt-link >គន្លឹះល្អៗ</nuxt-link>
               </li>
             </ul>
           </div>

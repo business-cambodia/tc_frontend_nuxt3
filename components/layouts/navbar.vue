@@ -1,40 +1,30 @@
 <template>
   <div>
-    <nav
-      id="navbar"
-      :class="
-        scrollPosition == 0
-          ? 'w-full flex items-center justify-between px-4 lg:px-8 py-2 fixed z-50 navbar'
-          : 'w-full flex items-center justify-between px-4 lg:px-8 py-2 fixed z-50 bg-white dark:bg-dark filter drop-shadow-lg navbar'
-      "
-    >
+    <nav id="navbar" :class="scrollPosition == 0
+      ? 'w-full flex items-center justify-between px-4 lg:px-8 py-2 fixed z-50 navbar'
+      : 'w-full flex items-center justify-between px-4 lg:px-8 py-2 fixed z-50 bg-white dark:bg-dark filter drop-shadow-lg navbar'
+      ">
       <div class="flex items-center p-0.5 rounded-full hover:ring-1 hover:ring-primary">
-        <NuxtLink to="/"
-          ><div class=""><img src="/logo.png" alt="" width="60" /></div
-        ></NuxtLink>
+        <NuxtLink to="/">
+          <div class=""><img src="/logo.png" alt="" width="60" /></div>
+        </NuxtLink>
       </div>
       <div>
         <ul class="hidden lg:flex list-none">
-          <NuxtLink
-            v-for="(i, n) in navItems"
-            :key="n"
-            :to="i.slug ? 'category/' + i.slug : '/'"
-            :class="`mx-4  hover:text-primary nav-items text-base ${
-              scrollPosition == 0 &&
+          <NuxtLink v-for="(i, n) in navItems" :key="n" :to="i.slug ? `/category/${i.slug}` : '/'" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
               ($route.name == 'index' ||
                 $route.name == 'articles-article' ||
                 $route.name == 'videos-video' ||
                 $route.name == 'videos' ||
                 $route.name == 'category-category' ||
                 $route.name == 'authors-author')
-                ? 'text-white '
-                : 'text-black dark:text-white'
-            }`"
-            exact-active-class="text-primary dark:text-primary font-semibold "
-            exact
-          >
+              ? 'text-white '
+              : 'text-black dark:text-white'
+            }`" exact-active-class="text-primary dark:text-primary font-semibold " exact>
             <li>{{ i.name }}</li>
           </NuxtLink>
+
+
         </ul>
       </div>
       <div class="flex items-center">
@@ -58,64 +48,40 @@
         </form> -->
         <div class="mr-4">
           <NuxtLink to="search">
-            <IconsSearch
-              class="cursor-pointer"
-              :scrollPosition="scrollPosition"
-            />
+            <IconsSearch class="cursor-pointer" :scrollPosition="scrollPosition" />
           </NuxtLink>
         </div>
 
         <div class="mr-6 cursor-pointer">
-          <button
-            @click="
-              $colorMode.preference =
-                $colorMode.preference == 'dark' ? 'light' : 'dark'
-            "
-            v-if="$colorMode.preference == 'dark'"
-          >
+          <button @click="
+            $colorMode.preference =
+            $colorMode.preference == 'dark' ? 'light' : 'dark'
+            " v-if="$colorMode.preference == 'dark'">
             <IconsMoon :scrollPosition="scrollPosition" />
           </button>
-          <button
-            @click="
-              $colorMode.preference =
-                $colorMode.preference == 'dark' ? 'light' : 'dark'
-            "
-            v-else
-          >
+          <button @click="
+            $colorMode.preference =
+            $colorMode.preference == 'dark' ? 'light' : 'dark'
+            " v-else>
             <IconsSun :scrollPosition="scrollPosition" />
           </button>
         </div>
 
         <div>
-          <IconsMenu
-            class="cursor-pointer block lg:hidden"
-            :toggleDrawer="toggleDrawer"
-            :scrollPosition="scrollPosition"
-          />
+          <IconsMenu class="cursor-pointer block lg:hidden" :toggleDrawer="toggleDrawer"
+            :scrollPosition="scrollPosition" />
         </div>
       </div>
     </nav>
 
-    <div
-      class="h-screen w-full bg-primary dark:bg-gray-800 text-center fixed z-20 lg:hidden"
-      v-if="drawer"
-      data-aos="fade-left"
-    >
+    <div class="h-screen w-full bg-primary dark:bg-gray-800 text-center fixed z-20 lg:hidden" v-if="drawer"
+      data-aos="fade-left">
       <ul class="">
-        <div
-          v-for="(i, n) in navItems"
-          :key="n"
-          @click="drawer = false"
-          class="text-center"
-        >
-          <NuxtLink
-            :to="i.slug"
-            class="mx-4 text-white list-none"
-            exact-active-class="text-white font-bold text-lg"
-            exact
-            @click="closeDrawer"
-            ><li>{{ i.name }}</li></NuxtLink
-          >
+        <div v-for="(i, n) in navItems" :key="n" @click="drawer = false" class="text-center">
+          <NuxtLink :to="i.slug" class="mx-4 text-white list-none" exact-active-class="text-white font-bold text-lg" exact
+            @click="closeDrawer">
+            <li>{{ i.name }}</li>
+          </NuxtLink>
         </div>
       </ul>
     </div>
@@ -182,9 +148,11 @@ onMounted(() => {
 .navbar {
   transition: top 0.5s ease-in-out;
 }
+
 .nav-items {
   position: relative;
 }
+
 .nav-items::after {
   content: "";
   position: absolute;
@@ -195,6 +163,7 @@ onMounted(() => {
   bottom: -10px;
   transition: 0.5s;
 }
+
 .nav-items:hover::after {
   width: 100%;
 }
