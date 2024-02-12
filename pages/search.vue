@@ -2,7 +2,8 @@
   <!-- search page -->
   <div>
     <div class="flex justify-center items-center h-[35rem]">
-      <div class="flex flex-col items-center">
+      <div class="flex flex-col items-center" data-aos="fade-up"
+     data-aos-duration="1000">
         <img src="/footer/logo2.png" class="w-20 h-20" alt="Website Logo" />
         <h1 class="text-blue-500 text-4xl font-bold mt-4">ស្វែងរកអត្ថបទ</h1>
         <p class="text-blue-500 text-lg text-center mt-2">
@@ -45,7 +46,7 @@
       </div>
     </div>
     <!-- show the articles -->
-    <div
+    <div data-aos="zoom-in-up"
       class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 justify-center mb-10 gap-x-4 gap-y-8 mt-8 lg:px-20"
       v-if="articles != undefined && articles.length > 0"
     >

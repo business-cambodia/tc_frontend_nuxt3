@@ -1,6 +1,7 @@
 <template>
   <div class="">
-    <div
+    <div data-aos="fade-up"
+     data-aos-duration="1000"
       :style="{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${useImg(
           heroArticles[currentIndex].thumbnail
