@@ -1,8 +1,7 @@
 <template>
   <div class="">
-    <div data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="1500" :style="{
+
+    <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" :style="{
       backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${useImg(
         currentCategory.thumbnail
       )})`,
@@ -12,12 +11,13 @@
       </div>
     </div>
     <button data-aos="zoom-in"
-      class="button-shadow text-white p-5 mx-20 rounded-lg bg-gradient-to-r from-cyan-400 to-purple-600 mt-5 h-full flex items-center text-base px-6 max-[774px]:text-sm max-[774px]:mx-8 overflow-hidden relative w-[500px]">
+      class="button-shadow  text-white p-5 mx-auto rounded-lg bg-gradient-to-r from-cyan-400 to-purple-600 mt-5 h-full flex items-center text-base px-6 md:max-w-[774px]  md:text-sm md:mx-8 max-[774px]:w-[90%] overflow-hidden relative w-full md:w-[500px] min-[1024px]:mx-20">
       <span class="absolute left-full animate-marquee">{{ currentCategory.name }} ({{ currentCategory.description
       }})</span>
     </button>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 justify-center gap-4 mt-8 lg:px-20 px-6" data-aos="fade-up" data-aos-duration="500"
-      v-if="articles && articles.length > 0">
+
+    <div class="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 justify-center gap-4 mt-8 lg:px-20 px-6"
+      data-aos="fade-up" data-aos-duration="500" v-if="articles && articles.length > 0">
       <div v-for="(a, n) in articles" :key="n" class="flex justify-center article-animation">
         <ReusablesArticleCard :article="a" />
       </div>
@@ -133,11 +133,12 @@ onUnmounted(() => {
 </script>
   
 <style>
-.button-shadow{
+.button-shadow {
   /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
   box-shadow: rgba(255, 165, 0, 0.1) 0px 4px 16px, rgba(255, 165, 0, 0.1) 0px 8px 24px, rgba(255, 165, 0, 0.1) 0px 16px 56px;
 
 }
+
 @keyframes marquee {
   0% {
     transform: translateX(0);

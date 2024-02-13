@@ -1,21 +1,18 @@
 <template>
   <div class="bg-primary dark:bg-gray-800 pb-4 text-white">
-    <div class="flex flex-col items-center justify-center top-footer-background-img py-20" >
+    <div class="flex flex-col items-center justify-center top-footer-background-img py-20">
       <img src="/footer/logo2.png" alt="" class="h-44 w-44" />
-      <div class="text-4xl font-bold" data-aos="fade-up"
-     data-aos-duration="1000">Technology Cambodia</div>
-      <div class="text-2xl font-extralight" data-aos="fade-up"
-     data-aos-duration="1000">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន</div>
-      <div class="flex mt-2 justify-center items-center text-3xl" data-aos="fade-up"
-     data-aos-duration="1000">
+      <div class="text-4xl font-bold" data-aos="fade-up" data-aos-duration="1000">Technology Cambodia</div>
+      <div class="text-2xl font-extralight" data-aos="fade-up" data-aos-duration="1000">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន
+      </div>
+      <div class="flex mt-2 justify-center items-center text-3xl" data-aos="fade-up" data-aos-duration="1000">
         <i class="fab text-4xl fa-facebook mx-4"></i>
         <i class="fab text-4xl fa-youtube mx-4"></i>
         <i class="fab text-4xl fa-tiktok mx-4"></i>
         <i class="fab text-4xl fa-telegram mx-4"></i>
       </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 pt-10 gap-4" data-aos="fade-up"
-     data-aos-duration="1000">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 pt-10 gap-4" data-aos="fade-up" data-aos-duration="1000">
       <div class="flex justify-center ">
         <div>
           <div class="font-semibold text-xl md:text-2xl " id="aboutus">
@@ -31,8 +28,7 @@
           </ul>
         </div>
       </div>
-      <div class="flex justify-center" data-aos="fade-up"
-     data-aos-duration="1000">
+      <div class="flex justify-center" data-aos="fade-up" data-aos-duration="1000">
         <div>
           <div class="font-semibold text-xl md:text-2xl" id="population">ផ្នែកដែលពេញនិយម</div>
           <div class="wrap-ul flex sm:flex-row  justify-between mt-3 md:mt-6">
@@ -81,7 +77,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col  items-center mt-8 " >
+    <div class="flex flex-col  items-center mt-8 ">
       <div>© 2022 Baksey Media. All Rights Reserved.</div>
       <a class="transform hover:underline" target="_blank">Developed by: Technology Camabodia Team</a>
     </div>
@@ -144,4 +140,5 @@ export default {};
   #contactus {
     font-size: 1.7rem;
   }
-}</style>
+}
+</style>

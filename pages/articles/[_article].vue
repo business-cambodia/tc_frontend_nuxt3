@@ -12,13 +12,12 @@
                 :sideBarAds="sideBarAds"
                 :underTitleAds="underTitleAds"
                 :showElements="showElements"
-                :page="index"
-
-            />
-        </div>
+                :page="index"/>
+        </div> 
         <AdsBottom :ad="bottomAd" />
     </div>
 </template>
+
 <script setup lang="ts">
 // import tailwind.config
 import { content } from "tailwind.config";
@@ -45,7 +44,7 @@ const articles = ref(
         { method: "GET" }
       )
     ))
-  ).data
+  ).data 
 );
 let thumbnail = articles.value[0].thumbnail
   ? articles.value[0].thumbnail_facebook
@@ -99,7 +98,7 @@ useHead({
     //   defer: true,
     // },
 
-  ],
+  ], 
   title: articles.value[0].title,
   meta: [
     {

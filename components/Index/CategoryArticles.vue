@@ -34,7 +34,6 @@
           <Slide v-for="(a, index) in articles" :key="index">
             <ReusablesArticleCard :article="a" class="px-2 mb-3 text-left" />
           </Slide>
-
           <template #addons>
             <Pagination class="dark:text-white"/>
           </template>

@@ -23,11 +23,10 @@
             }`" exact-active-class="text-primary dark:text-primary font-semibold " exact>
             <li>{{ i.name }}</li>
           </NuxtLink>
-
-
         </ul>
       </div>
       <div class="flex items-center">
+        
         <!-- <form
           class="mr-4 hidden lg:block"
           v-if="$route.path.includes('search')"
@@ -51,7 +50,6 @@
             <IconsSearch class="cursor-pointer" :scrollPosition="scrollPosition" />
           </NuxtLink>
         </div>
-
         <div class="mr-6 cursor-pointer">
           <button @click="
             $colorMode.preference =
@@ -74,13 +72,13 @@
       </div>
     </nav>
 
-    <div class="h-screen w-full bg-primary dark:bg-gray-800 text-center fixed z-20 lg:hidden" v-if="drawer"
+    <div class="h-screen w-full bg-primary dark:bg-gray-900 text-center fixed z-20 lg:hidden" v-if="drawer"
       data-aos="fade-left">
       <ul class="">
         <div v-for="(i, n) in navItems" :key="n" @click="drawer = false" class="text-center">
-          <NuxtLink :to="i.slug" class="mx-4 text-white list-none" exact-active-class="text-white font-bold text-lg" exact
+          <NuxtLink :to="`/category/${i.slug}`" class="mx-4 text-white list-none" exact-active-class="text-white font-bold text-lg" exact
             @click="closeDrawer">
-            <li>{{ i.name }}</li>
+            <li class=" hover-nav">{{ i.name }}</li>
           </NuxtLink>
         </div>
       </ul>
@@ -135,7 +133,6 @@ const updateScroll = () => {
       navbar.style.top = "0";
     }
   }
-
   lastScroll.value = scrollTop;
 };
 
@@ -166,5 +163,12 @@ onMounted(() => {
 
 .nav-items:hover::after {
   width: 100%;
+}
+.hover-nav{
+  transition: 0.5s ease-in-out;
+}
+.hover-nav:hover{
+  transform: scale(1.3);
+  font-weight: bold;
 }
 </style>

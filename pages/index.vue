@@ -9,15 +9,13 @@
         <IndexCategoryArticles
           :articles="popularArticles"
           title="អត្ថបទពេញនិយមប្រចាំខែ"
-          seeMoreLink="/popular"
-        />
+          seeMoreLink="/popular"/>
       </div>
       <div class="mt-8 pb-4">
         <IndexCategoryArticles
           :articles="newestArticles"
           title="អត្ថបទថ្មីៗ"
-          seeMoreLink="/articles"
-        />
+          seeMoreLink="/articles"/>
       </div>
       <div class="mt-8 pb-4">
         <IndexCategoryArticles
@@ -25,8 +23,7 @@
           :key="n"
           :articles="c.articles"
           :title="c.name"
-          :name="c.slug"
-        />
+          :name="c.slug"/>
       </div>
     </div>
   </div>
