@@ -1,7 +1,7 @@
 <template>
   <div class="">
 
-    <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" :style="{
+    <div  data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" :style="{
       backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${useImg(
         currentCategory.thumbnail
       )})`,
