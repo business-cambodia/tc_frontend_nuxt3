@@ -5,11 +5,11 @@
     </div>
 
     <div class="px-4 lg:px-8">
-      <div class="mt-8 pb-4">
+      <div class="mt-8 pb-4" >
         <IndexCategoryArticles
           :articles="popularArticles"
           title="អត្ថបទពេញនិយមប្រចាំខែ"
-          seeMoreLink="/popular"/>
+          seeMoreLink="/popular" />
       </div>
       <div class="mt-8 pb-4">
         <IndexCategoryArticles
@@ -47,7 +47,6 @@ const heroArticles: IArticle[] = (
     )
   ))
 ).data;
-
 const popularArticles: IArticle[] = (
   await (<Promise<IResponse<IArticle[]>>>(
     useApi(
@@ -76,4 +75,6 @@ const categoriesNews: ICategory[] = (
 ).data;
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

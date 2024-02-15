@@ -26,7 +26,6 @@
         </ul>
       </div>
       <div class="flex items-center">
-        
         <!-- <form
           class="mr-4 hidden lg:block"
           v-if="$route.path.includes('search')"
@@ -40,8 +39,7 @@
           />
           <button
             class="px-4 py-1 bg-primary text-white rounded-lg"
-            type="submit"
-          >
+            type="submit">
             Search
           </button>
         </form> -->

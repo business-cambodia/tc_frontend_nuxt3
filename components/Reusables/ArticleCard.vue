@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="`/articles/${article.slug}`">
     <div
-      class="bg-white dark:bg-neutral-800 filter drop-shadow-xl rounded-b-lg mx-2 mb-6 lg:my-0 lg:mx-0 rounded-xl transform transition duration-300 hover:scale-95 hover:shadow-lg"
+      class="bg-white dark:bg-neutral-800 filter drop-shadow-xl rounded-b-lg mx-2 mb-6 lg:my-0 lg:mx-0 rounded-xl transform transition duration-300 hover:scale-95 hover:shadow-md hover:shadow-blue-500"
     >
       <img
         format="webp"
@@ -36,7 +36,7 @@
             class="text-base lg:text-lg font-medium line-clamp dark:text-white mt-1">
             {{ article.title }}
           </p>
-          <div class="text-xs font-light mt-2 dark:text-white">
+          <div class="text-xs font-light text-red-500 mt-2 dark:text-white">
             {{ $kFormatter(article.views) }} views
             <span class="text-xs mx-2">•</span>
             <span

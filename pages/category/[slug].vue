@@ -11,7 +11,7 @@
       </div>
     </div>
     <button data-aos="zoom-in"
-      class="button-shadow  text-white p-5 mx-auto rounded-lg bg-gradient-to-r from-cyan-400 to-purple-600 mt-5 h-full flex items-center text-base px-6 md:max-w-[774px]  md:text-sm md:mx-8 max-[774px]:w-[90%] overflow-hidden relative w-full md:w-[500px] min-[1024px]:mx-20">
+      class="button-shadow outline-none text-white p-5 mx-auto rounded-lg bg-gradient-to-r from-cyan-400 to-purple-600 mt-5 h-full flex items-center text-base px-6 md:max-w-[774px]  md:text-sm md:mx-8 max-[774px]:w-[90%] overflow-hidden relative w-full md:w-[500px] min-[1024px]:mx-20">
       <span class="absolute left-full animate-marquee">{{ currentCategory.name }} ({{ currentCategory.description
       }})</span>
     </button>
