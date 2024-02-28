@@ -2,6 +2,7 @@ import { ICategory } from "./category";
 import { IAuthor } from "./author";
 
 export interface IArticle {
+  sum: any;
   title: string;
   date_created: Date;
   views: number;

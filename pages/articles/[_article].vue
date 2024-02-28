@@ -1,6 +1,8 @@
 <template>
-    <LayoutsNavbarWhite />
+    <!-- <LayoutsNavbarWhite /> -->
+   
     <div class="pt-28 lg:pt-24" id="article_detail">
+      {{ ads }}
         <div v-for="(article, index) in articles" :key="index">
             <ArticlesContent 
                 :aboveArticleAds="aboveArticleAds"
@@ -19,8 +21,6 @@
 </template>
 
 <script setup lang="ts">
-// import tailwind.config
-import { content } from "tailwind.config";
 import { IAd } from "~~/types/ad";
 import { IResponse } from "~~/types/api";
 import { IArticle } from "~~/types/article";
@@ -31,7 +31,7 @@ let requesting = false;
 const ads: IAd[] = (
   await (<Promise<IResponse<IAd[]>>>(
     useApi(
-      "/items/advertisements?fields=name, slug,id , file,link,mobile_only, file_mobile,advertisement_type.type, advertiser.slug, detail_page&filter[status]=published&filter[detail_page]=true&sort[]=-order",
+      "items/advertisement?fields=name, slug,id , file,link,mobile_only, file_mobile,advertisement_type.type, advertiser.slug, detail_page&filter[status]=published&filter[detail_page]=true&sort[]=-order",
       { method: "GET" }
     )
   ))
@@ -223,37 +223,9 @@ const handleElementSeen = () => {
     // console.log(error);
   }
 };
-const handleScrollPagination = async () => {
-  let documentHeight = document.body.scrollHeight;
-  let currentScroll = window.scrollY + window.innerHeight;
-  // When user scroll to 80% of the screen then fetch 10 more articles
-  if (currentScroll > 0.8 * documentHeight && !requesting) {
-    requesting = true;
-    currentPage = currentPage + 1;
-    const nextPageArticles: any = await useApi(
-      `/items/articles?page=${currentPage}&filter[status]=published&limit=1&sort[]=-date_created&filter[slug][_neq]=${articles.value[0].slug}&fields=title,id,keywords,body,slug,thumbnail, thumbnail_facebook,date_created,views,category.name,category.slug,user_created.first_name,user_created.last_name,user_created.email ,user_created.avatar, user_created.description, user_created.id, user_created.facebook_link, user_created.youtube_link,user_created.instagram_link,user_created.count(articles)`,
-      { method: "GET" }
-    );
-    articles.value = [...articles.value, ...nextPageArticles.data];
-    requesting = false;
-    window.history.pushState(
-      {},
-      "",
-      "/articles/" + nextPageArticles.data[0].slug
-    );
-    // handleArticleViewed(nextPageArticles.data[0]);
-  }
-};
 
-onMounted(() => {
-  window.addEventListener("scroll", handleScrollPagination);
-  handleArticleViewed(articles.value[0]);
-  // handleElementSeen();
-});
 
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScrollPagination);
-});
+
 </script>
 <style>
 /* Custom styles if needed */

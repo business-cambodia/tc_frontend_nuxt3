@@ -26,6 +26,8 @@
           :name="c.slug"/>
       </div>
     </div>
+    <BackToTopButton />
+    <Authors />
   </div>
 </template>
 

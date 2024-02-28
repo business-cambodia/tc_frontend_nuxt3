@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-primary dark:bg-gray-800 pb-4 text-white">
-    <div class="flex flex-col items-center justify-center top-footer-background-img py-20">
+  <div class="bg-primary dark:bg-gray-800 pb-4 text-white"  >
+    <div class="flex flex-col items-center justify-center top-footer-background-img py-20" >
       <img src="/footer/logo2.png" alt="" class="h-44 w-44" />
-      <div class="text-4xl font-bold" data-aos="fade-up" data-aos-duration="1000">Technology Cambodia</div>
-      <div class="text-2xl font-extralight" data-aos="fade-up" data-aos-duration="1000">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន
+      <div class="text-4xl font-bold">Technology Cambodia</div>
+      <div class="text-2xl font-extralight">ដើម្បីកម្ពុជាកាន់តែទំនើបជាងមុន
       </div>
-      <div class="flex mt-2 justify-center items-center text-3xl" data-aos="fade-up" data-aos-duration="1000">
-        <i class="fab text-4xl fa-facebook mx-4"></i>
-        <i class="fab text-4xl fa-youtube mx-4"></i>
-        <i class="fab text-4xl fa-tiktok mx-4"></i>
-        <i class="fab text-4xl fa-telegram mx-4"></i>
+      <div class="flex mt-2 justify-center items-center text-3xl">
+        <a href="https://www.facebook.com/techcambodia2022"><i class="fab text-4xl fa-facebook mx-4"></i></a>
+        <a href="https://www.youtube.com/@technologycambodia9001"><i class="fab text-4xl fa-youtube mx-4"></i></a>
+        <a href="https://www.tiktok.com/@technology_cambodia"><i class="fab text-4xl fa-tiktok mx-4"></i></a>
+        <a href="https://t.me/techcambodia2022"><i class="fab text-4xl fa-telegram mx-4"></i></a>
       </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 pt-10 gap-4" data-aos="fade-up" data-aos-duration="1000">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 pt-10 gap-4">
       <div class="flex justify-center ">
         <div>
           <div class="font-semibold text-xl md:text-2xl " id="aboutus">
@@ -28,7 +28,7 @@
           </ul>
         </div>
       </div>
-      <div class="flex justify-center" data-aos="fade-up" data-aos-duration="1000">
+      <div class="flex justify-center">
         <div>
           <div class="font-semibold text-xl md:text-2xl" id="population">ផ្នែកដែលពេញនិយម</div>
           <div class="wrap-ul flex sm:flex-row  justify-between mt-3 md:mt-6">
@@ -66,9 +66,8 @@
           </div>
           <ul class="mt-3 md:mt-6 list-none font-thin max-[774px]:text-center">
             <li class="transform hover:underline cursor-pointer">
-              <a href="https://goo.gl/maps/GXV3J6cyRgoM9rGL6" target="_blank">
-                Address: Building 422 St. 271, Phum 1, <br />
-                Stung Mean Chey Khan MeanChey, Phnom Penh
+              <a href="https://maps.app.goo.gl/4DiihhAZTdz55yvA7" target="_blank">
+                Address: 110a Russian Federation Blvd (110), Phnom Penh<br />
               </a>
             </li>
             <li>Email: khonsakada@gmail.com</li>
@@ -78,13 +77,16 @@
       </div>
     </div>
     <div class="flex flex-col  items-center mt-8 ">
-      <div>© 2022 Baksey Media. All Rights Reserved.</div>
+      <div>© {{ currentYear }} Baksey Media. All Rights Reserved.</div>
       <a class="transform hover:underline" target="_blank">Developed by: Technology Camabodia Team</a>
     </div>
   </div>
 </template>
-<script>
-export default {};
+<script setup>
+
+
+const currentYear = new Date().getFullYear();
+
 </script>
 
 <style>

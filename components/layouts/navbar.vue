@@ -12,14 +12,14 @@
       <div>
         <ul class="hidden lg:flex list-none">
           <NuxtLink v-for="(i, n) in navItems" :key="n" :to="i.slug ? `/category/${i.slug}` : '/'" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
-              ($route.name == 'index' ||
-                $route.name == 'articles-article' ||
-                $route.name == 'videos-video' ||
-                $route.name == 'videos' ||
-                $route.name == 'category-category' ||
-                $route.name == 'authors-author')
-              ? 'text-white '
-              : 'text-black dark:text-white'
+            ($route.name == 'index' ||
+              $route.name == 'articles-article' ||
+              $route.name == 'videos-video' ||
+              $route.name == 'videos' ||
+              $route.name == 'category-category' ||
+              $route.name == 'authors-author')
+            ? 'text-white '
+            : 'text-black dark:text-white'
             }`" exact-active-class="text-primary dark:text-primary font-semibold " exact>
             <li>{{ i.name }}</li>
           </NuxtLink>
@@ -44,10 +44,11 @@
           </button>
         </form> -->
         <div class="mr-4">
-          <NuxtLink to="search">
+          <NuxtLink to="/search">
             <IconsSearch class="cursor-pointer" :scrollPosition="scrollPosition" />
           </NuxtLink>
         </div>
+
         <div class="mr-6 cursor-pointer">
           <button @click="
             $colorMode.preference =
@@ -74,8 +75,8 @@
       data-aos="fade-left">
       <ul class="">
         <div v-for="(i, n) in navItems" :key="n" @click="drawer = false" class="text-center">
-          <NuxtLink :to="`/category/${i.slug}`" class="mx-4 text-white list-none" exact-active-class="text-white font-bold text-lg" exact
-            @click="closeDrawer">
+          <NuxtLink :to="`/category/${i.slug}`" class="mx-4 text-white list-none"
+            exact-active-class="text-white font-bold text-lg" exact @click="closeDrawer">
             <li class=" hover-nav">{{ i.name }}</li>
           </NuxtLink>
         </div>
@@ -162,10 +163,12 @@ onMounted(() => {
 .nav-items:hover::after {
   width: 100%;
 }
-.hover-nav{
+
+.hover-nav {
   transition: 0.5s ease-in-out;
 }
-.hover-nav:hover{
+
+.hover-nav:hover {
   transform: scale(1.3);
   font-weight: bold;
 }

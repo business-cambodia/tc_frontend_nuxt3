@@ -5,8 +5,8 @@
       <div class="flex flex-col items-center" data-aos="fade-up"
      data-aos-duration="1000">
         <img src="/footer/logo2.png" class="w-20 h-20" alt="Website Logo" />
-        <h1 class="text-blue-500 text-4xl font-bold mt-4">ស្វែងរកអត្ថបទ</h1>
-        <p class="text-blue-500 text-lg text-center mt-2">
+        <h1 class="text-blue-500 dark:text-white text-4xl font-bold mt-4">ស្វែងរកអត្ថបទ</h1>
+        <p class="text-blue-500 dark:text-white text-lg text-center mt-2">
           ស្វែងរកអត្ថបទដែលអ្នកចង់អាននៅទីនេះ
         </p>
         <div class="flex mt-4 w-full">
@@ -54,6 +54,7 @@
         <ReusablesArticleCard :article="a" />
       </div>
     </div>
+    <BackToTopButton />
   </div>
 </template>
   <script setup lang="ts">

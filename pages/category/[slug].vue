@@ -22,9 +22,10 @@
         <ReusablesArticleCard :article="a" />
       </div>
     </div>
+    <BackToTopButton />
   </div>
 </template>
-  
+
 <script setup lang="ts">
 import '~/assets/css/animations.css';
 import { IResponse } from "~~/types/api";
