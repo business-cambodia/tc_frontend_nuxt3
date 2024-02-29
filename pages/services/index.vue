@@ -23,45 +23,25 @@
                 <img src="~/assets/services/website_1.gif" class="max-[1024px]:mx-auto " alt="" id="close-select">
             </div>
         </div>
-        <div class="h-screen flex lg:flex w-full justify-evenly items-center lg:px-32   mission max-[1024px]:block   "
-            data-aos="fade-up" data-aos-anchor-placement="top-center">
-            <div class="w-1/2 max-[1024px]:w-[100%] max-[1024px]:px-2  max-[1024px]:mt-[4rem]">
-                <img data-aos="fade-down-left" src="~/assets/services/Write_Articles.png"
-                    class="max-[1024px]:mx-auto  w-[80%]" id="close-select" alt="">
+        <div v-for="cm_features in  content_marketing_features" :key="cm_features.id" data-aos="fade-up"
+            data-aos-anchor-placement="top-center"
+            class="h-screen flex flex-col lg:flex-row items-center  justify-around p-4 md:mt-10">
+            <div v-if="cm_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
+                <img :src="cm_features.image" :alt="cm_features.alt" class="w-full lg:w-auto">
             </div>
-            <div class="w-4/5 max-[1024px]:w-[100%] max-[1024px]:px-2 ">
-                <div class="lg:w-full max-[1024px]:pt-40  max-[1024px]:text-center ">
-                    <h1 class="text-[7rem] max-[1400px]:text-5xl font-bold text-primary dark:text-white "
-                        id="content-marketing">Content Marketing</h1>
-
-                    <h1 class="text-[5rem] max-[1400px]:text-5xl font-bold text-primary dark:text-white ">Write Articles
-                    </h1>
-                    <div class="flex flex-wrap lg:justify-start justify-center gap-8 mt-6 dark:text-white">
-                        <p class="text-2xl text-justify">&nbsp;&nbsp; We offer professional writing services for all needs.
-                            Our team creates engaging articles on many topics. Need content for your site, blog, or
-                            magazine? We deliver quality writing that grabs attention. Our work is tailored,
-                            well-researched, and on time. Trust us to make your project stand out with great writing.</p>
-                    </div>
-                </div>
+            <div class="text-center lg:text-left text-primary " id="content-marketing ">
+                <h1 v-if="cm_features.id === 'content-marketing'" class="text-4xl lg:text-5xl font-bold mb-4"
+                    :id="cm_features.id">
+                      {{ cm_features.title }} </h1>
+                <h2 v-else class="text-4xl lg:text-5xl font-bold mb-4">
+                    {{ cm_features.title }}
+                </h2>
+                <p class="text-lg lg:text-xl text-gray-900 dark:text-white">
+                    {{ cm_features.description }}
+                </p>
             </div>
-
-        </div>
-        <div class="h-screen flex flex-col lg:flex-row items-center  justify-around p-4 md:mt-10 bg-primary  dark:bg-gray-900  mission max-[1024px]:block  "
-            data-aos="fade-up" data-aos-anchor-placement="top-center">
-            <div class="w-4/5 max-[1024px]:w-[100%] max-[1024px]:px-2 ">
-                <div class="lg:w-full max-[1024px]:pt-40  max-[1024px]:text-center text-white ">
-                    <h1 class="text-[7rem] max-[1400px]:text-5xl font-bold  ">Join Event</h1>
-                    <div class="flex flex-wrap lg:justify-start justify-center gap-8 mt-6 ">
-                        <p class="text-2xl text-justify ">&nbsp;&nbsp; We offer professional writing services for all needs.
-                            Our team creates engaging articles on many topics. Need content for your site, blog, or
-                            magazine? We deliver quality writing that grabs attention. Our work is tailored,
-                            well-researched, and on time. Trust us to make your project stand out with great writing.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="w-1/2 max-[1024px]:w-[100%] max-[1024px]:px-2  max-[1024px]:mt-[4rem]">
-                <img data-aos="flip-down" src="~/assets/services/Join_Event.png" class="max-[1024px]:mx-auto  w-[80%]"
-                    id="close-select" alt="">
+            <div v-if="!cm_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
+                <img :src="cm_features.image" :alt="cm_features.alt" class="w-full lg:w-auto">
             </div>
         </div>
         <!-- <div id="paid-advertisement" class="p-2 text-white text-center text-2xl bg-gray-900">Paid Advertisement</div> -->
@@ -207,6 +187,70 @@ onMounted(() => {
     url.searchParams.delete('id'); // Remove only the 'id' query parameter
     history.replaceState(null, '', url.pathname + url.search);
 });
+// content marketing data loop
+import Write_Articles from '~/assets/services/Content_Marketing/Write_Articles.png';
+import Join_Event from '~/assets/services/Content_Marketing/Join_Event.png';
+import Article_by_Client from '~/assets/services/Content_Marketing/Aricle_by_Client.png';
+import Poster_Or_Photos_Post from '~/assets/services/Content_Marketing/Poster_Or_Photos_Post.png';
+import Product_Review_Video from '~/assets/services/Content_Marketing/Product_Review_Video.png';
+const content_marketing_features = ref([
+    {
+        id: 'write-article',
+        title:'Write Aticle',
+        description: 'We provide expert writing services for any requirement. Our group writes interesting articles on various subjects. If you require content for your website, blog, or magazine, we offer high-quality writing that captures interest. Our work is customized, thoroughly researched, and delivered punctually. Rely on us to make your project shine with excellent writing.',
+        image: Write_Articles,
+        alt: 'Write_Articles',
+        imageLeft: true
+    },
+    {
+        id: 'join-event',
+        title:' Join Event',
+        description: 'We help you join events like conferences, workshops, or online classes that you like. Our team helps you find these events, sign up, and keep track of them. We make sure these events are good for learning, meeting new people, and sharing what you know. You can count on us to find events that make you smarter and help you meet more people who can help you in your work.',
+        image: Join_Event,
+        alt: 'Join_Event',
+        imageLeft: false
+    },
+    {
+        id: 'article-by-client',
+        title:' Aricle by Client',
+        description: 'We write articles for you. If you have an idea or a topic, we turn it into a good story or article. Our team does research to make sure the article has accurate and interesting information. We write it in a way that is easy to read and understand. This service is great for your website, blog, or magazine to attract and keep readers interested. Trust us to write articles that people will want to read.',
+        image: Article_by_Client,
+        alt: 'Article_by_Client',
+        imageLeft: true
+    },
+    {
+        id: 'poster-or-photos-post',
+        title:'Poster Or Photos Post',
+        description: "We create posters and photo posts for you. Our team designs beautiful and eye-catching posters or social media photos. These are perfect for sharing your message or promoting events and products. We make sure they look good and grab people's attention. You can use our designs to make your announcements stand out and reach more people. Trust us to make your ideas look great through our posters and photo posts.",
+        image: Poster_Or_Photos_Post,
+        alt: 'Poster_Or_Photos_Post',
+        imageLeft: false
+    },
+    {
+        id: 'product-review-video',
+        title:'Product Review Video',
+        description: "We make videos reviewing products for you. Our team watches and tests products, then we make a video to tell people what we think. We talk about what's good and what could be better. Our videos are easy to understand and help people decide if they want to buy the product. You can use our videos to show off your products and help customers choose. Trust us to create honest and helpful review videos.",
+        image: Product_Review_Video,
+        alt: 'Product_Review_Video',
+        imageLeft: true
+    },
+    {
+        id: 'event-coverage-video',
+        title:'Event Coverage Video',
+        description: "We create videos that show what happens at events. Our team goes to events like parties, conferences, or shows, and we record everything important. Then, we make a video that shares the story of the event. We show the best parts, interviews with people there, and the fun moments. Our videos make it easy for people who couldn't come to feel like they were there. You can use our videos to share your event with more people. Trust us to capture your event in a way that everyone will enjoy watching.",
+        image: Product_Review_Video,
+        alt: '',
+        imageLeft: false
+    },
+    {
+        id: 'video-post-or-cross-live',
+        title:'Video Post Or Cross Live',
+        description: "We make videos and live streams for you. Our team creates exciting videos to share on social media or websites. We can also go live at events or for talks, showing everything as it happens in real-time. This helps you reach people who are far away but still want to be part of the action. Our videos and live streams are clear, fun, and make sure everyone feels included. You can trust us to share your moments or events live and direct, making your audience feel right there with you.",
+        image: Product_Review_Video,
+        alt: '',
+        imageLeft: true
+    },
+])
 // web development data loop
 import custom_web_solution from '~/assets/services/Custom_Web_Solution.png';
 import e_commerce_development from '~/assets/services/E-commerce_Development.png';
