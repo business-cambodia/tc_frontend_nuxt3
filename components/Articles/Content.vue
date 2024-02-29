@@ -2,10 +2,10 @@
     <!-- Damrei pop up ads -->
     <ins data-revive-zoneid="168" data-revive-id="4ff484e57e8020025aee8261064e4569"></ins>
     <AdsAboveArticle :ads="aboveArticleAds" id="type_above-article" type="above-article" :page="page" />
-
+    <!-- {{ ads }} -->
 
     <div class="flex max-lg:block mb-5">
-        <div class="pb-6 pt-2 w-full ">
+        <div class="pb-6 pt-2 w-full " data-aos="fade-up">
             <!-- headings like titles and details -->
             <div id="title">
                 <div
@@ -44,13 +44,24 @@
                 </div>
             </div>
             <!-- body -->
-            <div class="grid grid-cols-1 lg:grid-cols-left_expand gap-x-6 mt-4 px-6 lg:px-36 text-xl font-light text-black dark:text-white"
+
+            <div class="grid grid-cols-1 text-justify lg:grid-cols-left_expand gap-x-6 mt-4 px-6 lg:px-36 text-xl font-light text-black dark:text-white"
                 id="article-body">
                 <!-- content -->
                 <div>
+                    <div class="top-ads cursor-pointer">
+                        <div v-for="ad in topAds" :key="ad.id" :data-slug="ad.slug" :ref="setTopAdRef" 
+                            @click.prevent="handleAdClick(ad)">
+                            <!-- Wrap the ad content in a div and make the link functional within handleAdClick -->
+                            <div>
+                                <img :src="useImg(ad.file)" :alt="ad.name" class="w-full mt-2 mb-2 rounded-xl" />
+                            </div>
+                        </div>
+                    </div>
                     <AdsUnderTitle type="under-title" id="type_under-title" :ads="underTitleAds" :page="page" />
                     <div id="article_thumbnail">
-                        <img :src="useImg(article.thumbnail)" alt="" srcset="" v-if="showElements.article_thumbnail" />
+                        <img :src="useImg(article.thumbnail)" alt="" srcset="" v-if="showElements.article_thumbnail"
+                            class="w-full" />
                     </div>
                     <div class="body_content pt-2">
                         <div id="part_1_container">
@@ -61,7 +72,14 @@
                             <!-- <BodyAd :ads="firstParagraphAds" id="paragraph-1" /> -->
                             <span id="innity-in-post"></span>
                         </div>
-
+                        <!-- above ads -->
+                        <div class="footer-ad cursor-pointer">
+                            <div v-if="footerAd" :data-slug="footerAd.slug" ref="footerAdRef"
+                                @click="handleAdClick(footerAd)">
+                                <!-- Your Ad component or HTML structure here -->
+                                <img :src="useImg(footerAd.file)" :alt="footerAd.name" class="w-full mt-2 mb-2 rounded-xl" />
+                            </div>
+                        </div>
                         <!--Damrei - Mobile Grow-->
                         <div id="gax-inpage-async-1700708404"></div>
                         <!-- ads line 54-69 -->
@@ -115,10 +133,11 @@
                 </div>
             </div>
         </div>
-        <div class=" px-1 bg-white dark:bg-gray-900 shadow-md lg:w-1/4 sm:w-full  h-screen overflow-y-auto sticky top-[0%]">
+        <div data-aos="fade-left"
+            class=" px-1 bg-white dark:bg-gray-900 shadow-md lg:w-1/4 sm:w-full  h-screen overflow-y-auto sticky top-[0%]  scrollbar-thumb-white scrollbar-track-sky-500 scrollbar-thin">
             <div
-                class="flex flex-col mt-5 h-20 justify-center px-1  text-primary dark:text-white text-2xl font-bold bg-white sticky top-[0%] z-10 dark:rounded-xl ">
-                <span class="dark:text-black">អត្ថបទពេញនិយម</span>
+                class="flex flex-col mt-5 h-20 justify-center items-center px-1  text-white text-2xl font-bold bg-primary dark:bg-gray-900  sticky top-[0%] z-10 rounded-xl ">
+                <span class=" ">បន្តអានអត្ថបទថ្មីៗ</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 justify-center gap-x-4 gap-y-8 mt-8 lg:px-1"
                 v-if="articles != undefined && articles.length > 0">
@@ -128,6 +147,7 @@
             </div>
         </div>
     </div>
+
     <BackToTopButton />
 </template>
   
@@ -136,22 +156,120 @@ import { IAd } from '~~/types/ad';
 import { IArticle } from '~~/types/article';
 import { IResponse } from "~~/types/api";
 import { IAuthor } from "~~/types/author";
-    
+const route = useRoute();
 const now = new Date();
 const firstday = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 const { $handleAdSeen } = useNuxtApp();
+
+//===========================================ads===========================================
+
+
+// Fetch the ads using your API utility
+const adsData = ref<IAd[]>([]);
+
+// Fetch ads function
+const fetchAds = async () => {
+    const response = await useApi(
+        'items/advertisement?fields=name, slug, id, file, link, mobile_only, file_mobile, advertisement_type.type, advertiser.slug, detail_page&filter[status]=published&filter[detail_page]=true&sort[]=-order',
+        { method: 'GET' }
+    );
+    adsData.value = response.data;
+};
+
+// Computed properties for ads
+const topAds = computed(() => adsData.value.filter(ad => ad.advertisement_type.type === 'above-thumbnail'));
+const footerAd = computed(() => adsData.value.find(ad => ad.advertisement_type.type === 'middle-body'));
+
+// Refs for the ad elements
+const topAdsRefs = ref([]);
+
+// Function to assign a ref to each top ad element
+const setTopAdRef = (el) => {
+    if (el) {
+        topAdsRefs.value.push(el);
+        observeAd(el);
+    }
+};
+
+const footerAdRef = ref(null);
+
+// Function to track ad impressions
+const trackImpression = async (slug) => {
+    try {
+        const response = await fetch(`https://tech-cambodia.com/cms/advertisement/impressions/${slug}`);
+        if (!response.ok) {
+            throw new Error('Impression tracking failed');
+        }
+        // Process the response if necessary
+    } catch (error) {
+        console.error('Error tracking impression:', error);
+    }
+};
+
+// Function to track ad clicks
+const handleAdClick = async (ad) => {
+    event.preventDefault(); // Prevent default action if your ad is a link
+    try {
+        const response = await fetch(`https://tech-cambodia.com/cms/advertisement/clicks/${ad.slug}`);
+        if (!response.ok) {
+            throw new Error('Click tracking failed');
+        }
+        // Process the response if necessary
+
+        // If the ad link should still be followed after the click is tracked, uncomment below:
+        // window.location.href = ad.link;
+        window.open(ad.link, '_blank');
+    } catch (error) {
+        console.error('Error tracking click:', error);
+    }
+};
+
+// Observer for ad impressions
+const observeAd = (adElement) => {
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const slug = entry.target.dataset.slug; // Get the slug from data attribute
+                    trackImpression(slug);
+                    observer.unobserve(entry.target); // Stop observing after the ad is seen
+                }
+            });
+        },
+        { threshold: 0.5 }
+    );
+
+    observer.observe(adElement);
+};
+// Fetch ads when component mounts
+onMounted(fetchAds);
 
 const articles = ref(
     (
         await (<Promise<IResponse<IArticle[]>>>(
             useApi(
-                `/items/articles?filter[date_created][_between]=${firstday}, ${now.toISOString()}&sort[]=-views&limit=10&fields=title, date_created,slug, thumbnail,body,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,slug`,
+                '/items/articles?filter[status]=published&limit=10&sort=-date_created&fields=title, date_created,slug, thumbnail,body ,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views',
                 { method: "GET" }
             )
         ))
     ).data
 );
+// After fetching the ads, set up the IntersectionObserver
+onMounted(async () => {
+    await fetchAds();
 
+    // Make sure to call this after the ad data has been fetched and the DOM has been updated
+    nextTick(() => {
+        if (footerAd.value && footerAdRef.value) {
+            observeAd(footerAdRef.value);
+        }
+    });
+});
+const nextTick = (callback) => {
+    setTimeout(callback, 0);
+};
+
+//===========================================end of ads===========================================
 const props = defineProps<{
     aboveArticleAds: Array<IAd>;
     article: IArticle;

@@ -1,7 +1,7 @@
 <template>
   <div class="">
 
-    <div  data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" :style="{
+    <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" :style="{
       backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${useImg(
         currentCategory.thumbnail
       )})`,
@@ -17,11 +17,16 @@
     </button>
 
     <div class="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 justify-center gap-4 mt-8 lg:px-20 px-6"
-      data-aos="fade-up" data-aos-duration="500" v-if="articles && articles.length > 0">
+      data-aos="fade-up" data-aos-duration="500" v-if="articles && currentCategory && articles.length > 0">
       <div v-for="(a, n) in articles" :key="n" class="flex justify-center article-animation">
         <ReusablesArticleCard :article="a" />
       </div>
     </div>
+
+    <div v-else class="mt-10 justify-center flex items-center h-auto ">
+      <PageNotFound />
+    </div>
+
     <BackToTopButton />
   </div>
 </template>

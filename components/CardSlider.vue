@@ -1,5 +1,5 @@
 <template>
-        <div ref="sliderRef" class=" flex lg:w-[80%] m-auto overflow-x-auto gap-4 p-4 h-auto sm:w-full"  data-aos="fade-up">
+        <div ref="sliderRef" class=" flex lg:w-[80%] m-auto overflow-x-auto  scrollbar-thumb-white scrollbar-track-sky-500 scrollbar-thin gap-4 p-4 h-auto sm:w-full"  data-aos="fade-up">
             <div v-for="card in cards" :key="card.id" class="min-w-[600px] h-[450px] shadow-lg rounded-lg p-4">
                 <h1 class="text-center text-2xl font-bold text-primary">Our Clients</h1>
                 <img :src="card.image" alt="Card Image" class="rounded-lg w-full h-[85%]">
@@ -9,6 +9,7 @@
                 </div>
             </div>
         </div>
+        <br>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';

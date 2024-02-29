@@ -2,7 +2,7 @@
     <!-- <LayoutsNavbarWhite /> -->
    
     <div class="pt-28 lg:pt-24" id="article_detail">
-      {{ ads }}
+      <!-- {{ ads }} -->
         <div v-for="(article, index) in articles" :key="index">
             <ArticlesContent 
                 :aboveArticleAds="aboveArticleAds"

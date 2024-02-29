@@ -1,9 +1,18 @@
 import { IAd_Types } from "./ad_types";
 
 export interface IAd {
-    link: string;
+    name: string;
+  slug: string;
+  id: number;
+  file: string;
+  link: string;
+  mobile_only: boolean;
+  file_mobile: string;
+  advertisement_type: {
+    type: string;
+  };
+  advertiser: {
     slug: string;
-    file: string;
-    mobile_only: boolean;
-    advertisement_type: IAd_Types;
+  };
+  detail_page: boolean;
 }
