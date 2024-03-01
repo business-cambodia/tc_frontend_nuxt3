@@ -15,7 +15,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import BC_Cambodia from '~/assets/services/Clients/BC_Cambodia.png';
 import bay_of_flights from '~/assets/services/Clients/Bay_of_lights.png';
-import clinic from '~/assets/services/Clients/Clinic.png';
+import clinic from '~/assets/services/Clients/clinic.png';
 import lch_investment from '~/assets/services/Clients/Lch_investment_group.png';
 import task_force from '~/assets/services/Clients/task_force.png';
 import attaccapital from '~/assets/services/Clients/Attcapital.png';
