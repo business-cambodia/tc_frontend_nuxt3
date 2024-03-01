@@ -29,12 +29,12 @@
             <div v-if="cm_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
                 <img :src="cm_features.image" :alt="cm_features.alt" class="w-full lg:w-auto">
             </div>
-            <div class="text-center lg:text-left text-primary " id="content-marketing ">
+            <div class="text-center lg:text-left text-primary " id="content-marketing">
                 <h1 v-if="cm_features.id === 'content-marketing'" class="text-4xl lg:text-5xl font-bold mb-4"
                     :id="cm_features.id">
-                      {{ cm_features.title }} </h1>
+                     {{ cm_features.title }} </h1>
                 <h2 v-else class="text-4xl lg:text-5xl font-bold mb-4">
-                    {{ cm_features.title }}
+                   {{ cm_features.content }} <br> {{ cm_features.title }}
                 </h2>
                 <p class="text-lg lg:text-xl text-gray-900 dark:text-white">
                     {{ cm_features.description }}
@@ -72,8 +72,8 @@
                     <p class="text-white text-lg md:text-sm mt-4" id="web-development">{{ deail_web[0].detail }}</p>
                     <div class="flex flex-wrap lg:justify-start justify-center gap-8 mt-6">
                         <a id="button" href="#" v-for="Webservice in web_services" :key="Webservice.title"
-                            class="cursor-pointer text-white font-bold relative p-4 text-xl md:text-sm  text-center bg-gradient-to-r from-violet-500 from-10% via-sky-500 via-30% to-pink-500 to-90% bg-[length:400%] rounded-[30px] z-10 hover:animate-gradient-xy hover:bg-[length:100%] before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:-left-[5px] before:-right-[5px] before:bg-gradient-to-r before:from-violet-500 before:from-10% before:via-sky-500 before:via-30% before:to-pink-500 before:bg-[length:400%] before:-z-10 before:rounded-[35px] before:hover:blur-xl before:transition-all before:ease-in-out before:duration-[1s] before:hover:bg-[length:10%] active:bg-violet-700 focus:ring-violet-700"
-                            @click.prevent="scrollToSection(Webservice.id)">
+                            class=" text-white font-bold relative p-4 text-xl md:text-sm  text-center bg-gradient-to-r from-violet-500 from-10% via-sky-500 via-30% to-pink-500 to-90% bg-[length:400%] rounded-[30px] z-10 hover:animate-gradient-xy hover:bg-[length:100%] before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:-left-[5px] before:-right-[5px] before:bg-gradient-to-r before:from-violet-500 before:from-10% before:via-sky-500 before:via-30% before:to-pink-500 before:bg-[length:400%] before:-z-10 before:rounded-[35px] before:hover:blur-xl before:transition-all before:ease-in-out before:duration-[1s] before:hover:bg-[length:10%] active:bg-violet-700 focus:ring-violet-700"
+                            @click.prevent="scrollToSection(web_features.id)">
                             {{ Webservice.title }}
                         </a>
                     </div>
@@ -92,7 +92,7 @@
                 <img :src="web_features.image" :alt="web_features.alt" class="w-full lg:w-auto">
             </div>
             <div class="text-center lg:text-left text-primary " id="web-development">
-                <h1 v-if="web_features.id === 'paid-advertisement'" class="text-4xl lg:text-5xl font-bold mb-4"
+                <h1 v-if="web_features.id === 'web-development'" class="text-4xl lg:text-5xl font-bold mb-4"
                     :id="web_features.id">
                     {{ web_features.title }} </h1>
                 <h2 v-else class="text-4xl lg:text-5xl font-bold mb-4">
@@ -196,6 +196,7 @@ import Product_Review_Video from '~/assets/services/Content_Marketing/Product_Re
 const content_marketing_features = ref([
     {
         id: 'write-article',
+        content:'Content Marketing',
         title:'Write Aticle',
         description: 'We provide expert writing services for any requirement. Our group writes interesting articles on various subjects. If you require content for your website, blog, or magazine, we offer high-quality writing that captures interest. Our work is customized, thoroughly researched, and delivered punctually. Rely on us to make your project shine with excellent writing.',
         image: Write_Articles,
