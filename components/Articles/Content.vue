@@ -15,14 +15,14 @@
                         {{ article.title }}
                     </div>
                     <div
-                        class="flex items-center justify-center text-xs lg:text-sm font-light text-gray-500 dark:text-white mt-2 ">
+                        class="flex items-center justify-center text-xs lg:text-sm font-light text-gray-500 dark:text-white mt-2">
                         <NuxtLink :to="'/authors/' + article.user_created.id"
                             class="hover:text-primary hover:text-bold duration-200 ">
                             <span>{{
-                                article.user_created.first_name +
-                                ' ' +
-                                article.user_created.last_name
-                            }}</span>
+        article.user_created.first_name +
+        ' ' +
+        article.user_created.last_name
+    }}</span>
                         </NuxtLink>
                         <span class="mx-2">•</span>
                         <span>
@@ -50,7 +50,7 @@
                 <!-- content -->
                 <div>
                     <div class="top-ads cursor-pointer">
-                        <div v-for="ad in topAds" :key="ad.id" :data-slug="ad.slug" :ref="setTopAdRef" 
+                        <div v-for="ad in topAds" :key="ad.id" :data-slug="ad.slug" :ref="setTopAdRef"
                             @click.prevent="handleAdClick(ad)">
                             <!-- Wrap the ad content in a div and make the link functional within handleAdClick -->
                             <div>
@@ -77,7 +77,8 @@
                             <div v-if="footerAd" :data-slug="footerAd.slug" ref="footerAdRef"
                                 @click="handleAdClick(footerAd)">
                                 <!-- Your Ad component or HTML structure here -->
-                                <img :src="useImg(footerAd.file)" :alt="footerAd.name" class="w-full mt-2 mb-2 rounded-xl" />
+                                <img :src="useImg(footerAd.file)" :alt="footerAd.name"
+                                    class="w-full mt-2 mb-2 rounded-xl" />
                             </div>
                         </div>
                         <!--Damrei - Mobile Grow-->
@@ -98,8 +99,8 @@
                             <div v-html="splitBody().secondPart" class="article_body" id="part-2"
                                 v-if="showElements.part_2_container"></div>
 
-                            <AdsBody v-if="secondParagraphAds" :ads="secondParagraphAds" :type="'paragraph-2'" :page="page"
-                                :body="2" id="type_paragraph-2" />
+                            <AdsBody v-if="secondParagraphAds" :ads="secondParagraphAds" :type="'paragraph-2'"
+                                :page="page" :body="2" id="type_paragraph-2" />
                         </div>
                         <div id="part_3_container">
                             <div v-html="splitBody().thirdPart" class="article_body" id="part-3"
@@ -134,23 +135,23 @@
             </div>
         </div>
         <div data-aos="fade-left"
-            class=" px-1 bg-white dark:bg-gray-900 shadow-md lg:w-1/4 sm:w-full  h-screen overflow-y-auto sticky top-[0%]  scrollbar-thumb-white scrollbar-track-sky-500 scrollbar-thin">
+            class="px-1 bg-white dark:bg-gray-900 shadow-md w-full lg:w-1/4 h-screen overflow-y-auto sticky top-0 ">
             <div
-                class="flex flex-col mt-5 h-20 justify-center items-center px-1  text-white text-2xl font-bold bg-primary dark:bg-gray-900  sticky top-[0%] z-10 rounded-xl ">
-                <span class=" ">បន្តអានអត្ថបទថ្មីៗ</span>
+                class="flex flex-col mt-5 h-20 justify-center items-center px-1 text-white text-2xl font-bold bg-primary dark:bg-gray-900 sticky top-0 z-10 rounded-xl">
+                <span>បន្តអានអត្ថបទថ្មីៗ</span>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 justify-center gap-x-4 gap-y-8 mt-8 lg:px-1"
-                v-if="articles != undefined && articles.length > 0">
+            <div class="grid grid-cols-1 gap-x-4 gap-y-8 mt-8 px-1" v-if="articles != undefined && articles.length > 0">
                 <div v-for="(a, n) in articles" :key="n" class="flex justify-center">
                     <ReusablesArticleCard :article="a" />
                 </div>
             </div>
         </div>
+
     </div>
 
     <BackToTopButton />
 </template>
-  
+
 <script setup lang="ts">
 import { IAd } from '~~/types/ad';
 import { IArticle } from '~~/types/article';
@@ -379,7 +380,7 @@ onMounted(() => {
     }
 });
 </script>
-  
+
 <style>
 iframe {
     max-width: 100%;
