@@ -1,7 +1,7 @@
 
 <template>
     <div class="min-h-screen dark:bg-black">
-        <div class="h-screen  lg:flex w-full justify-evenly items-center px-32  dark:bg-gray-900 mission" data-aos="fade-up"
+        <div class=" lg:flex w-full justify-evenly items-center lg:px-32 max-sm:pt-32 md:h-auto lg:h-screen dark:bg-gray-900 mission" data-aos="fade-up"
             data-aos-anchor-placement="top-center">
             <div data-aos="fade-right" class="w-full text-center aos-init aos-animate">
                 <img id="close-select" src="/about/Baksey_Media.jpg" class="lg:w-[80%] rounded-full " alt="">
@@ -13,7 +13,7 @@
                     class="lg:w-[100%] lg:rounded-3xl ">
             </div>
         </div>
-        <div class="h-screen max-[1024px]:p-20  lg:flex w-full justify-evenly items-center px-32" data-aos="fade-up"
+        <div class=" max-[1024px]:p-20  lg:flex w-full justify-evenly md:h-auto lg:h-screen items-center px-32" data-aos="fade-up"
             data-aos-anchor-placement="top-center">
             <div class="w-full  mt-30 lg:w-1/2 zoom-in-up">
                 <div style="pointer-events: none; user-select: none; overflow: hidden;">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="h-screen max-[1024px]:p-20  lg:flex w-full justify-evenly items-center px-32">
+        <div class="md:h-auto lg:h-screen max-[1024px]:p-20  lg:flex w-full justify-evenly items-center px-32">
             <div class="w-full lg:w-1/2 ">
                 <div class="w-full text-center zoom-in   "
                     style="pointer-events: none; user-select: none; overflow: hidden;">
@@ -42,7 +42,7 @@
                         About Technology Cambodia
                     </div>
                     <div data-aos="zoom-out-down"
-                        class="mt-12 text-2xl text-white lg:p-5 max-[774px]:text-xl max-[774px]:text-justify bg-blue-600 rounded-3xl">
+                        class="mt-12 text-2xl p-5 text-white lg:p-5 max-[774px]:text-xl max-[774px]:text-justify bg-blue-600 rounded-3xl">
                         {{ about_tech_detail }}
                     </div>
                 </div>
@@ -60,7 +60,7 @@
 
         </div>
 
-        <div class="h-screen  lg:flex w-full justify-evenly items-center px-32 bg-primary dark:bg-gray-900 mission">
+        <div class="md:h-auto lg:h-screen   lg:flex w-full justify-evenly items-center lg:px-32 bg-primary dark:bg-gray-900 mission">
             <div data-aos="fade-up" data-aos-duration="1500" class="w-full text-center aos-init aos-animate">
                 <div class="text-[5rem] font-extrabold text-white " id="close-select">បេសកកម្ម</div>
                 <div class="mt-12 text-4xl text-white">
@@ -128,7 +128,7 @@
             </div>
         </div>
         <div
-            class="h-screen   lg:flex w-full justify-evenly items-center px-32 text-primary dark:text-white  dark:bg-gray-900">
+            class="h-screen   lg:flex w-full justify-evenly items-center lg:px-32 text-primary dark:text-white  dark:bg-gray-900">
             <div class="container mx-auto px-4 flex flex-col md:flex-row md:space-x-6 items-center py-8">
                 <div class="w-full md:w-2/5 flex flex-col items-center relative" data-aos="fade-up"
                     data-aos-duration="3000">
@@ -150,7 +150,7 @@
 
         </div>
 
-
+        <Authors />
         <div class="py-10 min-h-screen  text-primary dark:text-white bg-primary    dark:bg-gray-900 aboutus-bg"
             id="close-select">
 
@@ -253,22 +253,22 @@ const preventDefault = (event: Event) => {
 };
 
 // Function to handle keydown events
-const preventCertainKeys = (event: KeyboardEvent) => {
-    if (event.ctrlKey && [67, 86, 85, 117].includes(event.keyCode)) {
-        preventDefault(event);
-    }
-    if (event.keyCode === 123) { // F12 key
-        preventDefault(event);
-    }
-};
+// const preventCertainKeys = (event: KeyboardEvent) => {
+//     if (event.ctrlKey && [67, 86, 85, 117].includes(event.keyCode)) {
+//         preventDefault(event);
+//     }
+//     if (event.keyCode === 123) { // F12 key
+//         preventDefault(event);
+//     }
+// };
 
-onMounted(() => {
+// onMounted(() => {
 
-    document.addEventListener('contextmenu', preventDefault);
+//     document.addEventListener('contextmenu', preventDefault);
 
 
-    document.addEventListener('keydown', preventCertainKeys);
-});
+//     document.addEventListener('keydown', preventCertainKeys);
+// });
 
 onUnmounted(() => {
 

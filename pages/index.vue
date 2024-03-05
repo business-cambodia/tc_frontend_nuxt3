@@ -27,7 +27,7 @@
       </div>
     </div>
     <BackToTopButton />
-    <Authors />
+    <!-- <Authors /> -->
   </div>
 </template>
 
