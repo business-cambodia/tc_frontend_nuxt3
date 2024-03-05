@@ -253,22 +253,22 @@ const preventDefault = (event: Event) => {
 };
 
 // Function to handle keydown events
-// const preventCertainKeys = (event: KeyboardEvent) => {
-//     if (event.ctrlKey && [67, 86, 85, 117].includes(event.keyCode)) {
-//         preventDefault(event);
-//     }
-//     if (event.keyCode === 123) { // F12 key
-//         preventDefault(event);
-//     }
-// };
+const preventCertainKeys = (event: KeyboardEvent) => {
+    if (event.ctrlKey && [67, 86, 85, 117].includes(event.keyCode)) {
+        preventDefault(event);
+    }
+    if (event.keyCode === 123) { // F12 key
+        preventDefault(event);
+    }
+};
 
-// onMounted(() => {
+onMounted(() => {
 
-//     document.addEventListener('contextmenu', preventDefault);
+    document.addEventListener('contextmenu', preventDefault);
 
 
-//     document.addEventListener('keydown', preventCertainKeys);
-// });
+    document.addEventListener('keydown', preventCertainKeys);
+});
 
 onUnmounted(() => {
 
