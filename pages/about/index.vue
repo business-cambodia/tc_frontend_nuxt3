@@ -188,9 +188,9 @@
 
         </div>
 
-        <div class="h-screen  lg:flex w-full justify-evenly items-center px-32  dark:bg-gray-900 mission">
+        <div class="h-screen  lg:flex w-full justify-evenly items-center lg:px-32 pt-5  dark:bg-gray-900 mission">
             <div data-aos="fade-up" data-aos-duration="1500" class="w-full text-center aos-init aos-animate">
-                <div class="text-[3rem] font-extrabold text-primary " id="close-select">ទាក់ទងមកយើងតាមរយៈទូរស័ព្ទ</div>
+                <div class="lg:text-[3rem] max-md:text-4xl font-extrabold text-primary " id="close-select">ទាក់ទងមកយើងតាមរយៈទូរស័ព្ទ</div>
                 <div class="mt-12 text-2xl text-primary">
                     HOTLINE: <a href="https://t.me/marketing_techcambodia" target="_blank">+855 (0) 89 525 180</a> | <a
                         href="https://t.me/marketing_techcambodia" target="_blank">+855 (0) 69
