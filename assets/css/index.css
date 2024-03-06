@@ -6,3 +6,8 @@
     background: #64c6ff;
     color: white;
   }
+
+  /* remove blue backgound on mobile press */
+a {
+  -webkit-tap-highlight-color: transparent;
+}
