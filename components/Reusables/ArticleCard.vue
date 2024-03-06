@@ -26,22 +26,21 @@
             class="text-xs font-light text-primary mt-10 flex justify-between"
           >
             {{ $formatDate(article.date_created) }}
-            <div
-              class="underline">
-              #{{ article.category.name }}
-            </div>
+            <div class="underline">#{{ article.category.name }}</div>
           </div>
 
           <p
-            class="text-base lg:text-lg font-medium line-clamp dark:text-white mt-1">
+            class="text-base lg:text-lg font-medium line-clamp dark:text-white mt-1"
+          >
             {{ article.title }}
           </p>
-          <div class="text-xs font-light text-red-500 mt-2 dark:text-white">
+          <div class="text-xs font-light text-gray-700 mt-2 dark:text-white">
             {{ $kFormatter(article.views) }} views
             <span class="text-xs mx-2">•</span>
             <span
               class="bg-gray-200 dark:bg-gray-500 dark:text-white p-0.5 px-2 rounded-full"
-              >{{ $calculateReadTime(article.body) }}</span>
+              >{{ $calculateReadTime(article.body) }}</span
+            >
           </div>
         </div>
         <div class="flex items-center justify-between dark:text-white">
