@@ -1,7 +1,7 @@
 <template>
     <!-- <LayoutsNavbarWhite /> -->
    
-    <div class="pt-28 lg:pt-24" id="article_detail">
+    <div class="pt-9 lg:pt-12" id="article_detail">
       <!-- {{ ads }} -->
         <div v-for="(article, index) in articles" :key="index">
             <ArticlesContent 
@@ -78,18 +78,22 @@ useHead({
         `,
     },
     {
+      type: "text/javascript",
       innerHTML: `
       gammatag.cmd.push(function() {
-      //MR1
-      gammatag.defineZone({code:"gax-inpage-async-1700708881",size:[300,250],params:{siteId:"1700707025",zoneId:"1700708881",zoneType:"Inpage"}});
-      //Mobile Underlay
-      gammatag.defineZone({code:"gax-inpage-async-1706848424",size:[640,1386],params:{siteId:"1700707025",zoneId:"1706848424",zoneType:"Inpage"}});
-      //Mobile Underlay
-      gammatag.defineZone({code:"gax-inpage-async-1700708647",size:[640,1386],params:{siteId:"1700707025",zoneId:"1700708647",zoneType:"Inpage"}});
-      //Mobile Grow
-      gammatag.defineZone({code:"gax-inpage-async-1700708404",size:[640,853],params:{siteId:"1700707025",zoneId:"1700708404",zoneType:"Inpage"}});
-      gammatag.sendRequest();
-      });
+        // Mobile Underlay - Zone 1
+        gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
+            
+        // Mobile Underlay - Zone 2
+        gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
+            
+        // Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
+        gammatag.sendRequest();
+  
+        //MR1 Desktop
+        gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
+        gammatag.sendRequest();
+        });
       `
     },
     // {
