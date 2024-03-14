@@ -1,213 +1,123 @@
 <template>
-  <!-- Damrei pop up ads -->
-  <ins
-    data-revive-zoneid="168"
-    data-revive-id="4ff484e57e8020025aee8261064e4569"
-  ></ins>
   <AdsAboveArticle
     :ads="aboveArticleAds"
     id="type_above-article"
     type="above-article"
     :page="page"
   />
-  <!-- {{ ads }} -->
 
-  <div class="flex max-lg:block mb-5">
-    <div class="pb-6 pt-2 w-full" data-aos="fade-up">
-      <!-- headings like titles and details -->
-      <div id="title">
-        <div
-          class="flex flex-col justify-center px-4 lg:px-36 text-black dark:text-white my-6 object-cover bg-center bg-no-repeat bg-cover"
+  <!-- Header -->
+  <div class="px-2">
+    <div class="lg:px-24 my-2">
+      <!-- <AboveTitleAd :ads="aboveTitleAds" /> -->
+      <div
+        class="text-center text-grey-800 text-2xl lg:text-4xl font-medium lg:font-semibold article-title dark:text-white"
+      >
+        {{ article.title }}
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center pt-2 text-xs lg:text-base">
+      <div
+        class="flex flex-wrap justify-center items-center text-gray-600 dark:text-white"
+      >
+        <NuxtLink :to="`/authors/${article.user_created.id}`"
+          ><div class="transfrom hover:underline">
+            {{
+              article.user_created.first_name +
+              ' ' +
+              article.user_created.last_name
+            }}
+          </div></NuxtLink
         >
-          <div class="text-3xl lg:text-5xl font-bold article-title text-center">
-            {{ article.title }}
-          </div>
-          <div
-            class="flex items-center justify-center text-xs lg:text-sm font-light text-gray-500 dark:text-white mt-2"
-          >
-            <NuxtLink
-              :to="'/authors/' + article.user_created.id"
-              class="hover:text-primary hover:text-bold duration-200"
-            >
-              <span>{{
-                article.user_created.first_name +
-                ' ' +
-                article.user_created.last_name
-              }}</span>
-            </NuxtLink>
-            <span class="mx-2">•</span>
-            <span>
-              {{ $formatDate(article.date_created) }}
-            </span>
-            <span class="mx-2">•</span>
-            <span class="font-bold">
-              {{ $kFormatter(article.views) }} views
-            </span>
-            <span class="mx-2">•</span>
-            <span>
-              {{ article.category.name }}
-            </span>
-            <span class="mx-2">•</span>
-            <!-- <span class="bg-primary rounded-lg p-1 text-white">
-              {{ $calculateReadTime(article.body) }}
-            </span> -->
-          </div>
-        </div>
-      </div>
-      <!-- body -->
 
-      <div
-        class="grid grid-cols-1 text-justify lg:grid-cols-left_expand gap-x-6 mt-4 px-6 lg:px-36 text-xl font-light text-black dark:text-white"
-        id="article-body"
-      >
-        <!-- content -->
-        <div>
-          <div class="top-ads cursor-pointer">
-            <div
-              v-for="ad in topAds"
-              :key="ad.id"
-              :data-slug="ad.slug"
-              :ref="setTopAdRef"
-              @click.prevent="handleAdClick(ad)"
-            >
-              <!-- Wrap the ad content in a div and make the link functional within handleAdClick -->
-              <div>
-                <img
-                  :src="useImg(ad.file)"
-                  :alt="ad.name"
-                  class="w-full mt-2 mb-2 rounded-xl"
-                />
-              </div>
-            </div>
-          </div>
-          <AdsUnderTitle
-            type="under-title"
-            id="type_under-title"
-            :ads="underTitleAds"
-            :page="page"
-          />
-          <div id="article_thumbnail">
-            <img
-              :src="useImg(article.thumbnail)"
-              alt=""
-              srcset=""
-              v-if="showElements.article_thumbnail"
-              class="w-full"
+        <div class="text-lg mx-2 lg:mx-4">•</div>
+        <div>{{ $formatDate(article.date_created) }}</div>
+        <div class="text-lg mx-2 lg:mx-4">•</div>
+        <div>{{ article.category.name }}</div>
+        <div class="text-lg mx-2 lg:mx-4">•</div>
+        <div class="font-bold">{{ $kFormatter(article.views) }} views</div>
+        <div class="text-lg mx-2 lg:mx-4">•</div>
+        <div>{{ $calculateReadTime(article.body) }}</div>
+      </div>
+    </div>
+    <div class="flex justify-center mt-4">
+      <hr class="w-10 h-1 bg-primary" />
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="mt-4 pb-10 grid grid-cols-1 lg:grid-cols-10">
+    <div class="col-span-2"></div>
+    <div class="pt-4 px-4 col-span-6">
+      <!-- content -->
+      <div class="">
+        <!-- above thumbnail ads -->
+        <AdsAboveThumbnailAds
+          :ads="aboveThumbnailAds"
+          id="above-thumbnail"
+          :page="page"
+        />
+        <!-- thumbnail -->
+        <img
+          format="webp"
+          loading="lazy"
+          :src="useImg(article.thumbnail)"
+          alt=""
+          class="w-full rounded-xl object-cover bg-no-repeat bg-center lg:block mb-3"
+        />
+
+        <!-- article body -->
+        <div
+          class="text-lg lg:text-xl list-disc font-light dark:text-white break-words"
+          id="article-body"
+        >
+          <div>
+            <AdsBody
+              :ads="firstParagraphAds"
+              id="paragraph-1"
+              :page="page"
+              :body="1"
             />
+            <div id="part-1">
+              <div v-html="splitBody().firstPart" class="article_body"></div>
+            </div>
+            <!--Mobile Underlay - Zone 1-->
+            <div id="gax-inpage-async-1700709319"></div>
           </div>
-          <div class="body_content pt-2">
-            <div id="part_1_container">
-              <div
-                v-html="splitBody().firstPart"
-                class="article_body"
-                id="part-1"
-              ></div>
-              <!--Mobile Underlay - Zone 1-->
-              <div id="gax-inpage-async-1700709319"></div>
 
-              <AdsBody
-                :ads="firstParagraphAds"
-                :type="'paragraph-1'"
-                :page="page"
-                :body="1"
-                id="type_paragraph-1"
-              />
-            </div>
-            <!-- above ads -->
-            <div class="footer-ad cursor-pointer">
-              <div
-                v-if="footerAd"
-                :data-slug="footerAd.slug"
-                ref="footerAdRef"
-                @click="handleAdClick(footerAd)"
-              >
-                <!-- Your Ad component or HTML structure here -->
-                <img
-                  :src="useImg(footerAd.file)"
-                  :alt="footerAd.name"
-                  class="w-full mt-2 mb-2 rounded-xl"
-                />
-              </div>
-            </div>
-            <div id="part_2_container">
-              <div
-                v-html="splitBody().secondPart"
-                class="article_body"
-                id="part-2"
-                v-if="showElements.part_2_container"
-              ></div>
-
-              <!--Mobile Underlay - Zone 2-->
-              <div id="gax-inpage-async-1706848793"></div>
-              <AdsBody
-                v-if="secondParagraphAds"
-                :ads="secondParagraphAds"
-                :type="'paragraph-2'"
-                :page="page"
-                :body="2"
-                id="type_paragraph-2"
-              />
-            </div>
-            <div id="part_3_container">
-              <div
-                v-html="splitBody().thirdPart"
-                class="article_body"
-                id="part-3"
-                v-if="showElements.part_3_container"
-              ></div>
-
-              <AdsBody
-                :ads="thirdParagraphAds"
-                :type="'paragraph-3'"
-                :page="page"
-                :body="3"
-                id="type_paragraph-3"
-              />
-            </div>
-            <div class="pb-10" id="the_rest_container">
-              <div
-                v-html="splitBody().theRest"
-                class="article_body"
-                id="the-rest"
-                v-if="showElements.the_rest_container"
-              ></div>
-            </div>
+          <div id="part-2">
+            <AdsBody
+              :ads="secondParagraphAds"
+              id="paragraph-2"
+              :page="page"
+              :body="2"
+            />
+            <div v-html="splitBody().secondPart" class="article_body"></div>
+            <!--Mobile Underlay - Zone 2-->
+            <div id="gax-inpage-async-1706848793"></div>
           </div>
-          <div id="author">
-            <NuxtLink :to="'/authors/' + article.user_created.id">
-              <ArticlesAuthor
-                :user="article.user_created"
-                v-if="showElements.author"
-              />
-            </NuxtLink>
+
+          <div id="part-3">
+            <AdsBody
+              :ads="thirdParagraphAds"
+              id="paragraph-3"
+              :page="page"
+              :body="3"
+            />
+            <div v-html="splitBody().thirdPart" class="article_body"></div>
           </div>
-        </div>
-        <!-- ads -->
-        <div>
-          <AdsSide id="type_side-bar" :ads="sideBarAds" :page="page" />
+
+          <div id="the-rest">
+            <div v-html="splitBody().theRest" class="article_body"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      data-aos="fade-left"
-      class="px-1 bg-white dark:bg-gray-900 shadow-md w-full lg:w-1/4 h-screen overflow-y-auto sticky top-0"
-    >
       <!--Damrei - MR1 Desktop-->
-      <div id="gax-inpage-async-1709623758"></div>
-      <div
-        class="flex flex-col mt-5 h-20 justify-center items-center px-1 text-white text-2xl font-bold bg-primary dark:bg-gray-900 sticky top-0 z-10 rounded-xl"
-      >
-        <span>បន្តអានអត្ថបទថ្មីៗ</span>
-      </div>
-      <div
-        class="grid grid-cols-1 gap-x-4 gap-y-8 mt-8 px-1"
-        v-if="articles != undefined && articles.length > 0"
-      >
-        <div v-for="(a, n) in articles" :key="n" class="flex justify-center">
-          <ReusablesArticleCard :article="a" />
-        </div>
-      </div>
+      <div id="gax-inpage-async-1709623758" class="flex justify-center"></div>
+      <ArticlesAuthor :user="article.user_created" />
     </div>
+    <div class="col-span-2"></div>
   </div>
 
   <BackToTopButton />
@@ -216,129 +126,8 @@
 <script setup lang="ts">
 import { IAd } from '~~/types/ad';
 import { IArticle } from '~~/types/article';
-import { IResponse } from '~~/types/api';
-import { IAuthor } from '~~/types/author';
-const route = useRoute();
-const now = new Date();
-const firstday = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 const { $handleAdSeen } = useNuxtApp();
 
-//===========================================ads===========================================
-
-// Fetch the ads using your API utility
-const adsData = ref<IAd[]>([]);
-
-// Fetch ads function
-const fetchAds = async () => {
-  const response: any = await useApi(
-    'items/advertisement?fields=name, slug, id, file, link, mobile_only, file_mobile, advertisement_type.type, advertiser.slug, detail_page&filter[status]=published&filter[detail_page]=true&sort[]=-order',
-    { method: 'GET' }
-  );
-  adsData.value = response.data;
-};
-
-// Computed properties for ads
-const topAds = computed(() =>
-  adsData.value.filter((ad) => ad.advertisement_type.type === 'above-thumbnail')
-);
-const footerAd = computed(() =>
-  adsData.value.find((ad) => ad.advertisement_type.type === 'middle-body')
-);
-
-// Refs for the ad elements
-const topAdsRefs = ref([]);
-
-// Function to assign a ref to each top ad element
-const setTopAdRef = (el) => {
-  if (el) {
-    topAdsRefs.value.push(el);
-    observeAd(el);
-  }
-};
-
-const footerAdRef = ref(null);
-
-// Function to track ad impressions
-const trackImpression = async (slug) => {
-  try {
-    const response = await fetch(
-      `https://tech-cambodia.com/cms/advertisement/impressions/${slug}`
-    );
-    if (!response.ok) {
-      throw new Error('Impression tracking failed');
-    }
-    // Process the response if necessary
-  } catch (error) {
-    console.error('Error tracking impression:', error);
-  }
-};
-
-// Function to track ad clicks
-const handleAdClick = async (ad) => {
-  event.preventDefault(); // Prevent default action if your ad is a link
-  try {
-    const response = await fetch(
-      `https://tech-cambodia.com/cms/advertisement/clicks/${ad.slug}`
-    );
-    if (!response.ok) {
-      throw new Error('Click tracking failed');
-    }
-    // Process the response if necessary
-
-    // If the ad link should still be followed after the click is tracked, uncomment below:
-    // window.location.href = ad.link;
-    window.open(ad.link, '_blank');
-  } catch (error) {
-    console.error('Error tracking click:', error);
-  }
-};
-
-// Observer for ad impressions
-const observeAd = (adElement) => {
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const slug = entry.target.dataset.slug; // Get the slug from data attribute
-          trackImpression(slug);
-          observer.unobserve(entry.target); // Stop observing after the ad is seen
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  observer.observe(adElement);
-};
-// Fetch ads when component mounts
-onMounted(fetchAds);
-
-const articles = ref(
-  (
-    await (<Promise<IResponse<IArticle[]>>>(
-      useApi(
-        '/items/articles?filter[status]=published&limit=10&sort=-date_created&fields=title, date_created,slug, thumbnail,body ,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views',
-        { method: 'GET' }
-      )
-    ))
-  ).data
-);
-// After fetching the ads, set up the IntersectionObserver
-onMounted(async () => {
-  await fetchAds();
-
-  // Make sure to call this after the ad data has been fetched and the DOM has been updated
-  nextTick(() => {
-    if (footerAd.value && footerAdRef.value) {
-      observeAd(footerAdRef.value);
-    }
-  });
-});
-const nextTick = (callback) => {
-  setTimeout(callback, 0);
-};
-
-//===========================================end of ads===========================================
 const props = defineProps<{
   aboveArticleAds: Array<IAd>;
   article: IArticle;
@@ -346,41 +135,23 @@ const props = defineProps<{
   secondParagraphAds: Array<IAd>;
   thirdParagraphAds: Array<IAd>;
   sideBarAds: Array<IAd>;
-  underTitleAds: Array<IAd>;
+  aboveThumbnailAds: Array<IAd>;
   showElements: any;
   page: number;
 }>();
 
 const splitBody = () => {
   const bodyParts = props.article.body.split('\n');
-
   return {
     firstPart: bodyParts[0],
-    secondPart: bodyParts[1] ? bodyParts[1] + '\n' : '\n',
-    thirdPart: bodyParts[2] ? bodyParts[2] : '\n',
+    secondPart: bodyParts[1] ? bodyParts[1] + '' : '\n',
+    thirdPart: bodyParts[2] ? bodyParts[2] + '' : '\n',
     theRest: bodyParts.length > 3 ? bodyParts.slice(3).join('') : '\n',
   };
 };
 
 // here where i toggle impression on ads seen
 onMounted(() => {
-  var adUnits = [
-    {
-      code: 'block_23',
-      placement_id: 23,
-      sizes: [640, 1386],
-    },
-  ];
-  if (typeof DAMREIX !== 'undefined') {
-    DAMREIX.buildUnits(adUnits);
-  } else {
-    console.warn('DAMREIX library not loaded.');
-  }
-  // add damrei script on new article loaded
-  const scpt = document.createElement('script');
-  scpt.async = true;
-  scpt.src = '//gamma.cachefly.net/js/gaxpt.min.js';
-  document.body.appendChild(scpt);
   try {
     let observer = new IntersectionObserver(
       async (entries) => {
@@ -410,9 +181,9 @@ onMounted(() => {
       );
     });
     // --> under article page
-    props.underTitleAds.forEach((a, index) => {
+    props.aboveThumbnailAds.forEach((a, index) => {
       observer.observe(
-        document.getElementById('under_article_' + index + '_' + props.page)!
+        document.getElementById('above_thumbnail_' + index + '_' + props.page)!
       );
     });
     // --> body ads
@@ -454,40 +225,70 @@ iframe {
   max-width: 100%;
 }
 
-p,
-.article_body {
-  word-wrap: break-word;
-  hyphens: auto;
-  max-width: 100%;
-}
-
-.article-title {
-  line-height: 1.5;
-}
-
-.body_content {
-  white-space: pre-wrap;
-}
-
 .article_body a {
   text-decoration: underline;
-  color: #ed1c24;
+  color: blue;
 }
 
 .article_body {
-  line-height: 2;
-  display: inline-block;
+  white-space: pre-wrap;
+  line-height: 1.75;
+}
+
+.article_body p {
+  padding: 9px 0px;
+}
+
+.profile-avatar {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 12%;
+  text-align: center;
+  z-index: 1;
+}
+
+#article-body img {
+  height: 100%;
+  width: 100%;
 }
 
 .article_body ul {
   list-style: disc;
+  padding-left: 1rem;
+  line-height: normal;
 }
 
 .article_body ol {
   list-style: decimal;
+  padding-left: 1rem;
+}
+
+.article_body li {
+  line-height: normal;
 }
 
 .article_body h1 {
+  font-size: 2em;
   font-weight: bold;
+  color: #089cf4;
+  line-height: normal;
+}
+
+.article_body h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #777777;
+  line-height: normal;
+}
+
+.article_body h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+}
+
+.article_body ul li {
+  line-height: 180%;
 }
 </style>

@@ -11,7 +11,7 @@
         class="h-auto lg:h-40 2xl:h-44 w-full rounded-t-xl object-cover bg-no-repeat bg-center"
       />
       <div
-        class="h-60 px-4 pt-4 pb-6 flex flex-col justify-between rounded-b-lg relative"
+        class="h-60 px-4 pt-4 pb-6 flex flex-col justify-between rounded-b-lg relative text-start"
       >
         <div>
           <div class="p-1 bg-white dark:bg-gray-800 card-profile-container">
