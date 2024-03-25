@@ -74,6 +74,18 @@ export default defineNuxtConfig({
           crossorigin: "anonymous",
           nonce: "RzfGg0xF",
         },
+        {
+          type: 'text/javascript',
+          innerHTML: `
+            var _ase  = _ase || [];
+            /* load placement for account: Business Cambodia, site: tech-cambodia.com, zone size : 282x370 */
+            _ase.push(['1700707438','1700709882']);
+          `,
+        },
+        {
+          src: "//gamma.cachefly.net/js/ad-exchange.js",
+          type: "text/javascript",
+        },
       ],
     },
   },
