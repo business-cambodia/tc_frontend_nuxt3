@@ -16,12 +16,30 @@
               $route.name == 'articles-article' ||
               $route.name == 'videos-video' ||
               $route.name == 'videos' ||
-              $route.name == 'category-category' ||
+              $route.name == 'category-slug' ||
               $route.name == 'authors-author')
             ? 'text-white '
             : 'text-black dark:text-white'
             }`" exact-active-class="text-primary dark:text-primary font-semibold " exact>
             <li>{{ i.name }}</li>
+          </NuxtLink>
+          <NuxtLink
+            :to="`/videos`"
+            :class="`mx-4 hover:text-primary nav-items text-base ${
+              scrollPosition == 0 &&
+              ($route.name == 'index' ||
+                $route.name == 'articles-article' ||
+                $route.name == 'videos-video' ||
+                $route.name == 'videos' ||
+                $route.name == 'category-slug' ||
+                $route.name == 'authors-author')
+                ? 'text-white '
+                : 'text-black dark:text-white'
+            }`"
+            exact-active-class="text-primary dark:text-primary font-semibold "
+            exact
+          >
+            <li>វីដេអូ</li>
           </NuxtLink>
         </ul>
       </div>
@@ -80,6 +98,10 @@
             <li class=" hover-nav">{{ i.name }}</li>
           </NuxtLink>
         </div>
+        <NuxtLink to="/videos" class="mx-4 text-white list-none"
+            exact-active-class="text-white font-bold text-lg" exact @click="closeDrawer">
+            <li class=" hover-nav">វិដេអូ</li>
+          </NuxtLink>
       </ul>
     </div>
   </div>
