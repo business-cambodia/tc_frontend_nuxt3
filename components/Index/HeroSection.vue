@@ -1,7 +1,8 @@
 <template>
   <div class="">
-    <div data-aos="fade-up"
-     data-aos-duration="1000"
+    <div
+      data-aos="fade-up"
+      data-aos-duration="1000"
       :style="{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${useImg(
           heroArticles[currentIndex].thumbnail
@@ -33,7 +34,7 @@
             <div class="font-light transform hover:underline self-center">
               {{
                 heroArticles[currentIndex].user_created.first_name +
-                " " +
+                ' ' +
                 heroArticles[currentIndex].user_created.last_name
               }}
             </div>
@@ -64,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { IArticle } from "types/article";
+import { IArticle } from 'types/article';
 
 const currentIndex = ref(0);
 
@@ -94,40 +95,38 @@ onMounted(() => {
 
 /* button */
 .custom-button {
-   
-    background-color: #008CBA;/* Default background color */
-    color: white;
-    font-weight: bold;
-    padding: 10px 20px;
-    font-size: 16px;
-    width: 150px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    transition: 0.5s ease-in-out;
-    /* transition: background-color 0.3s ease; */
+  background-color: #008cba; /* Default background color */
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 150px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.5s ease-in-out;
+  /* transition: background-color 0.3s ease; */
 }
 
 .custom-button:hover {
-    background-color: #4CAF50; /* New background color on hover */
+  background-color: #089cf4; /* New background color on hover */
 }
 
 /* Animation for hover effect */
 .custom-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background-color: #4CAF50; /* Color for animation */
-    transition: left 0.3s ease;
-    z-index: -1;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #089cf4; /* Color for animation */
+  transition: left 0.3s ease;
+  z-index: -1;
 }
 
 .custom-button:hover::before {
-    left: 0;
+  left: 0;
 }
-
 </style>
