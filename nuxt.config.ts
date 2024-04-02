@@ -68,6 +68,15 @@ export default defineNuxtConfig({
           async: true,
         },
         {
+          hid: 'gtmHead',
+          innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-3FB6MBW2F3');
+          `,
+        },
+        {
           src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=853816945294999&autoLogAppEvents=1',
           // defer: true,
           async: true,
