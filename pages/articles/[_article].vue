@@ -16,6 +16,8 @@
         :page="index"
       />
     </div>
+    <!--Damrei - Footer-->
+    <div id="gax-inpage-async-1700710572"></div>
     <ArticlesNext
       :articles="nextArticles"
       title="បន្តអានអត្ថបទបន្ទាប់"
@@ -105,6 +107,9 @@ useHead({
         //MR1 Desktop
         gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
 
+        //Footer
+        gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
+        
         //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
         gammatag.sendRequest();
         });
