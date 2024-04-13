@@ -55,11 +55,6 @@ export default defineNuxtConfig({
           src: 'https://kit.fontawesome.com/7c7b227626.js',
         },
         {
-          type: 'text/javascript',
-          src: 'https://cdn.innity.net/admanager-async.js',
-          async: true,
-        },
-        {
           src: 'https://www.googletagmanager.com/gtag/js?id=G-3FB6MBW2F3',
           async: true,
         },

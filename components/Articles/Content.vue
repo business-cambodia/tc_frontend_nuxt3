@@ -86,6 +86,10 @@
             <div id="gax-inpage-async-1700709319"></div>
           </div>
 
+          <!-- Zone Tag : Technology Cambodia Mobile Inpage UT-->
+
+          <div id="div-ad-innity-101009/0"></div>
+
           <div id="part-2">
             <AdsBody
               :ads="secondParagraphAds"

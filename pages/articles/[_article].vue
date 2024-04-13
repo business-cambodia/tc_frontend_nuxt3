@@ -89,6 +89,30 @@ useHead({
     },
     {
       type: 'text/javascript',
+      src: 'https://cdn.innity.net/admanager-async.js',
+      async: true,
+    },
+    {
+      type: 'text/javascript',
+      innerHTML: `
+        var innity_adZoneAsync = innity_adZoneAsync || {}; 
+        innity_adZoneAsync.q = innity_adZoneAsync.q || []; 
+        `,
+    },
+    {
+      type: 'text/javascript',
+      innerHTML: `
+        innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101009", {"target": "div-ad-innity-101009/0"});});
+        `,
+    },
+    {
+      type: 'text/javascript',
+      innerHTML: `
+        new innity_adZone("386854131f58a556343e056f03626e00", "101010", {}); 
+        `,
+    },
+    {
+      type: 'text/javascript',
       innerHTML: `
         var gammatag = gammatag || {};
         gammatag.cmd = gammatag.cmd || [];
