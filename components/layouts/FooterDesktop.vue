@@ -104,9 +104,9 @@
     </div>
     <div class="flex flex-col items-center mt-8">
       <div>© {{ currentYear }} Baksey Media. All Rights Reserved.</div>
-      <a class="transform hover:underline" target="_blank"
-        >Developed by: Technology Camabodia Team</a
-      >
+      <NuxtLink to="/about" class="transform hover:underline">
+        Developed by: Technology Cambodia
+      </NuxtLink>
     </div>
   </div>
 </template>
