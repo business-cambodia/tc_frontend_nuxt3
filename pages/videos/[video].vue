@@ -79,6 +79,8 @@
           </div>
         </div>
       </div>
+      <!--Mobile Underlay - Zone 1-->
+      <div id="gax-inpage-async-1700709319"></div>
     </div>
     <div>
       <NextVideos
@@ -87,6 +89,8 @@
         to="/latest"
       />
     </div>
+    <!--Mobile Underlay - Zone 2-->
+    <div id="gax-inpage-async-1706848793"></div>
   </div>
 </template>
 
@@ -169,6 +173,34 @@ useHead({
       type: 'text/javascript',
       src: 'https://platform.twitter.com/widgets.js',
       async: true,
+    },
+    {
+      type: 'text/javascript',
+      innerHTML: `
+        var gammatag = gammatag || {};
+        gammatag.cmd = gammatag.cmd || [];
+        `,
+    },
+    {
+      type: 'text/javascript',
+      innerHTML: `
+      gammatag.cmd.push(function() {
+        <!--Mobile Underlay - Zone 1-->
+        gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
+
+        <!--Mobile Underlay - Zone 2-->
+        gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
+        
+        //MR1 Desktop
+        gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
+
+        //Footer
+        gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
+        
+        //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
+        gammatag.sendRequest();
+        });
+      `,
     },
   ],
   title: video.title,
