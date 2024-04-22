@@ -25,15 +25,15 @@
             <div
               class="flex flex-wrap justify-center items-center text-gray-600 dark:text-white"
             >
-              <!-- <NuxtLink :to="`/authors/${video.user_created?.id}`">-->
-              <div class="transfrom hover:underline">
-                {{
-                  video.user_created.first_name +
-                  ' ' +
-                  video.user_created.last_name
-                }}
-              </div>
-              <!-- </NuxtLink> -->
+              <NuxtLink :to="`/authors/${video.user_created?.id}`">
+                <div class="transfrom hover:underline">
+                  {{
+                    video.user_created.first_name +
+                    ' ' +
+                    video.user_created.last_name
+                  }}
+                </div>
+              </NuxtLink>
 
               <div class="text-lg mx-2 lg:mx-4">•</div>
               <div>{{ $formatDate(video.date_created) }}</div>
