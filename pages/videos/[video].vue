@@ -91,6 +91,8 @@
     </div>
     <!--Mobile Underlay - Zone 2-->
     <div id="gax-inpage-async-1706848793"></div>
+    <!--Damrei - Footer-->
+    <div id="gax-inpage-async-1700710572"></div>
   </div>
 </template>
 
