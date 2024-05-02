@@ -25,9 +25,9 @@
         </div>
         <div v-for="cm_features in  content_marketing_features" :key="cm_features.id" data-aos="fade-up"
             data-aos-anchor-placement="top-center"
-            class="h-screen flex flex-col lg:flex-row items-center  justify-around p-4 md:mt-10">
+            class="lg:h-screen container mx-auto flex flex-col lg:flex-row items-center  justify-around p-4 md:mt-10">
             <div v-if="cm_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
-                <img :src="cm_features.image" :alt="cm_features.alt" class="w-full lg:w-auto">
+                <img :src="cm_features.image" :alt="cm_features.alt" class=" w-96  ">
             </div>
             <div class="text-center lg:text-left text-primary " id="content-marketing">
                 <h1 v-if="cm_features.id === 'content-marketing'" class="text-4xl lg:text-5xl font-bold mb-4"
@@ -41,14 +41,14 @@
                 </p>
             </div>
             <div v-if="!cm_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
-                <img :src="cm_features.image" :alt="cm_features.alt" class="w-full lg:w-auto">
+                <img :src="cm_features.image" :alt="cm_features.alt" class="w-96   ">
             </div>
         </div>
         <!-- <div id="paid-advertisement" class="p-2 text-white text-center text-2xl bg-gray-900">Paid Advertisement</div> -->
-        <div v-for="service in services" :key="service.id" data-aos="fade-up" data-aos-anchor-placement="top-center"
-            class="h-screen flex flex-col lg:flex-row items-center max-sm:flex-col-reverse  justify-around p-4 max-md:h-auto ">
+        <div v-for="service in services" :key="service.id" data-aos="fade-up"
+            class="h-screen container mx-auto  flex flex-col lg:flex-row items-center max-sm:flex-col-reverse  justify-around p-4 max-md:h-auto ">
             <div v-if="service.imageLeft" class="flex-shrink-0 lg:w-2/5">
-                <img :src="service.image" :alt="service.alt" class="w-full  max-md:w-2/3 max-sm:w-full lg:w-auto">
+                <img :src="service.image" :alt="service.alt" class="w-96  ">
             </div>
             <div class="text-center lg:text-left text-primary" id="paid-advertisement">
                 <h1 v-if="service.id === 'paid-advertisement'" class="text-4xl lg:text-5xl font-bold mb-4" :id="service.id">
@@ -59,7 +59,7 @@
                 </p>
             </div>
             <div v-if="!service.imageLeft" class="flex-shrink-0 lg:w-2/5">
-                <img :src="service.image" :alt="service.alt" class="w-full max-md:w-2/3 max-sm:w-full lg:w-auto">
+                <img :src="service.image" :alt="service.alt" class="w-96 ">
             </div>
         </div>
         <div id="intro-web-bg"
@@ -80,16 +80,16 @@
                 </div>
             </div>
             <div class="w-1/2 max-[1024px]:w-[100%] max-[1024px]:px-2  max-[1024px]:mt-[4rem] web-deve ">
-                <img src="~/assets/services/web_development.png" class="w-full   max-[1024px]:mx-auto " alt=""
+                <img src="~/assets/services/web_development.png" class="w-96  " alt=""
                     id="close-select">
             </div>
         </div>
 
         <div v-for="web_features in  web_services_features" :key="web_features.id" data-aos="fade-up"
             data-aos-anchor-placement="top-center"
-            class="h-screen flex flex-col lg:flex-row items-center  justify-around p-4 md:mt-10">
+            class="h-screen container mx-auto flex flex-col lg:flex-row items-center  justify-around p-4 md:mt-10">
             <div v-if="web_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
-                <img :src="web_features.image" :alt="web_features.alt" class="w-full lg:w-auto">
+                <img :src="web_features.image" :alt="web_features.alt" class="w-96 ">
             </div>
             <div class="text-center lg:text-left text-primary " id="web-development">
                 <h1 v-if="web_features.id === 'web-development'" class="text-4xl lg:text-5xl font-bold mb-4"
@@ -103,7 +103,7 @@
                 </p>
             </div>
             <div v-if="!web_features.imageLeft" class="flex-shrink-0 lg:w-2/5">
-                <img :src="web_features.image" :alt="web_features.alt" class="w-full lg:w-auto">
+                <img :src="web_features.image" :alt="web_features.alt" class="w-96 ">
             </div>
         </div>
           <CardSlider />
