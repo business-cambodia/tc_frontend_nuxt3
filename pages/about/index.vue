@@ -1,24 +1,24 @@
 
 <template>
-    <div class="min-h-screen dark:bg-black">
-        <div class=" lg:flex w-full justify-evenly items-center lg:px-32 max-sm:pt-32 md:h-auto lg:h-screen dark:bg-gray-900 mission" data-aos="fade-up"
+    <div class="min-h-screen dark:bg-black overflow-hidden">
+        <div class="px-4  lg:flex w-full justify-evenly items-center lg:px-32 max-sm:pt-32 md:h-auto lg:h-screen dark:bg-gray-900 mission" data-aos="fade-up"
             data-aos-anchor-placement="top-center">
-            <div data-aos="fade-right" class="w-full text-center aos-init aos-animate">
-                <img id="close-select" src="/about/Baksey_Media.jpg" class="lg:w-[80%] rounded-full " alt="">
+            <div data-aos="fade-right" class="w-full text-center aos-init flex items-center justify-center aos-animate">
+                <img id="close-select" src="/about/Baksey_Media.jpg" class="w-96 lg:w-[80%] rounded-full " alt="">
 
             </div>
-            <div data-aos="zoom-in" data-aos-duration="1500" class="w-full flex justify-center aos-init aos-animate"
+            <div data-aos="zoom-in" data-aos-duration="1500" class="w-full mt-8 flex justify-center aos-init aos-animate"
                 style="pointer-events: none; user-select: none; overflow: hidden;filter: drop-shadow(0px 15px 5px #006eff); ">
                 <img id="close-select" src="/about/Technology_Macbook_Mockup.png" alt=""
-                    class="lg:w-[100%] lg:rounded-3xl ">
+                    class="w-96 lg:w-[100%] lg:rounded-3xl ">
             </div>
         </div>
-        <div class=" max-[1024px]:p-20  lg:flex w-full justify-evenly md:h-auto lg:h-screen items-center px-32" data-aos="fade-up"
+        <div class="h-screen max-[1024px]:p-4  lg:flex w-full justify-evenly md:h-auto lg:h-screen items-center px-32" data-aos="fade-up"
             data-aos-anchor-placement="top-center">
             <div class="w-full  mt-30 lg:w-1/2 zoom-in-up">
                 <div style="pointer-events: none; user-select: none; overflow: hidden;">
                     <img src="/about/develop-web.gif" alt=""
-                        class="image-bevel lg:w-[75%] lg:rounded-3xl md:rounded-2xl md:mb-8 sm:rounded-sm">
+                        class="image-bevel w-96 lg:w-[75%] rounded-lg lg:rounded-3xl md:rounded-2xl md:mb-8 sm:rounded-sm">
                 </div>
             </div>
             <div class="w-full lg:w-1/2 ">
@@ -27,13 +27,13 @@
                     <div class="text-5xl  font-extrabold text-primary dark:text-white">
                         ចក្ខុវិស័យ
                     </div>
-                    <div class="mt-12 text-2xl dark:text-white lg:p-5 max-[774px]:text-xl max-[774px]:text-justify">
+                    <div class="mt-12 text-2xl md:text-4xl dark:text-white">
                         {{ about_tech_vision }}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="md:h-auto lg:h-screen max-[1024px]:p-20  lg:flex w-full justify-evenly items-center px-32">
+        <div class=" md:h-auto lg:h-screen max-[1024px]:p-4  lg:flex w-full justify-evenly items-center px-32">
             <div class="w-full lg:w-1/2 ">
                 <div class="w-full text-center zoom-in   "
                     style="pointer-events: none; user-select: none; overflow: hidden;">
@@ -53,17 +53,17 @@
                 <div style="pointer-events: none; user-select: none; overflow: hidden;" data-aos="fade-up"
                     data-aos-anchor-placement="top-center">
                     <img src="/footer/logo2.png" alt=""
-                        class="image-bevels lg:w-[75%] lg:rounded-3xl md:rounded-2xl md:mb-8 sm:rounded-sm">
+                        class="image-bevels w-96 lg:w-[75%] lg:rounded-3xl md:rounded-2xl md:mb-8 sm:rounded-sm">
                 </div>
             </div>
             <!-- div text w-1/2 -->
 
         </div>
 
-        <div class="md:h-auto lg:h-screen   lg:flex w-full justify-evenly items-center lg:px-32 bg-primary dark:bg-gray-900 mission">
+        <div class=" md:h-auto lg:h-screen   lg:flex w-full justify-evenly items-center lg:px-32 bg-primary dark:bg-gray-900 mission">
             <div data-aos="fade-up" data-aos-duration="1500" class="w-full text-center aos-init aos-animate">
-                <div class="text-[5rem] font-extrabold text-white " id="close-select">បេសកកម្ម</div>
-                <div class="mt-12 text-4xl text-white">
+                <div class="text-5xl font-extrabold text-white " id="close-select">បេសកកម្ម</div>
+                <div class="mt-12 text-4xl px-4 text-white">
                     បំផុសគំនិតបច្ចេកវិទ្យា បង្ហាញអនាគត!
                 </div>
             </div>
@@ -188,9 +188,9 @@
 
         </div>
 
-        <div class="h-screen  lg:flex w-full justify-evenly items-center lg:px-32 pt-5  dark:bg-gray-900 mission">
+        <div class="lg:h-screen px-4  lg:flex w-full justify-evenly items-center lg:px-32 pt-20 md:pt-5  dark:bg-gray-900 mission">
             <div data-aos="fade-up" data-aos-duration="1500" class="w-full text-center aos-init aos-animate">
-                <div class="lg:text-[3rem] max-md:text-4xl font-extrabold text-primary " id="close-select">ទាក់ទងមកយើងតាមរយៈទូរស័ព្ទ</div>
+                <div class="text-3xl md:text-4xl font-extrabold text-primary " id="close-select">ទាក់ទងមកយើងតាមរយៈទូរស័ព្ទ</div>
                 <div class="mt-12 text-2xl text-primary">
                     HOTLINE: <a href="https://t.me/marketing_techcambodia" target="_blank">+855 (0) 89 525 180</a> | <a
                         href="https://t.me/marketing_techcambodia" target="_blank">+855 (0) 69
@@ -201,7 +201,7 @@
             <div data-aos="zoom-in" data-aos-duration="1500"
                 class="w-full flex justify-center aos-init aos-animate mission-rotate"
                 style="pointer-events: none; user-select: none; overflow: hidden;"><img src="/about/call_icon.png" alt=""
-                    class="w-[70%] lg:rounded-3xl"></div>
+                    class="w-96 lg:w-[70%] lg:rounded-3xl"></div>
         </div>
         <BackToTopButton />
 
