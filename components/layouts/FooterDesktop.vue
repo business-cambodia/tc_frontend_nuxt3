@@ -117,14 +117,19 @@ const currentYear = new Date().getFullYear();
 <style>
 /* image stye for top-footer-background-img  */
 .top-footer-background-img {
-  background-image: url('/footer/foot_bg.jpg');
+  background-image: url("/footer/foot_bg.jpg");
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
   filter: brightness(1);
 }
-
+/* display see full image in mobile screen  */
+@media (max-width: 774px) {
+  .top-footer-background-img {
+    background-image: none;
+  }
+}
 .mobile-respons-population li {
   transition: all 0.3s ease-in-out;
 }
