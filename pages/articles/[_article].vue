@@ -47,7 +47,7 @@ const articles = ref(
   (
     await (<Promise<IResponse<IArticle[]>>>(
       useApi(
-        `/items/articles?filter[status]=published&filter[slug][_eq]=${route.params._article}&fields=title,id,keywords,body,slug,thumbnail, thumbnail_facebook,date_created,views,category.name,category.slug,user_created.first_name,user_created.last_name,user_created.email ,user_created.avatar,user_created.cover_pic, user_created.description, user_created.id, user_created.facebook_link, user_created.youtube_link,user_created.instagram_link,user_created.count(articles)`,
+        `/items/articles?filter[status]=published&filter[slug][_eq]=${route.params._article}&fields=title,id,keywords,body,telegram_embed,slug,thumbnail, thumbnail_facebook,date_created,views,category.name,category.slug,user_created.first_name,user_created.last_name,user_created.email ,user_created.avatar,user_created.cover_pic, user_created.description, user_created.id, user_created.facebook_link, user_created.youtube_link,user_created.instagram_link,user_created.count(articles)`,
         { method: 'GET' }
       )
     ))

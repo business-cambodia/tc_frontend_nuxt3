@@ -13,5 +13,6 @@ export interface IArticle {
   length: number;
   body: string;
   keywords: string;
+  telegram_embed: string;
   thumbnail_facebook: string;
 }
