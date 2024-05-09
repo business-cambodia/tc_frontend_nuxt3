@@ -117,7 +117,7 @@
           </div>
         </div>
       </div>
-      <div v-html="article.telegram_embed"></div>
+      <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>
       <!--Damrei - MR1 Desktop-->
       <div id="gax-inpage-async-1709623758" class="flex justify-center"></div>
       <ArticlesAuthor :user="article.user_created" />
