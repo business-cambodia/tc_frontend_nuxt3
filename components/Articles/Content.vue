@@ -88,7 +88,7 @@
 
           <!-- Zone Tag : Technology Cambodia Mobile Inpage UT-->
 
-          <div id="div-ad-innity-101009/0"></div>
+          <!-- <div id="div-ad-innity-101009/0"></div> -->
 
           <div id="part-2">
             <AdsBody
