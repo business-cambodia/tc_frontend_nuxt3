@@ -99,6 +99,11 @@ useHead({
     },
     {
       type: 'text/javascript',
+      src: 'https://platform.twitter.com/widgets.js',
+      async: true,
+    },
+    {
+      type: 'text/javascript',
       innerHTML: `
         var innity_adZoneAsync = innity_adZoneAsync || {}; 
         innity_adZoneAsync.q = innity_adZoneAsync.q || []; 
