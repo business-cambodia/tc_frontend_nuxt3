@@ -241,9 +241,12 @@ onMounted(() => {
 });
 
 const handleArticleViewed = async (article: IArticle) => {
-  const articleId = article.slug;
-  await useApi('/articles/views/' + articleId, {
-    method: 'GET',
+  const articleId = article.id;
+  await useApi('/items/articles/' + articleId, {
+    method: 'PATCH',
+    data: {
+      views: article.views + 1,
+    },
   });
 };
 
