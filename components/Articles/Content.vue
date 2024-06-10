@@ -35,7 +35,7 @@
         <div>{{ $formatDate(article.date_created) }}</div>
         <div class="text-lg mx-2 lg:mx-4">•</div>
         <div>{{ article.category.name }}</div>
-        <div class="text-lg mx-2 lg:mx-4">•</div>
+        <div v-if="article.category.name !== 'PR'" class="text-lg mx-2 lg:mx-4">•</div>
         <div v-if="article.category.name !== 'PR'" class="font-bold">
           {{ $kFormatter(article.views) }} views
         </div>

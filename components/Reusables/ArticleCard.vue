@@ -35,8 +35,12 @@
             {{ article.title }}
           </p>
           <div class="text-xs font-light text-gray-700 mt-2 dark:text-white">
-            {{ $kFormatter(article.views) }} views
-            <span class="text-xs mx-2">•</span>
+            <span v-if="article.category.name !== 'PR'"
+              >{{ $kFormatter(article.views) }} views</span
+            >
+            <span v-if="article.category.name !== 'PR'" class="text-xs mx-2"
+              >•</span
+            >
             <span
               class="bg-gray-200 dark:bg-gray-500 dark:text-white p-0.5 px-2 rounded-full"
               >{{ $calculateReadTime(article.body) }}</span
