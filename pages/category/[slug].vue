@@ -67,8 +67,8 @@ const articles = ref(
     await (<Promise<IResponse<IArticle[]>>>(
       useApi(
         route.params.slug == "technology"
-          ? `/items/articles?limit=10&sort=-date_created&page=1&filter[category][slug][_in]=business,technology,agriculture&filter[status]=published&fields=title, thumbnail, date_created,user_created.first_name, user_created.last_name,user_created.avatar ,slug, views,id, category.slug, category.name`
-          : `/items/articles?limit=10&sort=-date_created&page=1&filter[category][slug]=${route.params.slug}&filter[status]=published&fields=title, thumbnail, date_created,user_created.first_name, user_created.last_name,user_created.avatar ,slug, views,id, category.slug, category.name`,
+          ? `/items/articles?limit=10&sort=-date_created&page=1&filter[category][slug][_in]=business,technology,agriculture&filter[status]=published&fields=title,body, thumbnail, date_created,user_created.first_name, user_created.last_name,user_created.avatar ,slug, views,id, category.slug, category.name`
+          : `/items/articles?limit=10&sort=-date_created&page=1&filter[category][slug]=${route.params.slug}&filter[status]=published&fields=title, thumbnail,body, date_created,user_created.first_name, user_created.last_name,user_created.avatar ,slug, views,id, category.slug, category.name`,
         { method: "GET" }
       )
     ))
