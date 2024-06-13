@@ -164,7 +164,7 @@ useHead({
     {
       hid: 'og:description',
       name: 'og:description',
-      content: articles.value[0].body,
+      content: articles.value[0].body.replace(/<[^>]+>/g, ''),
     },
     {
       hid: 'og:title',
@@ -174,7 +174,7 @@ useHead({
     {
       hid: 'description',
       name: 'description',
-      content: articles.value[0].body,
+      content: articles.value[0].body.replace(/<[^>]+>/g, ''),
     },
     {
       hid: 'keywords',
