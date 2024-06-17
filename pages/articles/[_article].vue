@@ -18,6 +18,8 @@
     </div>
     <!--Damrei - Footer-->
     <div id="gax-inpage-async-1700710572"></div>
+    <!--Footer-->
+    <div id="gax-inpage-async-1718360117"></div>
     <ArticlesNext
       :articles="nextArticles"
       title="បន្តអានអត្ថបទបន្ទាប់"
@@ -124,6 +126,7 @@ useHead({
     {
       type: 'text/javascript',
       innerHTML: `
+        var _ase_region="SGP";
         var gammatag = gammatag || {};
         gammatag.cmd = gammatag.cmd || [];
         `,
@@ -147,13 +150,16 @@ useHead({
         //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
         gammatag.sendRequest();
         });
+
+        <!--Footer-->
+        gammatag.defineZone({code:"gax-inpage-async-1718360117",size:[720,250],params:{siteId:"1700707438",zoneId:"1718360117",zoneType:"Inpage"}});
+        gammatag.sendRequest();
       `,
     },
-    // {
-    //   src: "https://sspendpoint1.damreix.com/?c=res&m=async",
-    //   async: true,
-    //   defer: true,
-    // },
+    {
+      src: "//ssp-cdn.gammaplatform.com/js/gaxpt.min.js",
+      async: true,
+    },
   ],
   title: articles.value[0].title,
   meta: [
