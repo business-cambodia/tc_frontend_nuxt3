@@ -298,4 +298,8 @@ iframe {
 .article_body ul li {
   line-height: 180%;
 }
+
+table {
+  max-width: fit-content;
+}
 </style>
