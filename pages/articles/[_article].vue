@@ -228,12 +228,13 @@ const thirdParagraphAds = ads.filter((a) => {
 });
 
 const sideBarAds = ads.filter((a) => {
-  return a.advertisement_type.type == 'side-bar';
+  return a.advertisement_type.type == 'sidebar-right';
 });
 
 const aboveThumbnailAds = ads.filter((a) => {
   return a.advertisement_type.type == 'above-thumbnail';
 });
+
 
 const bottomAd = ads.filter((a) => {
   return a.advertisement_type.type == 'bottom';

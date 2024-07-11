@@ -49,9 +49,8 @@
   </div>
 
   <!-- Body -->
-  <div class="mt-4 pb-10 grid grid-cols-1 lg:grid-cols-10">
-    <div class="col-span-2"></div>
-    <div class="pt-4 px-4 col-span-6">
+  <div class="mt-4 pb-10 px-2 lg:px-32  grid grid-cols-1 lg:grid-cols-12">
+    <div class="pt-4 px-4 col-span-8">
       <!-- content -->
       <div class="">
         <!-- above thumbnail ads -->
@@ -124,7 +123,9 @@
       <div id="gax-inpage-async-1709623758" class="flex justify-center"></div>
       <ArticlesAuthor :user="article.user_created" />
     </div>
-    <div class="col-span-2"></div>
+    <div class="col-span-4 md:px-2 lg:px-8">
+      <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />
+    </div>
   </div>
 
   <BackToTopButton />
@@ -218,7 +219,7 @@ onMounted(() => {
     // --> side bar ads
     props.sideBarAds.forEach((a, index) => {
       observer.observe(
-        document.getElementById('side_ads_' + index + '_' + props.page)!
+        document.getElementById('side_ads_' + index)!
       );
     });
   } catch (error) {
