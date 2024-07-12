@@ -147,13 +147,12 @@ useHead({
         //Footer
         gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
         
+        //Footer1
+        gammatag.defineZone({code:"gax-inpage-async-1718360117",size:[720,250],params:{siteId:"1700707438",zoneId:"1718360117",zoneType:"Inpage"}});
+        
         //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
         gammatag.sendRequest();
         });
-
-        <!--Footer-->
-        gammatag.defineZone({code:"gax-inpage-async-1718360117",size:[720,250],params:{siteId:"1700707438",zoneId:"1718360117",zoneType:"Inpage"}});
-        gammatag.sendRequest();
       `,
     },
     {
