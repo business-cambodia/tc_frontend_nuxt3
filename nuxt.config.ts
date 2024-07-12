@@ -135,34 +135,34 @@ export default defineNuxtConfig({
     classSuffix: '',
     storageKey: 'nuxt-color-mode',
   },
-  pwa: {
-    manifest: {
-      name: 'Technology Cambodia',
-      short_name: 'Tech Cambodia',
-      description:
-        "Tech-Cambodia is Cambodia's most popular technology website. We aim to provide Cambodian students and adults with all the necessary knowledge regarding technology.",
-      icons: [
-        {
-          src: 'icons/bc-logo-64_x_64.png',
-          sizes: '64x64',
-          type: 'image/png',
-        },
-        {
-          src: 'icons/bc-logo-144_x_144.png',
-          sizes: '144x144',
-          type: 'image/png',
-        },
-        {
-          src: 'icons/bc-logo-192_x_192.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: 'icons/bc-logo-512_x_512.png',
-          sizes: '512x512',
-          type: 'image/png',
-        },
-      ],
-    },
-  },
+  // pwa: {
+  //   manifest: {
+  //     name: 'Technology Cambodia',
+  //     short_name: 'Tech Cambodia',
+  //     description:
+  //       "Tech-Cambodia is Cambodia's most popular technology website. We aim to provide Cambodian students and adults with all the necessary knowledge regarding technology.",
+  //     icons: [
+  //       {
+  //         src: 'icons/bc-logo-64_x_64.png',
+  //         sizes: '64x64',
+  //         type: 'image/png',
+  //       },
+  //       {
+  //         src: 'icons/bc-logo-144_x_144.png',
+  //         sizes: '144x144',
+  //         type: 'image/png',
+  //       },
+  //       {
+  //         src: 'icons/bc-logo-192_x_192.png',
+  //         sizes: '192x192',
+  //         type: 'image/png',
+  //       },
+  //       {
+  //         src: 'icons/bc-logo-512_x_512.png',
+  //         sizes: '512x512',
+  //         type: 'image/png',
+  //       },
+  //     ],
+  //   },
+  // },
 });
