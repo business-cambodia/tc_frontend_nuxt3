@@ -3,9 +3,9 @@
     <div class="flex flex-col items-center">
       <div
         v-if="ads.length && ads !== undefined"
-        class="w-full bg-white p-4 rounded-lg shadow-lg"
+        class="w-full my-4 bg-white rounded-lg shadow-lg"
       >
-        <div class="mt-4" v-for="(a, n) in ads" :key="n">
+        <div v-for="(a, n) in ads" :key="n">
           <a
             :href="a.link"
             target="_blank"
@@ -16,11 +16,13 @@
               :id="a ? a.slug : ''"
               :src="useImg(a.file)"
               alt="Advertisement"
-              class="w-full h-auto my-2 rounded-md"
+              class="w-full h-auto rounded-md"
             />
           </a>
         </div>
       </div>
+      <!--Damrei - MR1-->
+      <div id="gax-inpage-async-1700709408"></div>
     </div>
   </div>
 </template>

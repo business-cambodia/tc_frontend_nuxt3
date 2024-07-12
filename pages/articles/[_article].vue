@@ -141,8 +141,8 @@ useHead({
         <!--Mobile Underlay - Zone 2-->
         gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
         
-        //MR1 Desktop
-        gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
+        //MR1
+        gammatag.defineZone({code:"gax-inpage-async-1700709408",size:[300,250],params:{siteId:"1700707438",zoneId:"1700709408",zoneType:"Inpage"}});
 
         //Footer
         gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
@@ -157,7 +157,7 @@ useHead({
       `,
     },
     {
-      src: "//ssp-cdn.gammaplatform.com/js/gaxpt.min.js",
+      src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
     },
   ],
@@ -234,7 +234,6 @@ const sideBarAds = ads.filter((a) => {
 const aboveThumbnailAds = ads.filter((a) => {
   return a.advertisement_type.type == 'above-thumbnail';
 });
-
 
 const bottomAd = ads.filter((a) => {
   return a.advertisement_type.type == 'bottom';
