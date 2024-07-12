@@ -35,7 +35,9 @@
         <div>{{ $formatDate(article.date_created) }}</div>
         <div class="text-lg mx-2 lg:mx-4">•</div>
         <div>{{ article.category.name }}</div>
-        <div v-if="article.category.name !== 'PR'" class="text-lg mx-2 lg:mx-4">•</div>
+        <div v-if="article.category.name !== 'PR'" class="text-lg mx-2 lg:mx-4">
+          •
+        </div>
         <div v-if="article.category.name !== 'PR'" class="font-bold">
           {{ $kFormatter(article.views) }} views
         </div>
@@ -49,7 +51,7 @@
   </div>
 
   <!-- Body -->
-  <div class="mt-4 pb-10 px-2 lg:px-32  grid grid-cols-1 lg:grid-cols-12">
+  <div class="mt-4 pb-10 px-2 lg:px-32 grid grid-cols-1 lg:grid-cols-12">
     <div class="pt-4 px-4 col-span-8">
       <!-- content -->
       <div class="">
@@ -114,13 +116,13 @@
           <div id="the-rest">
             <div v-html="splitBody().theRest" class="article_body"></div>
           </div>
-          <!-- Zone Tag : Technology Cambodia Mobile Inpage UT-->          
+          <!-- Zone Tag : Technology Cambodia Mobile Inpage UT-->
           <!-- <div id="div-ad-innity-101009/0"></div> -->
         </div>
       </div>
       <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>
       <!--Damrei - MR1 Desktop-->
-      <div id="gax-inpage-async-1709623758" class="flex justify-center"></div>
+      <div id="gax-inpage-async-1700709408" class="flex md:hidden justify-center"></div>
       <ArticlesAuthor :user="article.user_created" />
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
@@ -218,9 +220,7 @@ onMounted(() => {
     });
     // --> side bar ads
     props.sideBarAds.forEach((a, index) => {
-      observer.observe(
-        document.getElementById('side_ads_' + index)!
-      );
+      observer.observe(document.getElementById('side_ads_' + index)!);
     });
   } catch (error) {
     // console.log(error);
