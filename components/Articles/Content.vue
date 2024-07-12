@@ -121,12 +121,12 @@
         </div>
       </div>
       <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>
-      <!--Damrei - MR1 Desktop-->
-      <div id="gax-inpage-async-1700709408" class="flex md:hidden justify-center"></div>
+      <AdsSideBarRight v-if="isMobile" :ads="sideBarAds" id="side-bar" :page="page" />
+
       <ArticlesAuthor :user="article.user_created" />
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
-      <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />
+      <AdsSideBarRight v-if="!isMobile" :ads="sideBarAds" id="side-bar" :page="page" />
     </div>
   </div>
 
@@ -137,6 +137,8 @@
 import { IAd } from '~~/types/ad';
 import { IArticle } from '~~/types/article';
 const { $handleAdSeen } = useNuxtApp();
+
+const isMobile = ref(false);
 
 const props = defineProps<{
   aboveArticleAds: Array<IAd>;
@@ -162,6 +164,9 @@ const splitBody = () => {
 
 // here where i toggle impression on ads seen
 onMounted(() => {
+  if (window.innerWidth < 768) {
+    isMobile.value = true;
+  }
   try {
     let observer = new IntersectionObserver(
       async (entries) => {
