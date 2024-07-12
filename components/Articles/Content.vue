@@ -121,12 +121,13 @@
         </div>
       </div>
       <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>
-      <AdsSideBarRight v-if="isMobile" :ads="sideBarAds" id="side-bar" :page="page" />
-
+      <!--Damrei - MR1-->
+      <div id="gax-inpage-async-1700709408"></div>
+      
       <ArticlesAuthor :user="article.user_created" />
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
-      <AdsSideBarRight v-if="!isMobile" :ads="sideBarAds" id="side-bar" :page="page" />
+      <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />
     </div>
   </div>
 
