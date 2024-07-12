@@ -22,7 +22,7 @@
         </div>
       </div>
       <!--Damrei - MR1-->
-      <div class="hidden md:block" id="gax-inpage-async-1700709408"></div>
+      <div id="gax-inpage-async-1700709408"></div>
     </div>
   </div>
 </template>
