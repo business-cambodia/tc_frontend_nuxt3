@@ -124,7 +124,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@nuxtjs/color-mode', '@vite-pwa/nuxt'],
+  modules: ['@nuxtjs/color-mode'],
   colorMode: {
     preference: 'light', // default value of $colorMode.preference
     fallback: 'light', // fallback value if not system preference found
