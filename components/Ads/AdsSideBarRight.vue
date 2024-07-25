@@ -1,26 +1,19 @@
 <template>
-  <div class="sticky top-0">
-    <div class="flex flex-col items-center">
-      <div
-        v-if="ads.length && ads !== undefined"
-        class="w-full my-4 bg-white rounded-lg shadow-lg"
+  <div v-if="ads.length && ads !== undefined" class="sticky top-3 space-y-3">
+    <div v-for="(a, n) in ads" :key="n">
+      <a
+        :href="a.link"
+        target="_blank"
+        :id="'side_ads_' + n"
+        @click="$handleAdClick(a ? a.slug : '')"
       >
-        <div v-for="(a, n) in ads" :key="n">
-          <a
-            :href="a.link"
-            target="_blank"
-            :id="'side_ads_' + n"
-            @click="$handleAdClick(a ? a.slug : '')"
-          >
-            <img
-              :id="a ? a.slug : ''"
-              :src="useImg(a.file)"
-              alt="Advertisement"
-              class="w-full h-auto rounded-md"
-            />
-          </a>
-        </div>
-      </div>
+        <img
+          :id="a ? a.slug : ''"
+          :src="useImg(a.file)"
+          alt="Advertisement"
+          class="w-full h-auto rounded-md"
+        />
+      </a>
     </div>
   </div>
 </template>
