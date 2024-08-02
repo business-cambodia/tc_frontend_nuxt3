@@ -159,6 +159,10 @@ useHead({
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
     },
+    {
+      src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
+      async: true,
+    },
   ],
   title: articles.value[0].title,
   meta: [

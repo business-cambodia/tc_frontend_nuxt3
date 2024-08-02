@@ -111,6 +111,11 @@
             <div v-html="splitBody().thirdPart" class="article_body"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
+            <!-- GPAS MR1 -->
+            <ins
+              data-revive-zoneid="86"
+              data-revive-id="2d10743d9880200bf17a894cfa35dba0"
+            ></ins>
           </div>
 
           <div id="the-rest">
@@ -123,7 +128,7 @@
       <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>
       <!--Damrei - MR1-->
       <div id="gax-inpage-async-1700709408"></div>
-      
+
       <ArticlesAuthor :user="article.user_created" />
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
