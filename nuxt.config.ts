@@ -71,25 +71,13 @@ export default defineNuxtConfig({
           gtag('config', 'G-3FB6MBW2F3');
           `,
         },
-        {
-          src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=853816945294999&autoLogAppEvents=1',
-          // defer: true,
-          async: true,
-          crossorigin: 'anonymous',
-          nonce: 'RzfGg0xF',
-        },
-        {
-          type: 'text/javascript',
-          body: true,
-          innerHTML: `
-            /* The region will be automatically detected if "GLOBAL" is set. */
-            /* Possible values: "SGP", "JPN", "US_WEST", "EU" */
-            var _ase_region="SGP";
-            var _ase  = _ase || [];
-            /* load placement for account: Business Cambodia, site: tech-cambodia.com, zone size : 282x370 */
-            _ase.push(['1700707438','1700709882']);
-          `,
-        },
+        // {
+        //   src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=853816945294999&autoLogAppEvents=1',
+        //   // defer: true,
+        //   async: true,
+        //   crossorigin: 'anonymous',
+        //   nonce: 'RzfGg0xF',
+        // },
         {
           type: 'text/javascript',
           body: true,
