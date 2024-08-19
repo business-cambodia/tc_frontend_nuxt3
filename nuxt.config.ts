@@ -52,7 +52,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          src: 'https://kit.fontawesome.com/7c7b227626.js',
+          src: 'https://kit.fontawesome.com/a0fb06da4e.js',
         },
         {
           src: 'https://www.googletagmanager.com/gtag/js?id=G-3FB6MBW2F3',
