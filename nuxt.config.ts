@@ -53,6 +53,7 @@ export default defineNuxtConfig({
       script: [
         {
           src: 'https://kit.fontawesome.com/a0fb06da4e.js',
+          crossorigin: 'anonymous',
         },
         {
           src: 'https://www.googletagmanager.com/gtag/js?id=G-3FB6MBW2F3',
