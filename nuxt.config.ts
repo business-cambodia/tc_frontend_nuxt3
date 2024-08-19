@@ -82,15 +82,11 @@ export default defineNuxtConfig({
           type: 'text/javascript',
           body: true,
           innerHTML: `
+          var _ase_region="SGP";
           var _ase  = _ase || [];
           /* load placement for account: Business Cambodia, site: tech-cambodia.com, zone size : 282x370 */
           _ase.push(['1700707438','1700709882']);
           `,
-        },
-        {
-          type: 'text/javascript',
-          body: true,
-          src: '//gamma.cachefly.net/js/ad-exchange.js',
         },
         {
           type: 'text/javascript',
