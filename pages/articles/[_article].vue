@@ -126,33 +126,37 @@ useHead({
     {
       type: 'text/javascript',
       innerHTML: `
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         var _ase_region="SGP";
         var gammatag = gammatag || {};
         gammatag.cmd = gammatag.cmd || [];
+      }
         `,
     },
     {
       type: 'text/javascript',
       innerHTML: `
-      gammatag.cmd.push(function() {
-        <!--Mobile Underlay - Zone 1-->
-        gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        gammatag.cmd.push(function() {
+          <!--Mobile Underlay - Zone 1-->
+          gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
 
-        <!--Mobile Underlay - Zone 2-->
-        gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
-        
-        //MR1
-        gammatag.defineZone({code:"gax-inpage-async-1700709408",size:[300,250],params:{siteId:"1700707438",zoneId:"1700709408",zoneType:"Inpage"}});
+          <!--Mobile Underlay - Zone 2-->
+          gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
+          
+          //MR1
+          gammatag.defineZone({code:"gax-inpage-async-1700709408",size:[300,250],params:{siteId:"1700707438",zoneId:"1700709408",zoneType:"Inpage"}});
 
-        //Footer
-        gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
-        
-        //Footer1
-        gammatag.defineZone({code:"gax-inpage-async-1718360117",size:[720,250],params:{siteId:"1700707438",zoneId:"1718360117",zoneType:"Inpage"}});
-        
-        //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
-        gammatag.sendRequest();
+          //Footer
+          gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
+          
+          //Footer1
+          gammatag.defineZone({code:"gax-inpage-async-1718360117",size:[720,250],params:{siteId:"1700707438",zoneId:"1718360117",zoneType:"Inpage"}});
+          
+          //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
+          gammatag.sendRequest();
         });
+      }
       `,
     },
     {
