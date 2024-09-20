@@ -147,6 +147,9 @@ useHead({
           //MR1
           gammatag.defineZone({code:"gax-inpage-async-1700709408",size:[300,250],params:{siteId:"1700707438",zoneId:"1700709408",zoneType:"Inpage"}});
 
+          //MR1 Zone2
+          gammatag.defineZone({code:"gax-inpage-async-1726803747",size:[300,250],params:{siteId:"1700707438",zoneId:"1726803747",zoneType:"Inpage"}});
+
           //Footer
           gammatag.defineZone({code:"gax-inpage-async-1700710572",size:[720,250],params:{siteId:"1700707438",zoneId:"1700710572",zoneType:"Inpage"}});
           

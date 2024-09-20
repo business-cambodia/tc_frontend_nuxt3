@@ -69,6 +69,8 @@
           alt=""
           class="w-full rounded-xl object-cover bg-no-repeat bg-center lg:block mb-3"
         />
+        <!--Damrei - MR1 Zone2 Mobile-->
+        <div id="gax-inpage-async-1726803747"></div>
 
         <!-- article body -->
         <div
