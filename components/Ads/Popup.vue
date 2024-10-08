@@ -1,5 +1,8 @@
 <template>
-  <div class="fixed w-screen h-screen z-10" v-if="ad && ad !== undefined">
+  <div
+    class="fixed w-screen h-screen z-10"
+    v-if="ad && ad !== undefined && !delay"
+  >
     <div
       :style="{
         background: `rgba(0, 0, 0, 0.7)`,
@@ -37,6 +40,7 @@ import { IAd } from '~~/types/ad';
 const { $handleAdSeen }: any = useNuxtApp();
 
 const timer = ref(5);
+const delay = ref(true);
 const props = defineProps<{
   ad: IAd | undefined;
   handleClosePopup: Function;
@@ -52,10 +56,13 @@ const handleCountDown = () => {
     }
   }, 1000);
 };
-onMounted(async () => {
+onMounted(() => {
   if (props.ad) {
-    handleCountDown();
-    await $handleAdSeen(props?.ad?.slug);
+    setTimeout(async () => {
+      delay.value = false;
+      handleCountDown();
+      await $handleAdSeen(props?.ad?.slug);
+    }, 5000);
   }
 });
 </script>
