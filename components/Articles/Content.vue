@@ -133,6 +133,12 @@
       <div id="gax-inpage-async-1700709408"></div>
 
       <ArticlesAuthor :user="article.user_created" />
+      <div
+        class="fb-comments"
+        :data-href="'https://tech-cambodia.com' + $router.currentRoute.value.path"
+        data-width="100%"
+        data-numposts="5"
+      ></div>
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
       <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />

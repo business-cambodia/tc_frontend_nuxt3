@@ -170,6 +170,14 @@ useHead({
       src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
       async: true,
     },
+    {
+      async: true,
+      defer: true,
+      tagPosition: 'bodyOpen',
+      crossorigin: 'anonymous',
+      id: 'facebook-jssdk',
+      src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0&appId=1049142626486910',
+    },
   ],
   title: articles.value[0].title,
   meta: [
@@ -249,12 +257,28 @@ const bottomAd = ads.filter((a) => {
   return a.advertisement_type.type == 'bottom';
 })[0];
 
+const router = useRouter();
+
 onMounted(() => {
+  // for facebook comment plugin
+  if (window.FB) {
+    window.FB.XFBML.parse();
+  }
   // infinite scroll
   // window.addEventListener("scroll", handleScrollPagination);
   handleArticleViewed(articles.value[0]);
   // handleElementSeen();
 });
+
+// watch url changes for facebook comment plugin
+watch(
+  () => router.currentRoute.value.fullPath,
+  () => {
+    if (window.FB) {
+      window.FB.XFBML.parse();
+    }
+  }
+);
 
 const handleArticleViewed = async (article: IArticle) => {
   const slug = article.slug;
