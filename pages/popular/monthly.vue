@@ -5,7 +5,7 @@
       <div
         class="flex flex-col mt-10 h-20 justify-center px-4 lg:px-24 text-blue-500 text-3xl font-bold"
       >
-        អត្ថបទពេញនិយមសរុប
+        អត្ថបទពេញនិយមប្រចាំខែ
       </div>
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 justify-center gap-x-4 gap-y-8 mt-8 lg:px-20"
@@ -30,6 +30,8 @@
 import { ref } from 'vue';
 import { IResponse } from '~~/types/api';
 import { IArticle } from '~~/types/article';
+const now = new Date();
+const firstday = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 let currentPage = 1;
 
 // popular artcles
@@ -37,7 +39,7 @@ const articles = ref(
   (
     await (<Promise<IResponse<IArticle[]>>>(
       useApi(
-        '/items/articles?filter[status]=published&limit=10&page=1&sort=-views&fields=title, date_created,slug, thumbnail,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,body',
+        `/items/articles?filter[date_created][_between]=${firstday}, ${now.toISOString()}&sort[]=-views&limit=10&fields=title, date_created,slug, thumbnail,body,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,slug`,
         { method: 'GET' }
       )
     ))
@@ -49,7 +51,7 @@ const fetchMoreArticles = async () => {
   const newArticles = (
     await (<Promise<IResponse<IArticle[]>>>(
       useApi(
-        `/items/articles?filter[status]=published&limit=10&page=${currentPage}&sort=-views&fields=title, date_created,slug, thumbnail,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,body`,
+        `/items/articles?filter[date_created][_between]=${firstday}, ${now.toISOString()}&page=${currentPage}&sort[]=-views&limit=10&fields=title, date_created,slug, thumbnail,body,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,slug`,
         { method: 'GET' }
       )
     ))
@@ -58,7 +60,7 @@ const fetchMoreArticles = async () => {
 };
 
 useHead({
-  title: `Technology Cambodia - អត្ថបទពេញនិយមសរុប`,
+  title: `Technology Cambodia - អត្ថបទពេញនិយមប្រចាំខែ`,
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },

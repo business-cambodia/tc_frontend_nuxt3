@@ -5,17 +5,26 @@
     </div>
 
     <div class="px-4 lg:px-8">
-      <div class="mt-8 pb-4" >
-        <IndexCategoryArticles
-          :articles="popularArticles"
-          title="អត្ថបទពេញនិយមប្រចាំខែ"
-          seeMoreLink="/popular" />
-      </div>
       <div class="mt-8 pb-4">
         <IndexCategoryArticles
           :articles="newestArticles"
           title="អត្ថបទថ្មីៗ"
-          seeMoreLink="/articles"/>
+          seeMoreLink="/articles"
+        />
+      </div>
+      <div class="mt-8 pb-4">
+        <IndexCategoryArticles
+          :articles="popularArticles"
+          title="អត្ថបទពេញនិយមប្រចាំខែ"
+          seeMoreLink="/popular/monthly"
+        />
+      </div>
+      <div class="mt-8 pb-4">
+        <IndexCategoryArticles
+          :articles="mostPopularArticles"
+          title="អត្ថបទពេញនិយមសរុប"
+          seeMoreLink="/popular"
+        />
       </div>
       <div class="mt-8 pb-4">
         <IndexCategoryArticles
@@ -23,7 +32,8 @@
           :key="n"
           :articles="c.articles"
           :title="c.name"
-          :name="c.slug"/>
+          :name="c.slug"
+        />
       </div>
     </div>
     <BackToTopButton />
@@ -36,7 +46,6 @@ import { IResponse } from 'types/api';
 import { IArticle } from 'types/article';
 import { ICategory } from 'types/category';
 
-
 // to be used in monthly article
 const now = new Date();
 const firstday = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
@@ -44,7 +53,7 @@ const firstday = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 const heroArticles: IArticle[] = (
   await (<Promise<IResponse<IArticle[]>>>(
     useApi(
-      '/items/articles?filter[status]=published&limit=5&sort=-date_created&fields=title, date_created,slug, thumbnail,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,body',
+      '/items/articles?filter[status]=published&limit=3&sort=-views&fields=title, date_created,slug, thumbnail,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,body',
       { method: 'GET' }
     )
   ))
@@ -53,6 +62,14 @@ const popularArticles: IArticle[] = (
   await (<Promise<IResponse<IArticle[]>>>(
     useApi(
       `/items/articles?filter[date_created][_between]=${firstday}, ${now.toISOString()}&sort[]=-views&limit=5&fields=title, date_created,slug, thumbnail,body,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,slug`,
+      { method: 'GET' }
+    )
+  ))
+).data;
+const mostPopularArticles: IArticle[] = (
+  await (<Promise<IResponse<IArticle[]>>>(
+    useApi(
+      '/items/articles?filter[status]=published&limit=5&sort=-views&fields=title, date_created,slug, thumbnail,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views,body',
       { method: 'GET' }
     )
   ))
@@ -77,6 +94,4 @@ const categoriesNews: ICategory[] = (
 ).data;
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

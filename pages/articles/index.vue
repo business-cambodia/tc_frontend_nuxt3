@@ -26,7 +26,7 @@ const title = 'អត្ថបទថ្មីៗ'
 const newestArticles: IArticle[] = (
     await (<Promise<IResponse<IArticle[]>>>(
         useApi(
-            '/items/articles?filter[status]=published&sort=-date_created&fields=title, date_created,slug, thumbnail,body ,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views',
+            '/items/articles?filter[status]=published&limit=10&sort=-date_created&fields=title, date_created,slug, thumbnail,body ,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views',
             { method: 'GET' }
         )
     ))
