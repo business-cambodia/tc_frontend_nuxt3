@@ -66,8 +66,7 @@ const nextArticles = ref(
   ).data
 );
 let thumbnail = articles.value[0].thumbnail
-  ? articles.value[0].thumbnail_facebook
-  : articles.value[0].thumbnail;
+
 useHead({
   script: [
     {
