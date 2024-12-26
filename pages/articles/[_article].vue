@@ -65,7 +65,7 @@ const nextArticles = ref(
     ))
   ).data
 );
-let thumbnail = articles.value[0].thumbnail
+let thumbnail = articles.value[0].thumbnail;
 
 useHead({
   script: [
@@ -110,16 +110,16 @@ useHead({
         innity_adZoneAsync.q = innity_adZoneAsync.q || []; 
         `,
     },
-    // {
-    //   type: 'text/javascript',
-    //   innerHTML: `
-    //     innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101009", {"target": "div-ad-innity-101009/0"});});
-    //     `,
-    // },
     {
       type: 'text/javascript',
       innerHTML: `
         innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101010", {"target": "div-ad-innity-101010/0"});});
+        `,
+    },
+    {
+      type: 'text/javascript',
+      innerHTML: `
+        innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "102478", {"target": "div-ad-innity-102478/0","width": "300", "height": "250"});});
         `,
     },
     {

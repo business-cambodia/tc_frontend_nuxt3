@@ -114,6 +114,9 @@
             <div v-html="splitBody().thirdPart" class="article_body"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
+            
+            <!-- Zone Tag : Technology Cambodia Rectangle UT-->
+            <div id="div-ad-innity-102478/0"></div>
             <!-- GPAS MR1 -->
             <ins
               class="flex justify-center"
