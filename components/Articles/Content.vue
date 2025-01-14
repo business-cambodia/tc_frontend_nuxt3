@@ -172,7 +172,14 @@ const props = defineProps<{
 }>();
 
 const splitBody = () => {
-  const bodyParts = props.article.body.split('\n');
+
+  const bodyParts = props.article.body.split('\n').map((html) => {
+    // add sandbox attribute to iframe for facebook embed
+    return html.replace(
+      /sandbox=""/g,
+      'sandbox="allow-scripts allow-same-origin allow-popups"'
+    );
+  });
   return {
     firstPart: bodyParts[0],
     secondPart: bodyParts[1] ? bodyParts[1] + '' : '\n',
