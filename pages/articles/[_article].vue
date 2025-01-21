@@ -1,6 +1,12 @@
 <template>
   <!-- <LayoutsNavbarWhite /> -->
 
+  <!-- Gpas popup random 2 ads -->
+  <ins
+    :data-revive-zoneid="Math.random() < 0.5 ? '256' : '184'"
+    data-revive-id="2d10743d9880200bf17a894cfa35dba0"
+  ></ins>
+
   <div class="pt-16 lg:pt-20" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent
@@ -166,10 +172,6 @@ useHead({
       async: true,
     },
     {
-      src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
-      async: true,
-    },
-    {
       type: 'text/javascript',
       innerHTML: import.meta.server
         ? `
@@ -286,6 +288,14 @@ onMounted(() => {
   // window.addEventListener("scroll", handleScrollPagination);
   handleArticleViewed(articles.value[0]);
   // handleElementSeen();
+
+  // delay gpas popup ads
+  setTimeout(() => {
+    const script = document.createElement('script');
+    script.src = '//adservermsa.gpas.co/www/delivery/asyncjs.php';
+    script.async = true;
+    document.head.appendChild(script);
+  }, 5000);
 });
 
 // watch url changes for facebook comment plugin
