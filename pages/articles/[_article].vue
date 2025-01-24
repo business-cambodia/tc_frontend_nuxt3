@@ -1,5 +1,7 @@
 <template>
   <!-- <LayoutsNavbarWhite /> -->
+
+  <div class="pt-16 lg:pt-20" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent
         :aboveArticleAds="aboveArticleAds"
@@ -284,7 +286,6 @@ onMounted(() => {
   // window.addEventListener("scroll", handleScrollPagination);
   handleArticleViewed(articles.value[0]);
   // handleElementSeen();
-
 });
 
 // watch url changes for facebook comment plugin
