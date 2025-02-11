@@ -85,8 +85,10 @@ export default defineNuxtConfig({
           innerHTML: `
           var _ase_region="SGP";
           var _ase  = _ase || [];
-          /* load placement for account: Business Cambodia, site: tech-cambodia.com, zone size : 282x370 */
+          /* Mobile Popup, zone size : 282x370 */
           _ase.push(['1700707438','1700709882']);
+          /* Desktop Popup */
+          _ase.push(['1706775465','1706776197']);
           `,
         },
         {
