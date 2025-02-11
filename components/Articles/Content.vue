@@ -129,7 +129,7 @@
             <div v-html="splitBody().theRest" class="article_body"></div>
           </div>
           <!-- Zone Tag : Technology Cambodia Mobile Inpage UT-->
-          <!-- <div id="div-ad-innity-101009/0"></div> -->
+          <div id="div-ad-innity-101009/0"></div>
         </div>
       </div>
       <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>

@@ -95,16 +95,6 @@ useHead({
     },
     {
       type: 'text/javascript',
-      src: 'https://www.tiktok.com/embed.js',
-      async: true,
-    },
-    {
-      type: 'text/javascript',
-      src: 'https://platform.twitter.com/widgets.js',
-      async: true,
-    },
-    {
-      type: 'text/javascript',
       innerHTML: `
         var innity_adZoneAsync = innity_adZoneAsync || {}; 
         innity_adZoneAsync.q = innity_adZoneAsync.q || []; 
@@ -112,12 +102,21 @@ useHead({
     },
     {
       type: 'text/javascript',
+      tagPosition: 'bodyClose',
+      innerHTML: `
+        innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101009", {"target": "div-ad-innity-101009/0"});});
+        `,
+    },
+    {
+      type: 'text/javascript',
+      tagPosition: 'bodyClose',
       innerHTML: `
         innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101010", {"target": "div-ad-innity-101010/0"});});
         `,
     },
     {
       type: 'text/javascript',
+      tagPosition: 'bodyClose',
       innerHTML: `
         innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "102478", {"target": "div-ad-innity-102478/0","width": "300", "height": "250"});});
         `,
@@ -195,6 +194,16 @@ useHead({
       crossorigin: 'anonymous',
       id: 'facebook-jssdk',
       src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0&appId=1049142626486910',
+    },
+    {
+      type: 'text/javascript',
+      src: 'https://www.tiktok.com/embed.js',
+      async: true,
+    },
+    {
+      type: 'text/javascript',
+      src: 'https://platform.twitter.com/widgets.js',
+      async: true,
     },
   ],
   title: articles.value[0].title,
