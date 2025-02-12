@@ -85,11 +85,15 @@ export default defineNuxtConfig({
           innerHTML: `
           var _ase_region="SGP";
           var _ase  = _ase || [];
-          /* Mobile Popup, zone size : 282x370 */
-          _ase.push(['1700707438','1700709882']);
-          /* Desktop Popup */
-          _ase.push(['1706775465','1706776197']);
-          `,
+          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            /* Mobile Popup, zone size : 282x370 */
+            _ase.push(['1700707438','1700709882']);
+          }
+          else{
+            /* Desktop Popup */
+            _ase.push(['1706775465','1706776197']);
+          }
+            `,
         },
         {
           type: 'text/javascript',
