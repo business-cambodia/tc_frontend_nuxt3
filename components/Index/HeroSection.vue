@@ -1,140 +1,138 @@
 <template>
-  <div class="">
+  <div class="relative w-full">
+    <!-- Hero Background with Gradient Overlay -->
     <div
-      data-aos="fade-up"
-      data-aos-duration="1000"
-      :style="{
-        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${useImg(
-          heroArticles[currentIndex].thumbnail
-        )})`,
-      }"
-      class="w-full h-hero object-cover bg-center bg-no-repeat bg-cover"
+      class="relative h-[90vh] w-full overflow-hidden"
+      v-for="(article, index) in heroArticles"
+      :key="article.id"
+      v-show="currentIndex === index"
     >
+      <!-- Background Image with Modern Gradient -->
       <div
-        class="h-full flex flex-col justify-center text-center px-6 lg:px-20"
-      >
-        <div
-          class="text-white text-2xl lg:text-4xl xl:text-5xl 2xl:text-5xl font-medium hero-title mt-4"
-        >
-          {{ heroArticles[currentIndex].title }}
-        </div>
+        class="absolute inset-0 transition-opacity duration-700"
+        :class="{ 'opacity-0': currentIndex !== index }"
+        :style="{
+          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(${useImg(article.thumbnail)})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }"
+      ></div>
 
-        <div
-          class="flex items-center flex-wrap justify-center w-full mt-2 text-xs lg:text-base text-gray-200"
-        >
-          <div class="flex">
-            <div class="font-light self-center">
-              {{ $formatDate(heroArticles[currentIndex].date_created) }}
+      <!-- Content Container -->
+      <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col justify-center h-full text-white">
+          <!-- Category Badge -->
+          <div class="mb-4">
+            <span class="px-4 py-1.5 bg-primary/80 backdrop-blur-sm rounded-full text-sm font-medium">
+              {{ article.category.name }}
+            </span>
+          </div>
+
+          <!-- Title with Animation -->
+          <h1 
+            class="text-2xl md:text-5xl  font-medium max-w-4xl hero-title line-clamp-3"
+            :class="{ 'animate-fadeIn': currentIndex === index }"
+          >
+            {{ article.title }}
+          </h1>
+
+          <!-- Meta Information -->
+          <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-gray-200 animate-fadeIn">
+            <div class="flex items-center " >
+              <Icon icon="heroicons:calendar-20-solid" class="w-4 h-4 mr-2" />
+              {{ $formatDate(article.date_created) }}
             </div>
-            <div class="text-lg mx-4">•</div>
-            <div class="font-light self-center">
-              {{ heroArticles[currentIndex].category.name }}
+            <div class="flex items-center">
+              <Icon icon="noto-v1:man-judge" class="w-4 h-4 mr-2" />
+              {{ article.user_created.first_name + ' ' + article.user_created.last_name }}
             </div>
-            <div class="text-lg mx-4">•</div>
-            <div class="font-light transform hover:underline self-center">
-              {{
-                heroArticles[currentIndex].user_created.first_name +
-                ' ' +
-                heroArticles[currentIndex].user_created.last_name
-              }}
+            <div v-if="article.category.name !== 'PR'" class="flex items-center">
+              <Icon icon="hugeicons:view" class="w-4 h-4 mr-2" />
+              {{ article.views }} views
+            </div>
+            <div class="flex items-center">
+              <Icon icon="svg-spinners:clock" class="w-4 h-4 mr-2" />
+              {{ $calculateReadTime(article.body) }}
             </div>
           </div>
-          <div class="flex">
-            <div
-              v-if="heroArticles[currentIndex].category.name !== 'PR'"
-              class="text-lg mx-4"
-            >
-              •
-            </div>
-            <div
-              v-if="heroArticles[currentIndex].category.name !== 'PR'"
-              class="font-light self-center"
-            >
-              {{ heroArticles[currentIndex].views }} views
-            </div>
-            <div class="text-lg mx-4">•</div>
-            <div class="font-light self-center">
-              {{ $calculateReadTime(heroArticles[currentIndex].body) }}
-            </div>
+
+          <!-- CTA Button -->
+          <div class="mt-8">
+            <nuxt-link :to="'/articles/' + article.slug" class="group">
+              <button class="relative px-3 py-2 bg-primary rounded-lg overflow-hidden transition-all duration-300 hover:bg-primary/90">
+                <span class="relative z-10 flex items-center font-medium">
+                  បន្តការអាន
+                  <Icon icon="solar:round-arrow-right-bold" class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+              </button>
+            </nuxt-link>
           </div>
-        </div>
-        <div class="mt-10">
-          <nuxt-link :to="'/articles/' + heroArticles[currentIndex].slug">
-            <button
-              class="custom-button text-white bg-primary font-bold px-10 py-2 text-base rounded-3xl transform transition duration-300 hover:scale-110"
-            >
-              បន្តការអាន
-            </button>
-          </nuxt-link>
         </div>
       </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <button
+        v-for="(_, index) in heroArticles"
+        :key="index"
+        @click="currentIndex = index"
+        class="w-2 h-2 rounded-full transition-all duration-300"
+        :class="currentIndex === index ? 'bg-primary w-6' : 'bg-white/50 hover:bg-white/80'"
+      ></button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
 import { IArticle } from 'types/article';
-
-const currentIndex = ref(0);
-
+import { Icon } from "@iconify/vue";
 const props = defineProps<{
   heroArticles: IArticle[];
 }>();
 
+const currentIndex = ref(0);
+let intervalId: NodeJS.Timeout;
+
 const autoPlayCarousel = () => {
-  setInterval(() => {
-    if (currentIndex.value == props.heroArticles.length - 1) {
-      currentIndex.value = 0;
-      return;
-    }
-    currentIndex.value += 1;
+  intervalId = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % props.heroArticles.length;
   }, 5000);
 };
 
 onMounted(() => {
   autoPlayCarousel();
 });
+
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId);
+});
 </script>
 
-<style>
+<style scoped>
 .hero-title {
-  line-height: 1.5;
+  line-height: 1.3;
+}
+.animate-fadeIn {
+  animation: fadeIn 0.7s ease-out;
 }
 
-/* button */
-.custom-button {
-  background-color: #008cba; /* Default background color */
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  font-size: 16px;
-  width: 150px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  transition: 0.5s ease-in-out;
-  /* transition: background-color 0.3s ease; */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.custom-button:hover {
-  background-color: #089cf4; /* New background color on hover */
-}
-
-/* Animation for hover effect */
-.custom-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background-color: #089cf4; /* Color for animation */
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.custom-button:hover::before {
-  left: 0;
+/* Smooth transition for background changes */
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
