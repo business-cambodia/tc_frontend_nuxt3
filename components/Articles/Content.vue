@@ -43,6 +43,18 @@
         </div>
         <div class="text-lg mx-2 lg:mx-4">•</div>
         <div>{{ $calculateReadTime(article.body) }}</div>
+        <div class="text-lg mx-2 lg:mx-4">•</div>
+        <div class="flex items-center justify-between dark:text-white ">
+          <div class="flex items-center space-x-2">
+            <!-- Favorite button -->
+            <Icon
+              :icon="isFavorite ? 'material-symbols:favorite' : 'material-symbols:favorite-outline'"
+              width="24"
+              height="24"
+              @click.stop.prevent="handleToggleFavorite"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div class="flex justify-center mt-4">
@@ -155,8 +167,29 @@
 <script setup lang="ts">
 import { IAd } from '~~/types/ad';
 import { IArticle } from '~~/types/article';
-const { $handleAdSeen } = useNuxtApp();
+import { Icon } from '@iconify/vue';
 
+const { $handleAdSeen } = useNuxtApp();
+// Get toggleFavorite function
+const { toggleFavorite } = useFavorite();
+
+// Favorite state
+const isFavorite = ref(false);
+
+// Check if the article is already in favorites
+const checkIfFavorite = () => {
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  isFavorite.value = favorites.some((item: { id: string }) => props.article.id === item.id);
+};
+
+// Function to toggle favorite status
+const handleToggleFavorite = () => {
+  toggleFavorite(isFavorite, props.article);
+};
+
+onMounted(() => {
+  checkIfFavorite();
+});
 const isMobile = ref(false);
 
 const props = defineProps<{

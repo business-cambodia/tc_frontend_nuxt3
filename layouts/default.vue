@@ -4,6 +4,7 @@
     <ClientOnly>
       <AdsPopup :ad="ad[0]" id="popup" :handleClosePopup="handleClosePopup" />
     </ClientOnly>
+    <LayoutsBottomBar />
   </div>
 </template>
 
