@@ -41,7 +41,7 @@
       const startTime = Date.now();
       
       const response = await useApi(
-        '/items/articles?filter[status]=published&limit=15&sort=-date_created&fields=title, date_created,slug, thumbnail,body ,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views',
+        '/items/articles?filter[status]=published&limit=15&sort=-date_created&fields=id,title, date_created,slug, thumbnail,body ,category.name, user_created.first_name, user_created.last_name, user_created.avatar,views',
         { method: 'GET' }
       ) as IResponse<IArticle[]>;
       
