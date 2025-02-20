@@ -42,11 +42,22 @@
           </li>
 
           <!-- QuickApp Menu -->
-          <div  class="relative group">
-            <NuxtLink to="/quickapp" class="mx-4 text-black dark:text-white hover:text-primary nav-items text-base">
+         
+           <li>
+            <NuxtLink :to="`/quickapp`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
+              ($route.name == 'index' ||
+                $route.name == 'articles-article' ||
+                $route.name == 'videos-video' ||
+                $route.name == 'videos' ||
+                $route.name == 'category-slug' ||
+                $route.name == 'authors-author')
+              ? 'text-white '
+              : 'text-black dark:text-white'
+              }`" exact-active-class="text-primary dark:text-primary font-semibold" exact>
               QuickApp
             </NuxtLink>
-          </div>
+
+          </li>
           <!-- End QuickApp -->
           <!-- <li>
             <NuxtLink :to="`/videos`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
