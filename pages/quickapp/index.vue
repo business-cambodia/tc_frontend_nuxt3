@@ -133,8 +133,74 @@ const categories: Category[] = [
     gradientFrom: 'from-yellow-500',
     gradientTo: 'to-amber-500'
   },
+  {
+    id: 'image-to-text',
+    title: 'បម្លែងរូបភាពទៅជាអត្ថបទ',
+    description: 'Extract Khmer text from images with OCR technology',
+    svgPath: 'M4 4h16v12H4V4zm2 2v8h12V6H6zm12 10v2H6v-2h12zm-9-6h6v2H9v-2z',
+    fill: 'currentColor',
+    iconColor: 'text-indigo-600',
+    gradientFrom: 'from-indigo-500',
+    gradientTo: 'to-blue-500'
+  },
+  // ai chat bot
+  // {
+  //   id:'ai-chat-bot',
+  //   title:'AI Chat Bot',
+  //   description:'Chat with an AI-powered bot for instant responses',
+  //   svgPath:'M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h1v1h-1v-1zm-1 2h1v1h-1v-1zm2 0h1v1h-1v-1zm-1 2h1v1h-1v-1zm-2 0h1v1h-1v-1zm3-2h1v1h-1v-1zm0 4h1v1h-1v-1zm-2 0h1v1h-1v-1z',
+  //   fill:'currentColor',
+  //   iconColor:'text-green-600',
+  //   gradientFrom:'from-green-500',
+  //   gradientTo:'to-lime-500'
+  // }
   
 ];
+// Store categories globally using useState
+const quickApps = useState<Category[]>('quickApps', () => categories);
+
+// Watch for changes and update globally
+watch(categories, (newCategories) => {
+  quickApps.value = newCategories;
+});
+// usehead for quickapp
+useHead({
+  title: 'កម្មវិធីរហ័ស | Quick Apps',
+  meta: [
+    {
+      name: 'description',
+      content: 'កម្មវិធីរហ័សសម្រាប់ប្រើប្រាស់ប្រចាំថ្ងៃរបស់អ្នក។ ប្រើប្រាស់កម្មវិធីអោយងាយស្រួល និងមានប្រយោជន៍។'
+    },
+    { charset: "utf-8" },
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+    { name: "format-detection", content: "telephone=no" },
+    { name: "keywords", content: "technology-cambodia, technology cambodia" },
+    { name: "keywords", content: "កម្មវិធី, QR code, Barcode, Password Generator, Text to Speech, Image Compressor" },
+    { name: "robots", content: "index, follow" },
+    { property: "og:title", content: "កម្មវិធីរហ័ស | Quick Apps" },
+    { property: "og:description", content: "កម្មវិធីដែលអាចជួយអ្នកក្នុងការបង្កើត QR Code, Barcode, ពាក្យសម្ងាត់, និងបង្រួមទំហំរូបភាព។" },
+    { property: "og:type", content: "website" },
+  ]
+});
+
+// Dynamic title and description when a category is selected
+watch(activeCategory, (category) => {
+  if (category) {
+    useHead({
+      title: `${category.title} | Quick Apps`,
+      meta: [
+        {
+          name: 'description',
+          content: category.description
+        },
+        { property: "og:title", content: `${category.title} | Quick Apps` },
+        { property: "og:description", content: category.description },
+        { name: "twitter:title", content: `${category.title} | Quick Apps` },
+        { name: "twitter:description", content: category.description }
+      ]
+    });
+  }
+});
 
 </script>
 

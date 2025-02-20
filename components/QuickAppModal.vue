@@ -11,7 +11,7 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-black/25 backdrop-blur-sm" />
+        <div class="fixed inset-0 bg-black/25  backdrop-blur-sm" />
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
@@ -25,7 +25,7 @@
             leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95"
           >
-            <DialogPanel :class="`w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white bg-opacity-50  dark:bg-gray-800 p-6 shadow-xl transition-all ${activeCategory?.gradientFrom} ${activeCategory?.gradientTo} `">
+            <DialogPanel :class="`w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white   dark:bg-gray-800 p-6 shadow-xl transition-all ${activeCategory?.gradientFrom} ${activeCategory?.gradientTo} `">
               <div class="flex items-center justify-between mb-4">
                 <DialogTitle class="text-2xl font-semibold">
                   <div class="flex items-center dark:text-white">
@@ -79,6 +79,14 @@
                 <div v-else-if="activeCategory?.id === 'password-generator'" class="space-y-4">
                   <ToolPasswordGenerator />
                 </div>
+                <!-- image-to-text -->
+                <div v-else-if="activeCategory?.id === 'image-to-text'" class="space-y-4">
+                  <ToolImageToText />
+                </div>
+                <!-- ai-chat-bot -->
+                <!-- <div v-else-if="activeCategory?.id === 'ai-chat-bot'" class="space-y-4">
+                  <ToolGeminiChat />
+                </div> -->
 
                 <!-- Add more category-specific content here -->
               </div>

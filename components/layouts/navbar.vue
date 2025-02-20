@@ -13,7 +13,7 @@
       <div>
         <ul class="hidden lg:flex list-none">
           <!-- hot-news nuxtlink -->
-       
+
           <li v-for="(i, n) in navItems" :key="n" class="relative group">
             <NuxtLink :to="i.slug === '' ? '/' : i.slug === 'hot-news' ? '/hot-news' : `/category/${i.slug}`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
               ($route.name == 'index' ||
@@ -26,8 +26,8 @@
               : 'text-black dark:text-white'
               }`" exact-active-class="text-primary dark:text-primary font-semibold" exact>
               {{ i.name }}
-              <Icon v-if="i.sub_categories && i.sub_categories.length > 0"
-                icon="mdi:chevron-down" class="inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180"/>
+              <Icon v-if="i.sub_categories && i.sub_categories.length > 0" icon="mdi:chevron-down"
+                class="inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180" />
             </NuxtLink>
             <ul v-if="i.sub_categories && i.sub_categories.length > 0"
               class="absolute hidden group-hover:block bg-white/70 backdrop-blur-sm dark:bg-dark shadow-lg rounded-lg p-2 z-10 w-52">
@@ -35,12 +35,20 @@
                 class="px-4 py-2 text-black dark:text-white hover:font-bold hover:underline rounded-lg transition duration-300 ">
                 <NuxtLink :to="`/category/${i.slug}/${sub.slug}`" class="block w-full" exact-active-class="font-bold">
                   {{ sub.name }}
-                  
+
                 </NuxtLink>
               </li>
             </ul>
           </li>
-          <li>
+
+          <!-- QuickApp Menu -->
+          <div  class="relative group">
+            <NuxtLink to="/quickapp" class="mx-4 text-black dark:text-white hover:text-primary nav-items text-base">
+              QuickApp
+            </NuxtLink>
+          </div>
+          <!-- End QuickApp -->
+          <!-- <li>
             <NuxtLink :to="`/videos`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
               ($route.name == 'index' ||
                 $route.name == 'articles-article' ||
@@ -54,7 +62,7 @@
               វីដេអូ
             </NuxtLink>
 
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="flex items-center">
@@ -88,14 +96,15 @@
       data-aos="fade-left">
       <ul class="h-screen flex flex-col justify-center">
         <div v-for="(i, n) in navItems" :key="n" class="text-center h-12 group relative">
-          <NuxtLink :to="i.slug === '' ? '/' : i.slug === 'hot-news' ? '/hot-news' : `/category/${i.slug}`" class="mx-4 text-white list-none block"
-            exact-active-class="text-white font-bold text-sm" exact @click="closeDrawer">
+          <NuxtLink :to="i.slug === '' ? '/' : i.slug === 'hot-news' ? '/hot-news' : `/category/${i.slug}`"
+            class="mx-4 text-white list-none block" exact-active-class="text-white font-bold text-sm" exact
+            @click="closeDrawer">
             <li class="hover-nav">
               {{ i.name }}
-              <Icon v-if="i.sub_categories && i.sub_categories.length > 0"
-                icon="mdi:chevron-down" class="inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180"/>
+              <Icon v-if="i.sub_categories && i.sub_categories.length > 0" icon="mdi:chevron-down"
+                class="inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180" />
             </li>
-            
+
           </NuxtLink>
 
           <!-- Subcategories appear on hover -->
@@ -108,15 +117,23 @@
                 {{ sub.name }}
               </NuxtLink>
             </li>
+            <!-- QuickApp -->
+           
           </ul>
         </div>
-
+        <!-- QuickApp -->
         <div>
+          <NuxtLink to="/quickapp" class=" text-white list-none" exact-active-class="text-white font-bold text-lg"
+            exact @click="closeDrawer">
+            <li class="hover-nav">QuickApp</li>
+          </NuxtLink>
+        </div>
+        <!-- <div>
           <NuxtLink to="/videos" class="mx-4 text-white list-none" exact-active-class="text-white font-bold text-lg"
             exact @click="closeDrawer">
             <li class="hover-nav">វិដេអូ</li>
           </NuxtLink>
-        </div>
+        </div> -->
       </ul>
     </div>
 
