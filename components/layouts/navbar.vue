@@ -15,7 +15,7 @@
           <!-- hot-news nuxtlink -->
 
           <li v-for="(i, n) in navItems" :key="n" class="relative group">
-            <NuxtLink :to="i.slug === '' ? '/' : i.slug === 'hot-news' ? '/hot-news' : `/category/${i.slug}`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
+            <NuxtLink :to="i.slug === '' ? '/' : i.slug === 'hot-news' ? '/hot-news': i.slug === 'quickapp' ? '/quickapp'  : `/category/${i.slug}`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
               ($route.name == 'index' ||
                 $route.name == 'articles-article' ||
                 $route.name == 'videos-video' ||
@@ -41,24 +41,6 @@
             </ul>
           </li>
 
-          <!-- QuickApp Menu -->
-         
-           <li>
-            <NuxtLink :to="`/quickapp`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
-              ($route.name == 'index' ||
-                $route.name == 'articles-article' ||
-                $route.name == 'videos-video' ||
-                $route.name == 'videos' ||
-                $route.name == 'category-slug' ||
-                $route.name == 'authors-author')
-              ? 'text-white '
-              : 'text-black dark:text-white'
-              }`" exact-active-class="text-primary dark:text-primary font-semibold" exact>
-              QuickApp
-            </NuxtLink>
-
-          </li>
-          <!-- End QuickApp -->
           <!-- <li>
             <NuxtLink :to="`/videos`" :class="`mx-4 hover:text-primary nav-items text-base ${scrollPosition == 0 &&
               ($route.name == 'index' ||
@@ -164,7 +146,7 @@ const search = ref(false);
 const navItems: ICategory[] = (
   await (<Promise<IResponse<ICategory[]>>>(
     useApi(
-      '/items/categories?fields=slug,id,name,sub_categories.name,sub_categories.slug&sort=id&filter[status]=published',
+      '/items/categories?fields=slug,id,name,sub_categories.name,sub_categories.slug&sort=sort&filter[status]=published',
       { method: 'GET' }
     )
   ))
@@ -187,10 +169,21 @@ const hotNews: ICategory = {
   articles: undefined,
   sub_categories: undefined
 };
+
+const quickapp: ICategory = {
+  name: 'QuickApp',
+  slug: 'quickapp',
+  thumbnail: '',
+  articles: undefined,
+  sub_categories: undefined
+};
+
 // Ensure proper order: [Home, Hot News, Categories]
 navItems.unshift(hotNews);
-
 navItems.unshift(home);
+
+// add QuickApp to before 1 item of the end of the array
+navItems.splice(navItems.length-1,0,quickapp);
 
 const toggleDrawer = () => {
   drawer.value = !drawer.value;
