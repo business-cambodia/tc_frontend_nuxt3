@@ -55,6 +55,13 @@ const articles = ref(
     ))
   ).data
 );
+
+if (articles.value.length === 0)
+  throw createError({
+    statusCode: 404,
+    message: 'Article not found',
+  });
+
 const nextArticles = ref(
   (
     await (<Promise<IResponse<IArticle[]>>>(
