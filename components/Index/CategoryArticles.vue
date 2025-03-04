@@ -17,7 +17,7 @@
         >
       </div>
       <div
-        class="hidden lg:grid lg:grid-cols-4 2xl:grid-cols-5 gap-x-10 mt-6"
+        class="hidden lg:grid lg:grid-cols-3 2xl:grid-cols-5 gap-x-10 mt-6"
         v-if="articles != undefined && articles.length > 0"
         data-aos="zoom-in"
         data-aos-once='true'
