@@ -115,6 +115,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  runtimeConfig: {
+    // Server-side only environment variables
+    geminiApiKey: process.env.GEMINI_API_KEY,
+    // Removed from public config to prevent client-side exposure
+    public: {
+      // Other public configs that are safe to expose
+    }
+  },
   modules: ['@nuxtjs/color-mode'],
   colorMode: {
     preference: 'light', // default value of $colorMode.preference

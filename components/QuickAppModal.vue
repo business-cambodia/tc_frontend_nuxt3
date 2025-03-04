@@ -84,9 +84,10 @@
                   <ToolImageToText />
                 </div>
                 <!-- ai-chat-bot -->
-                <!-- <div v-else-if="activeCategory?.id === 'ai-chat-bot'" class="space-y-4">
+                <div v-else-if="activeCategory?.id === 'ai-chat-bot'" class="space-y-4">
                   <ToolGeminiChat />
-                </div> -->
+                </div>
+            
 
                 <!-- Add more category-specific content here -->
               </div>

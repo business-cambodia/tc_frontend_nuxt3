@@ -2,15 +2,14 @@
   <div class="min-h-screen bg-gradient-to-br pt-8 from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
     <div class="hidden dark:block">
       <div
-      class="animate-blob1 opacity-30 absolute bg-purple-300 dark:bg-purple-600 blur-3xl h-64 w-64 rounded-full -top-32 -left-32">
-    </div>
-    <div
-      class="animate-blob3 opacity-30 absolute bg-pink-300 dark:bg-pink-600 blur-3xl h-64 w-64 rounded-full bottom-0 right-0">
-    </div>
+        class="animate-blob1 opacity-30 absolute bg-purple-300 dark:bg-purple-600 blur-3xl h-64 w-64 rounded-full -top-32 -left-32">
+      </div>
+      <div
+        class="animate-blob3 opacity-30 absolute bg-pink-300 dark:bg-pink-600 blur-3xl h-64 w-64 rounded-full bottom-0 right-0">
+      </div>
     </div>
     <div class="container mx-auto px-4 py-12 ">
-      <h1
-        class="text-4xl  font-bold text-center mb-4   text-primary  ">
+      <h1 class="text-4xl  font-bold text-center mb-4   text-primary  ">
         កម្មវិធីរហ័ស
       </h1>
 
@@ -143,18 +142,29 @@ const categories: Category[] = [
     gradientFrom: 'from-indigo-500',
     gradientTo: 'to-blue-500'
   },
-  // ai chat bot
+  // ai chat bot 
+  {
+    id: 'ai-chat-bot',
+    title: 'AI ជំនួយការ',
+    description: 'Chat with an AI-powered bot for instant responses',
+    svgPath: 'M10 14.5v2.5a1 1 0 0 0 1.7.7l2.6-2.2a1 1 0 0 0 .3-.7v-8.8a1 1 0 0 0-1-1h-8a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.5zm9-9a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2v3.5a1.5 1.5 0 0 1-2.5 1.1L11 17H8v-1h3.5a.5.5 0 0 1 .3.1l2.7 2.4v-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-4V5h4zM6.5 9a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm0 2a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z',
+    fill: 'currentColor',
+    iconColor: 'text-indigo-600',
+    gradientFrom: 'from-indigo-500',
+    gradientTo: 'to-violet-500'
+  },
+  // Photo studio 
   // {
-  //   id:'ai-chat-bot',
-  //   title:'AI Chat Bot',
-  //   description:'Chat with an AI-powered bot for instant responses',
-  //   svgPath:'M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h1v1h-1v-1zm-1 2h1v1h-1v-1zm2 0h1v1h-1v-1zm-1 2h1v1h-1v-1zm-2 0h1v1h-1v-1zm3-2h1v1h-1v-1zm0 4h1v1h-1v-1zm-2 0h1v1h-1v-1z',
-  //   fill:'currentColor',
-  //   iconColor:'text-green-600',
-  //   gradientFrom:'from-green-500',
-  //   gradientTo:'to-lime-500'
+  //   id: 'khmer-canva',
+  //   title: 'Khmer Canva',
+  //   description: 'Edit and enhance photos with professional tools',
+  //   svgPath: 'M4 4h16v16H4V4zm2 2v12h12V6H6zm2 6l4-4v8l-4-4zm8 0l-4 4V8l4 4z',
+  //   fill: 'currentColor',
+  //   iconColor: 'text-green-600',
+  //   gradientFrom: 'from-green-500',
+  //   gradientTo: 'to-lime-500'
   // }
-  
+
 ];
 // Store categories globally using useState
 const quickApps = useState<Category[]>('quickApps', () => categories);
