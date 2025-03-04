@@ -29,7 +29,6 @@
     "browser-image-compression": "^2.0.2",
     "jsbarcode": "^3.11.6",
     "pdf-lib": "^1.17.1",
-    "pdfjs-dist": "^4.10.38",
     "qrcode": "^1.5.4",
     "swiper": "^11.0.7",
     "vue-awesome-swiper": "^5.0.1",
