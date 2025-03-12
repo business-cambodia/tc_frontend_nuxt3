@@ -360,6 +360,14 @@ iframe {
   font-weight: bold;
 }
 
+.article_body p, span{
+  font-family: 'Kantumruy Pro' !important;
+}
+
+.article_body strong {
+  font-weight: 600;
+}
+
 .article_body ul li {
   line-height: 180%;
 }
