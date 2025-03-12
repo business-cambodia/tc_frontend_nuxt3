@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/articles/${article.slug}`">
+  <NuxtLink :to="`/articles/${article.slug}`" target="_blank">
     <article class="relative w-full overflow-hidden group rounded-2xl"
       :class="[featured ? 'h-[500px] md:h-[600px]' : 'h-[280px]']">
       <!-- Main Image -->
