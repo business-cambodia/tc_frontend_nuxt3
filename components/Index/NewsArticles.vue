@@ -13,7 +13,7 @@
     </div>
 
     <!-- Carousel for Newest Articles -->
-    <carousel v-else-if="newestArticles.length > 0" :items-to-show="1" :breakpoints="breakpoints" :wrap-around="true"
+    <carousel v-else-if="newestArticles.length > 0" :breakpoints="breakpoints" snap-align="start" :wrap-around="true"
       :autoplay="4000" :pause-autoplay-on-hover="true" class="relative">
       <slide v-for="(article, index) in newestArticles" :key="article.id">
         <ReusablesArticleNewsCard :article="article" :featured="false" class="w-full px-2" data-aos="zoom-in"
@@ -40,11 +40,13 @@ import { IArticle } from "types/article";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Pagination, Slide, Navigation } from "vue3-carousel";
 import ArticleLoadingCard from "@/components/ArticleLoadingCard.vue"; // Import loading skeleton
+import { start } from "repl";
 
 const breakpoints = {
-  640: { itemsToShow: 2, snapAlign: "start" }, // Mobile
-  1024: { itemsToShow: 3, snapAlign: "center" }, // MD screens
-  1536: { itemsToShow: 5, snapAlign: "center" }, // XL screens
+  0: { itemsToShow: 1 }, // Mobile
+  640: { itemsToShow: 2 }, // Tablet
+  1024: { itemsToShow: 3 }, // MD screens
+  1536: { itemsToShow: 5 }, // XL screens
 };
 
 const isLoading = ref(true); // Loading state
