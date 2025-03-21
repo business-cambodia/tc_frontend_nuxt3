@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     }
     
     // Get API key from server environment
-    const apiKey = process.env.GEMINI_API_KEY
+    const apiKey = 'AIzaSyBasLyjnqdsDWdOSJxESQa6OXnA21hnoko'
     
     if (!apiKey) {
       console.error('Missing GEMINI_API_KEY environment variable')
