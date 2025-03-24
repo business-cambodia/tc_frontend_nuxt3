@@ -55,8 +55,92 @@
             />
           </div>
         </div>
+        <div class="flex items-center justify-between dark:text-white ml-2">
+          <button @click="summarizeArticle" class=" bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+          :disabled="isSummarizing">
+          {{ isSummarizing ? 'កំពុងសង្ខេប...' : 'សង្ខេបអត្ថបទប្រើ AI' }}
+        </button>
+        </div>
+        
       </div>
     </div>
+     <!-- Apple Intelligence Style Modal -->
+ <Teleport to="body">
+      <transition enter-active-class="transition duration-300 ease-out" enter-from-class="transform opacity-0 scale-95"
+        enter-to-class="transform opacity-100 scale-100" leave-active-class="transition duration-200 ease-in"
+        leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+        <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center">
+          <!-- Backdrop -->
+          <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" @click="closeModal"></div>
+
+          <!-- Modal Container -->
+          <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-2xl mx-4 flex flex-col"
+            style="max-height: 90vh;">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 class="text-lg font-medium text-gray-900 dark:text-white">AI សង្ខេបអត្ថបទ</h3>
+              <button @click="closeModal" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Modal Content -->
+            <!-- Modal Content -->
+            <div class="flex-1 overflow-hidden">
+              <div v-if="isSummarizing" class="flex flex-col items-center justify-center p-8 h-full">
+                <!-- Apple Intelligence Style Loader -->
+                <div class="relative h-16 w-16 mb-6">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div
+                      class="h-full w-full rounded-full border-4 border-t-blue-500 border-r-transparent border-b-blue-300 border-l-transparent animate-spin">
+                    </div>
+                  </div>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div
+                      class="h-10 w-10 rounded-full border-4 border-t-transparent border-r-blue-300 border-b-transparent border-l-blue-500 animate-spin-reverse">
+                    </div>
+                  </div>
+                </div>
+                <p class="text-center text-gray-600 dark:text-gray-300 text-lg">កំពុងសង្ខេបអត្ថបទ...</p>
+              </div>
+
+              <div v-else-if="summary" class="p-6 overflow-y-auto space-y-4" style="max-height: calc(90vh - 130px);">
+                <!-- Thumbnail -->
+                <div v-if="article?.thumbnail" class="flex justify-center">
+                  <img :src="useImg(article.thumbnail)" class="rounded-lg w-full object-cover max-h-64" alt="">
+                </div>
+
+               <!-- Summary Text -->
+                <p class="text-gray-700 dark:text-white text-base leading-relaxed whitespace-pre-line text-justify">
+                  {{ summary.split("**ចំណុចសំខាន់ៗ:**")[0].replace(/<br\s*\/?>/gi, '').trim() }}
+                </p>
+
+                <ul v-if="summary.includes('**ចំណុចសំខាន់ៗ:**')"
+                  class="mt-4 space-y-2 list-disc list-inside text-gray-800 dark:text-gray-200">
+                  <p class="font-bold "> -ចំណុចសំខាន់ៗ</p>
+                  <li v-for="(point, index) in summary.split('**ចំណុចសំខាន់ៗ:**')[1].replace(/<br\s*\/?>/gi, '').split('* ').slice(1)" 
+                      :key="index"
+                      class="pl-2 border-l-4 border-blue-500 dark:border-blue-400 text-gray-700 dark:text-gray-200">
+                     {{ point.trim() }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <!-- Modal Footer -->
+            <div
+              class="bg-gray-50 dark:bg-gray-700 px-4 py-3 flex justify-end border-t border-gray-200 dark:border-gray-700">
+              <button @click="closeModal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </Teleport>
     <div class="flex justify-center mt-4">
       <hr class="w-10 h-1 bg-primary" />
     </div>
@@ -169,6 +253,8 @@ import { IAd } from '~~/types/ad';
 import { IArticle } from '~~/types/article';
 import { Icon } from '@iconify/vue';
 
+
+
 const { $handleAdSeen } = useNuxtApp();
 // Get toggleFavorite function
 const { toggleFavorite } = useFavorite();
@@ -181,16 +267,12 @@ const checkIfFavorite = () => {
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
   isFavorite.value = favorites.some((item: { id: string }) => props.article.id === item.id);
 };
+// Summarize the article using AI
+const isSummarizing = ref(false);
+const summary = ref<string | null>(null);
+const showModal = ref(false);
 
-// Function to toggle favorite status
-const handleToggleFavorite = () => {
-  toggleFavorite(isFavorite, props.article);
-};
 
-onMounted(() => {
-  checkIfFavorite();
-});
-const isMobile = ref(false);
 
 const props = defineProps<{
   aboveArticleAds: Array<IAd>;
@@ -203,6 +285,52 @@ const props = defineProps<{
   showElements: any;
   page: number;
 }>();
+
+const summarizeArticle = async () => {
+  if (!props.article || !props.article.body) return;
+
+  isSummarizing.value = true;
+  summary.value = null;
+  showModal.value = true; // Show the modal when summarizing starts
+
+  // Prevent body scrolling when modal is open
+  document.body.style.overflow = 'hidden';
+
+  try {
+    const response = await useFetch<{ responseText: string }>('/api/ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: {
+        prompt: `សង្ខេបអត្ថបទជាភាសាខ្មែរ បន្ទាប់មក List ចំណុចសំខាន់ៗនៅក្នុងប្រអប់: ${props.article.body}`
+      }
+    });
+
+    summary.value = response.data.value?.responseText || 'Failed to generate summary.';
+    // We don't hide the modal here as we want to show the summary in the modal
+  } catch (error) {
+    console.error('Error summarizing article:', error);
+    summary.value = 'Failed to generate summary.';
+  } finally {
+    isSummarizing.value = false;
+  }
+};// Close the modal
+const closeModal = () => {
+  showModal.value = false;
+  // Re-enable body scrolling when modal is closed
+  document.body.style.overflow = 'auto';
+};
+
+// Function to toggle favorite status
+const handleToggleFavorite = () => {
+  toggleFavorite(isFavorite, props.article);
+};
+
+onMounted(() => {
+  checkIfFavorite();
+});
+const isMobile = ref(false);
+
+
 
 const splitBody = () => {
 
@@ -220,6 +348,7 @@ const splitBody = () => {
     theRest: bodyParts.length > 3 ? bodyParts.slice(3).join('') : '\n',
   };
 };
+
 
 // here where i toggle impression on ads seen
 onMounted(() => {
