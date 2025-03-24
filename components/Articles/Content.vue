@@ -69,7 +69,7 @@
       <transition enter-active-class="transition duration-300 ease-out" enter-from-class="transform opacity-0 scale-95"
         enter-to-class="transform opacity-100 scale-100" leave-active-class="transition duration-200 ease-in"
         leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-        <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center">
+        <div v-if="showModal" class="fixed inset-0 z-[60]  flex items-center justify-center">
           <!-- Backdrop -->
           <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" @click="closeModal"></div>
 
