@@ -40,7 +40,15 @@
   
             <!-- Modal Content -->
             <div class="flex-1 overflow-hidden">
-              <div v-if="isLoading" class="flex flex-col items-center justify-center p-8 h-full">
+              <div v-if="!hasClickedAd" class="flex flex-col items-center justify-center p-6 space-y-4">
+              <p class="text-lg text-gray-700 dark:text-gray-300 text-center">
+                ចុចលើការផ្សាយ <strong class="font-bold text-primary">ពាណិជ្ជកម្ម</strong> ខាងក្រោមមុនសិន ដើម្បីប្រើប្រាស់មុខងារ <strong class="font-bold text-primary">Ai សង្ខេបអត្ថបទនេះ</strong>
+              </p>
+              <a href="https://bakseyacademy.com/" target="_blank" @click="handleAdClick">
+                <img src="~/assets/ba-promote.png" alt="Ad" class="rounded-lg w-56  shadow-md hover:scale-105 transition-transform duration-300">
+              </a>
+            </div>
+              <div v-else-if="isLoading" class="flex flex-col items-center justify-center p-8 h-full">
                 <!-- Apple Intelligence Style Loader -->
                 <div class="relative h-20 w-20 mb-8">
                   <div class="absolute inset-0 flex items-center justify-center">
@@ -132,11 +140,24 @@
     thumbnail: ''
   });
   
-  const emit = defineEmits(['close']);
-  
-  const closeModal = () => {
-    emit('close');
-  };
+  const emit = defineEmits(['close', 'adClicked']);
+  const hasClickedAd = ref(false);
+  onMounted(() => {
+  hasClickedAd.value = localStorage.getItem('hasClickedAd') === 'true';
+});
+
+const handleAdClick = () => {
+  localStorage.setItem('hasClickedAd', 'true');
+  hasClickedAd.value = true;
+  emit('adClicked');
+};
+
+const closeModal = () => {
+  localStorage.removeItem('hasClickedAd'); // 🧹 Clean up on close
+  hasClickedAd.value = false;
+  emit('close');
+};
+
   
   // Compute summary text and key points
   const summaryText = computed(() => {
