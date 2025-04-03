@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto  ">
+  <div class="max-w-4xl mx-auto">
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-1">
       <!-- Chat History Section -->
       <div class="mb-6 max-h-96 overflow-y-auto" ref="chatHistoryRef">
@@ -9,7 +9,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
           </div>
-          <p>Start a conversation with AI Assistance</p>
+          <p>ចាប់ផ្តើមការសន្ទនាជាមួយ AI Assistance</p>
         </div>
         
         <div v-else class="space-y-4">
@@ -29,18 +29,18 @@
                 <div class="text-xs text-gray-500">{{ formatTime(message.timestamp) }}</div>
               </div>
               
-              <!-- Regular text content -->
+              <!-- Regular text content with markdown -->
               <div v-if="!hasCodeBlock(message.content)" 
-                   class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-                {{ message.content }}
+                   class="text-gray-800 dark:text-gray-200 prose dark:prose-invert max-w-none"
+                   v-html="renderMarkdown(message.content)">
               </div>
               
               <!-- Code block content with copy button -->
               <div v-else>
                 <div v-for="(part, partIdx) in parseMessage(message.content)" :key="partIdx">
                   <div v-if="part.type === 'text'" 
-                       class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap mb-2">
-                    {{ part.content }}
+                       class="text-gray-800 dark:text-gray-200 prose dark:prose-invert max-w-none mb-2"
+                       v-html="renderMarkdown(part.content)">
                   </div>
                   
                   <div v-else-if="part.type === 'code'" class="relative mt-2 mb-4 group">
@@ -58,9 +58,27 @@
               </div>
             </div>
           </div>
+          
+          <!-- Typing Indicator for AI -->
+          <div v-if="isTyping" class="flex">
+            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 max-w-3/4">
+              <div class="flex items-center mb-1">
+                <div class="bg-gray-800 dark:bg-gray-500 text-white rounded-full p-1 text-xs font-bold mr-2">
+                  AI
+                </div>
+                <div class="text-xs text-gray-500">{{ formatTime(new Date()) }}</div>
+              </div>
+              
+              <div class="text-gray-800 dark:text-gray-200 prose dark:prose-invert max-w-none"
+                   v-if="sanitizedPartialResponse" :innerHTML="sanitizedPartialResponse">
+                <span class="typing-cursor">|</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Rest of the component remains the same -->
       <!-- Copy toast notification -->
       <Transition
         enter-active-class="transform ease-out duration-300 transition"
@@ -94,23 +112,23 @@
                  bg-white dark:bg-gray-700 px-4 py-2 text-gray-900 dark:text-gray-100
                  focus:border-blue-500 focus:ring-blue-500"
           placeholder="Type your message here..."
-          :disabled="isLoading"
+          :disabled="isLoading || isTyping"
           @keydown.enter.exact.prevent="handleSubmit"
         />
         <button
           @click="handleSubmit"
-          :disabled="isLoading || !prompt.trim()"
+          :disabled="isLoading || isTyping || !prompt.trim()"
           class="absolute bottom-3 right-3 inline-flex items-center rounded-lg
                  bg-blue-600 px-4 py-2 text-sm font-semibold text-white
                  hover:bg-blue-700 focus:outline-none focus:ring-2 
                  focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
         >
-          <span v-if="isLoading" class="flex text-xs">
-            <svg class="animate-spin h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24">
+          <span v-if="isLoading" class="flex items-center">
+            <svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
-            Processing...
+            សូមរងចាំលទ្ធផល​...
           </span>
           <span v-else>Send</span>
         </button>
@@ -148,6 +166,8 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, watch } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 interface ChatMessage {
   role: 'user' | 'assistant'
@@ -158,11 +178,27 @@ interface ChatMessage {
 const prompt = ref('')
 const error = ref('')
 const isLoading = ref(false)
+const isTyping = ref(false)
+const partialResponse = ref('')
+
+// Computed property for sanitized partial response
+const sanitizedPartialResponse = computed(() => {
+  const markdownContent = marked.parse(partialResponse.value) as string; // Ensure synchronous parsing
+  return partialResponse.value ? DOMPurify.sanitize(markdownContent) : ''
+})
 const chatHistory = ref<ChatMessage[]>([])
 const showCopyToast = ref(false)
 const chatHistoryRef = ref<HTMLElement | null>(null)
 
 const { generateContent } = useGemini()
+
+// Render markdown content safely
+const renderMarkdown = (content: string) => {
+  // Process the markdown
+  const html = marked.parse(content) as string // Ensure synchronous parsing
+  // Sanitize the HTML to prevent XSS
+  return DOMPurify.sanitize(html)
+}
 
 // Load chat history from localStorage
 onMounted(() => {
@@ -180,6 +216,19 @@ onMounted(() => {
       console.error('Failed to parse saved chat history', e)
     }
   }
+  
+  // Add typing cursor animation
+  const style = document.createElement('style')
+  style.innerHTML = `
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .typing-cursor {
+      animation: blink 1s step-end infinite;
+    }
+  `
+  document.head.appendChild(style)
 })
 
 // Save chat history to localStorage when it changes
@@ -200,8 +249,70 @@ const scrollToBottom = () => {
   })
 }
 
+// Simulate typing effect
+const simulateTyping = async (text: string) => {
+  isTyping.value = true
+  partialResponse.value = ''
+  
+  // Detect code blocks and handle them differently
+  const parts = parseMessageForTyping(text)
+  
+  for (const part of parts) {
+    if (part.type === 'text') {
+      // Type text character by character
+      const words = part.content.split(' ')
+      
+      for (let i = 0; i < words.length; i++) {
+        // Add the word
+        partialResponse.value += words[i]
+        
+        // Add space unless it's the last word
+        if (i < words.length - 1) {
+          partialResponse.value += ' '
+        }
+        
+        // Scroll to keep up with the typing
+        scrollToBottom()
+        
+        // Random typing delay between words
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 20 + 10))
+      }
+    } else if (part.type === 'code') {
+      // Add a small pause before code block
+      await new Promise(resolve => setTimeout(resolve, 300))
+      
+      // For code blocks, type it out in chunks for efficiency
+      partialResponse.value += '```\n'
+      
+      const codeLines = part.content.split('\n')
+      for (const line of codeLines) {
+        partialResponse.value += line + '\n'
+        scrollToBottom()
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 30 + 20))
+      }
+      
+      partialResponse.value += '```'
+    }
+    
+    // Add a short pause between different parts
+    await new Promise(resolve => setTimeout(resolve, 200))
+  }
+  
+  // Add the complete response to the chat history
+  chatHistory.value.push({
+    role: 'assistant',
+    content: text,
+    timestamp: new Date()
+  })
+  
+  // Reset typing state
+  isTyping.value = false
+  partialResponse.value = ''
+}
+
+
 const handleSubmit = async () => {
-  if (!prompt.value.trim() || isLoading.value) return
+  if (!prompt.value.trim() || isLoading.value || isTyping.value) return
   
   const userMessage = prompt.value.trim()
   
@@ -218,17 +329,16 @@ const handleSubmit = async () => {
   isLoading.value = true
   
   try {
+    // Fetch the response
     const result = await generateContent(userMessage)
     
-    // Add assistant response to chat
-    chatHistory.value.push({
-      role: 'assistant',
-      content: result,
-      timestamp: new Date()
-    })
+    // Stop loading indicator
+    isLoading.value = false
+    
+    // Simulate typing the response
+    await simulateTyping(result)
   } catch (e: any) {
     error.value = e.message
-  } finally {
     isLoading.value = false
   }
 }
@@ -259,7 +369,7 @@ const hasCodeBlock = (message: string) => {
   return message.includes('```')
 }
 
-// Parse message to separate text and code blocks
+// Parse message to separate text and code blocks for display
 const parseMessage = (message: string) => {
   const parts = []
   const codeBlockRegex = /```(?:\w+)?\n([\s\S]*?)```/g
@@ -295,4 +405,68 @@ const parseMessage = (message: string) => {
   
   return parts.length > 0 ? parts : [{ type: 'text', content: message }]
 }
+
+// Parse message for typing simulation
+const parseMessageForTyping = (message: string) => {
+  const parts = []
+  const codeBlockRegex = /```(?:\w+)?\n([\s\S]*?)```/g
+  
+  let lastIndex = 0
+  let match
+  
+  while ((match = codeBlockRegex.exec(message)) !== null) {
+    // Add text before code block
+    if (match.index > lastIndex) {
+      parts.push({
+        type: 'text',
+        content: message.substring(lastIndex, match.index)
+      })
+    }
+    
+    // Add code block
+    parts.push({
+      type: 'code',
+      content: match[1]
+    })
+    
+    lastIndex = match.index + match[0].length
+  }
+  
+  // Add remaining text after last code block
+  if (lastIndex < message.length) {
+    parts.push({
+      type: 'text',
+      content: message.substring(lastIndex)
+    })
+  }
+  
+  return parts
+}
 </script>
+
+<style scoped>
+/* Component-specific styles */
+:deep(.prose) {
+  @apply max-w-none;
+}
+
+:deep(.prose strong) {
+  @apply font-bold text-gray-900 dark:text-gray-100;
+}
+
+:deep(.prose em) {
+  @apply italic text-gray-800 dark:text-gray-200;
+}
+
+:deep(.prose h1, .prose h2, .prose h3) {
+  @apply text-gray-900 dark:text-gray-100 font-bold;
+}
+
+:deep(.prose ul) {
+  @apply pl-5 list-disc;
+}
+
+:deep(.prose ol) {
+  @apply pl-5 list-decimal;
+}
+</style>

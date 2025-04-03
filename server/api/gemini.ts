@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
       'what is your origin',
       'what company built you',
       'what’s your purpose',
-    
+
       // Khmer variations
       'អ្នកជានរណា',
       'អ្នកឈ្មោះអ្វី',
@@ -61,13 +61,15 @@ export default defineEventHandler(async (event) => {
       'តើអ្នកអាចនិយាយអំពីខ្លួនអ្នកបានទេ',
       'តើអ្នកមានអត្តសញ្ញាណយ៉ាងដូចម្តេច'
     ]
-    
+    // normalize 
+    const normalize = (text: string) => text.toLowerCase().replace(/[^\w\s\u1780-\u17FF]/g, '').trim()
 
-    // Check if any of the phrases are included
+    const normalizedPrompt = normalize(prompt)
+
     const isIntroQuestion = introQuestions.some(q =>
-      lowerPrompt.includes(q) || prompt.includes(q)
+      normalize(q) === normalizedPrompt || normalizedPrompt.includes(normalize(q))
     )
-
+    
     if (isIntroQuestion) {
       return {
         responseText: 'ខ្ញុំគឺជាបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត (AI) រៀបចំដោយ Baksey Media។'
@@ -76,6 +78,7 @@ export default defineEventHandler(async (event) => {
 
     // Get API key from server environment
     const apiKey = 'AIzaSyBasLyjnqdsDWdOSJxESQa6OXnA21hnoko'
+    // const apiKey = 'AIzaSyCQ93H8BG0Fs1jDDulI_gvEYtvX7uc86BA'
 
     if (!apiKey) {
       console.error('Missing GEMINI_API_KEY environment variable')
@@ -84,6 +87,8 @@ export default defineEventHandler(async (event) => {
         body: { error: 'Server configuration error' }
       }
     }
+
+
 
     // Make request to Gemini API from server-side
     const response = await fetch(
