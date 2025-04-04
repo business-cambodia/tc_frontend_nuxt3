@@ -1,35 +1,27 @@
 <template>
-  <AdsAboveArticle
-    :ads="aboveArticleAds"
-    id="type_above-article"
-    type="above-article"
-    :page="page"
-  />
+  <AdsAboveArticle :ads="aboveArticleAds" id="type_above-article" type="above-article" :page="page" />
 
   <!-- Header -->
   <div class="px-2">
     <div class="lg:px-24 my-2">
       <!-- <AboveTitleAd :ads="aboveTitleAds" /> -->
       <div
-        class="text-center text-grey-800 text-2xl lg:text-4xl font-medium lg:font-semibold article-title dark:text-white"
-      >
+        class="text-center text-grey-800 text-2xl lg:text-4xl font-medium lg:font-semibold article-title dark:text-white">
         {{ article.title }}
       </div>
     </div>
 
     <div class="flex flex-col items-center pt-2 text-xs lg:text-base">
-      <div
-        class="flex flex-wrap justify-center items-center text-gray-600 dark:text-white"
-      >
-        <NuxtLink :to="`/authors/${article.user_created.id}`"
-          ><div class="transfrom hover:underline">
+      <div class="flex flex-wrap justify-center items-center text-gray-600 dark:text-white">
+        <NuxtLink :to="`/authors/${article.user_created.id}`">
+          <div class="transfrom hover:underline">
             {{
               article.user_created.first_name +
               ' ' +
               article.user_created.last_name
             }}
-          </div></NuxtLink
-        >
+          </div>
+        </NuxtLink>
 
         <div class="text-lg mx-2 lg:mx-4">•</div>
         <div>{{ $formatDate(article.date_created) }}</div>
@@ -47,38 +39,17 @@
         <div class="flex items-center justify-between dark:text-white ">
           <div class="flex items-center space-x-2">
             <!-- Favorite button -->
-            <Icon
-              :icon="isFavorite ? 'material-symbols:favorite' : 'material-symbols:favorite-outline'"
-              width="24"
-              height="24"
-              @click.stop.prevent="handleToggleFavorite"
-            />
+            <Icon :icon="isFavorite ? 'material-symbols:favorite' : 'material-symbols:favorite-outline'" width="24"
+              height="24" @click.stop.prevent="handleToggleFavorite" />
           </div>
         </div>
-        <!-- Updated AI summary button with animation -->
-        <div class="flex items-center justify-between dark:text-white ml-2">
-          <button 
-            @click="summarizeArticle" 
-            class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 group"
-            :disabled="isSummarizing">
-            <span class="relative z-10">
-              {{ isSummarizing ? 'កំពុងសង្ខេប...' : 'សង្ខេបអត្ថបទប្រើ AI' }}
-            </span>
-            <!-- Button background animation -->
-            <span class="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-size-200 animate-gradient-x"></span>
-          </button>
-        </div>
-        
+
+
       </div>
     </div>
-   <!-- Replace the old modal with our new AppleIntelligenceModal component -->
-   <SummarizeModalAI
-      :is-visible="showModal"
-      :is-loading="isSummarizing"
-      :summary-content="summary"
-      :thumbnail="article.thumbnail ? useImg(article.thumbnail) : ''"
-      @close="closeModal"
-    />
+    <!-- Replace the old modal with our new AppleIntelligenceModal component -->
+    <SummarizeModalAI :is-visible="showModal" :is-loading="isSummarizing" :summary-content="summary"
+      :thumbnail="article.thumbnail ? useImg(article.thumbnail) : ''" @close="closeModal" />
     <div class="flex justify-center mt-4">
       <hr class="w-10 h-1 bg-primary" />
     </div>
@@ -90,36 +61,20 @@
       <!-- content -->
       <div class="">
         <!-- above thumbnail ads -->
-        <AdsAboveThumbnailAds
-          :ads="aboveThumbnailAds"
-          id="above-thumbnail"
-          :page="page"
-        />
+        <AdsAboveThumbnailAds :ads="aboveThumbnailAds" id="above-thumbnail" :page="page" />
         <!-- thumbnail -->
-        <img
-          format="webp"
-          loading="lazy"
-          :src="useImg(article.thumbnail)"
-          alt=""
-          class="w-full rounded-xl object-cover bg-no-repeat bg-center lg:block mb-3"
-        />
+        <img format="webp" loading="lazy" :src="useImg(article.thumbnail)" alt=""
+          class="w-full rounded-xl object-cover bg-no-repeat bg-center lg:block mb-3" />
         <!--Damrei - MR1 Zone2 Mobile-->
         <div id="gax-inpage-async-1726803747"></div>
 
         <!-- article body -->
-        <div
-          class="text-lg lg:text-xl list-disc font-light dark:text-white break-words"
-          id="article-body"
-        >
+        <div class="text-lg lg:text-xl list-disc font-light dark:text-white break-words" id="article-body">
           <div>
-            <AdsBody
-              :ads="firstParagraphAds"
-              id="paragraph-1"
-              :page="page"
-              :body="1"
-            />
+            <AdsBody :ads="firstParagraphAds" id="paragraph-1" :page="page" :body="1" />
             <div id="part-1">
               <div v-html="splitBody().firstPart" class="article_body"></div>
+
             </div>
             <!--Mobile Underlay - Zone 1-->
             <div id="gax-inpage-async-1700709319"></div>
@@ -127,36 +82,37 @@
           </div>
 
           <div id="part-2">
-            <AdsBody
-              :ads="secondParagraphAds"
-              id="paragraph-2"
-              :page="page"
-              :body="2"
-            />
+            <AdsBody :ads="secondParagraphAds" id="paragraph-2" :page="page" :body="2" />
             <div v-html="splitBody().secondPart" class="article_body"></div>
             <!--Mobile Underlay - Zone 2-->
             <div id="gax-inpage-async-1706848793"></div>
           </div>
 
           <div id="part-3">
-            <AdsBody
-              :ads="thirdParagraphAds"
-              id="paragraph-3"
-              :page="page"
-              :body="3"
-            />
+            <AdsBody :ads="thirdParagraphAds" id="paragraph-3" :page="page" :body="3" />
+            <!-- Updated AI summary button with animation -->
+            <div class="flex items-center justify-between dark:text-white ml-2">
+              <button @click="summarizeArticle"
+                class="relative overflow-hidden bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 group"
+                :disabled="isSummarizing">
+                <span class="relative z-10 flex items-center justify-center">
+                  <Icon icon="fluent:arrow-right-12-filled" width="24" height="24" /> {{ isSummarizing ?
+                    'កំពុងសង្ខេប...' : 'សង្ខេបអត្ថបទប្រើ AI ' }}
+                </span>
+                <!-- Button background animation -->
+                <span
+                  class="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-size-200 animate-gradient-x"></span>
+              </button>
+            </div>
             <div v-html="splitBody().thirdPart" class="article_body"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
-            
+
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->
             <div id="div-ad-innity-102478/0" class="flex justify-center"></div>
             <!-- GPAS MR1 -->
-            <ins
-              class="flex justify-center"
-              data-revive-zoneid="86"
-              data-revive-id="2d10743d9880200bf17a894cfa35dba0"
-            ></ins>
+            <ins class="flex justify-center" data-revive-zoneid="86"
+              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
           </div>
 
           <div id="the-rest">
@@ -171,12 +127,8 @@
       <div id="gax-inpage-async-1700709408"></div>
 
       <ArticlesAuthor :user="article.user_created" />
-      <div
-        class="fb-comments"
-        :data-href="'https://tech-cambodia.com' + $router.currentRoute.value.path"
-        data-width="100%"
-        data-numposts="5"
-      ></div>
+      <div class="fb-comments" :data-href="'https://tech-cambodia.com' + $router.currentRoute.value.path"
+        data-width="100%" data-numposts="5"></div>
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
       <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />
@@ -209,8 +161,6 @@ const checkIfFavorite = () => {
 const isSummarizing = ref(false);
 const summary = ref<string | null>(null);
 const showModal = ref(false);
-
-
 
 const props = defineProps<{
   aboveArticleAds: Array<IAd>;
@@ -427,7 +377,8 @@ iframe {
   font-weight: bold;
 }
 
-.article_body p, span{
+.article_body p,
+span {
   font-family: 'Kantumruy Pro' !important;
 }
 
