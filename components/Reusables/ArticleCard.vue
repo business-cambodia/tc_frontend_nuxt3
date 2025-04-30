@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink @click="goToArticle(article)" class="article-card-container cursor-pointer" >
+  <NuxtLink :to="`/articles/${article.slug}`" class="article-card-container cursor-pointer" >
     <div
       class="article-card relative  bg-white dark:bg-neutral-900 rounded-xl overflow-hidden transition-all duration-500 transform hover:translate-y-2 group">
       <!-- Card Header with 3D perspective image -->
