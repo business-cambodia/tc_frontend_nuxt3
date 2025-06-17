@@ -1,6 +1,7 @@
 <template>
   <!-- <LayoutsNavbarWhite /> -->
-
+  <!-- gpas pop up-->
+  <ins data-revive-zoneid="542" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
   <div class="pt-16 lg:pt-20" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent
@@ -87,55 +88,15 @@ useHead({
       defer: true,
     },
     {
-      src: '//ads.health.com.kh/www/delivery/asyncjs.php',
-      async: true,
-      defer: true,
-    },
-    {
       src: '//gamma.cachefly.net/js/gaxpt.min.js',
       async: true,
     },
     {
       type: 'text/javascript',
-      src: 'https://cdn.innity.net/admanager-async.js',
-      async: true,
-    },
-    {
-      type: 'text/javascript',
       innerHTML: `
-        var innity_adZoneAsync = innity_adZoneAsync || {}; 
-        innity_adZoneAsync.q = innity_adZoneAsync.q || []; 
-        `,
-    },
-    {
-      type: 'text/javascript',
-      tagPosition: 'bodyClose',
-      innerHTML: `
-        innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101009", {"target": "div-ad-innity-101009/0"});});
-        `,
-    },
-    {
-      type: 'text/javascript',
-      tagPosition: 'bodyClose',
-      innerHTML: `
-        innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "101010", {"target": "div-ad-innity-101010/0"});});
-        `,
-    },
-    {
-      type: 'text/javascript',
-      tagPosition: 'bodyClose',
-      innerHTML: `
-        innity_adZoneAsync.q.push(function (){innity_adZoneAsync.display("386854131f58a556343e056f03626e00", "102478", {"target": "div-ad-innity-102478/0","width": "300", "height": "250"});});
-        `,
-    },
-    {
-      type: 'text/javascript',
-      innerHTML: `
-      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         var _ase_region="SGP";
         var gammatag = gammatag || {};
         gammatag.cmd = gammatag.cmd || [];
-      }
         `,
     },
     {
@@ -164,6 +125,11 @@ useHead({
           //Define more zone(s) here, each zone per line, if you have multiple zones on the same page.
           gammatag.sendRequest();
         });
+      } else {
+        gammatag.cmd.push(function() {
+          gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
+          gammatag.sendRequest();
+        }); 
       }
       `,
     },
@@ -174,25 +140,6 @@ useHead({
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
-    },
-    {
-      type: 'text/javascript',
-      innerHTML: import.meta.server
-        ? `
-                var m3_u = (location.protocol=='https:'?'https://adservermsa.gpas.co/www/delivery/ajs.php':'http://adservermsa.gpas.co/www/delivery/ajs.php');
-                var m3_r = Math.floor(Math.random()*99999999999);
-                if (!document.MAX_used) document.MAX_used = ',';
-                document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-                document.write ("?zoneid=133");
-                document.write ('&amp;cb=' + m3_r);
-                if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-                document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-                document.write ("&amp;loc=" + escape(window.location));
-                if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-                if (document.context) document.write ("&context=" + escape(document.context));
-                document.write ("'><\/scr"+"ipt>");
-           `
-        : '',
     },
     {
       async: true,
