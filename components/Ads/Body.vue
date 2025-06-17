@@ -14,7 +14,7 @@
           format="webp"
           loading="lazy"
           :src="
-            useImg(a.file)
+            useImg(a?.file)
           "
           alt=""
           :class="`my-2 w-full rounded-md ${
