@@ -1,7 +1,8 @@
 <template>
-  <!-- <LayoutsNavbarWhite /> -->
+  <!-- damrei popup -->
+  <div id="gax-inpage-async-1700709882" v-if="Math.random() < 0.7"></div>
   <!-- gpas pop up-->
-  <ins data-revive-zoneid="542" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  <ins v-else data-revive-zoneid="554" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
   <div class="pt-16 lg:pt-20" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent
@@ -104,6 +105,10 @@ useHead({
       innerHTML: `
       if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         gammatag.cmd.push(function() {
+
+          // Popup
+          gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
+          
           <!--Mobile Underlay - Zone 1-->
           gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
 

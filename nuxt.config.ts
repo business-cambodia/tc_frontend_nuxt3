@@ -79,27 +79,27 @@ export default defineNuxtConfig({
         //   crossorigin: 'anonymous',
         //   nonce: 'RzfGg0xF',
         // },
-        {
-          type: 'text/javascript',
-          body: true,
-          innerHTML: `
-          var _ase_region="SGP";
-          var _ase  = _ase || [];
-          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-            /* Mobile Popup, zone size : 282x370 */
-            _ase.push(['1700707438','1700709882']);
-          }
-          else{
-            /* Desktop Popup */
-            _ase.push(['1706775465','1706776197']);
-          }
-            `,
-        },
-        {
-          type: 'text/javascript',
-          body: true,
-          src: '//ssp-cdn.gammaplatform.com/js/ad-exchange.js',
-        },
+        // {
+        //   type: 'text/javascript',
+        //   body: true,
+        //   innerHTML: `
+        //   var _ase_region="SGP";
+        //   var _ase  = _ase || [];
+        //   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        //     /* Mobile Popup, zone size : 282x370 */
+        //     _ase.push(['1700707438','1700709882']);
+        //   }
+        //   else{
+        //     /* Desktop Popup */
+        //     _ase.push(['1706775465','1706776197']);
+        //   }
+        //     `,
+        // },
+        // {
+        //   type: 'text/javascript',
+        //   body: true,
+        //   src: '//ssp-cdn.gammaplatform.com/js/ad-exchange.js',
+        // },
       ],
     },
   },
