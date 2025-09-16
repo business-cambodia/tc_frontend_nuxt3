@@ -65,6 +65,8 @@
         <!-- thumbnail -->
         <img format="webp" loading="lazy" :src="useImg(article.thumbnail)" alt=""
           class="w-full rounded-xl object-cover bg-no-repeat bg-center lg:block mb-3" />
+        <!--Damrei - MR1-->
+        <div id="gax-inpage-async-1700709408"></div>
         <!--Damrei - MR1 Zone2 Mobile-->
         <div id="gax-inpage-async-1726803747"></div>
 
@@ -123,8 +125,6 @@
         </div>
       </div>
       <div v-if="article.telegram_embed" v-html="article.telegram_embed"></div>
-      <!--Damrei - MR1-->
-      <div id="gax-inpage-async-1700709408"></div>
 
       <ArticlesAuthor :user="article.user_created" />
       <div class="fb-comments" :data-href="'https://tech-cambodia.com' + $router.currentRoute.value.path"
