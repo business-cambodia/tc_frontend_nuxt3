@@ -86,11 +86,11 @@ useHead({
       src: 'https://platform.twitter.com/widgets.js',
       async: true,
     },
-    {
-      src: '//ads1.damrei.digital/www/delivery/asyncjs.php',
-      async: true,
-      defer: true,
-    },
+    // {
+    //   src: '//ads1.damrei.digital/www/delivery/asyncjs.php',
+    //   async: true,
+    //   defer: true,
+    // },
     {
       src: '//gamma.cachefly.net/js/gaxpt.min.js',
       async: true,
