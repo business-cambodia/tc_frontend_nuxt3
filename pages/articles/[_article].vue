@@ -1,8 +1,11 @@
+<!-- pages/articles/[_article].vue -->
 <template>
   <!-- damrei popup -->
   <div id="gax-inpage-async-1700709882" v-if="Math.random() < 0.7"></div>
   <!-- gpas pop up-->
   <ins v-else data-revive-zoneid="554" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+   <!-- damrei popup PC -->
+  <div id="gax-inpage-async-1706776197"></div>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent
@@ -105,6 +108,7 @@ useHead({
       innerHTML: `
       if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         gammatag.cmd.push(function() {
+          // Popup Tech Cambodia PC
 
           // Popup
           gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
@@ -134,14 +138,24 @@ useHead({
         gammatag.cmd.push(function() {
           // MR1 desktop
           gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
+          // Popup Tech Cambodia PC
+          gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
+          
           gammatag.sendRequest();
         }); 
+
       }
       `,
     },
     {
       src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
       async: true,
+    },
+    // Tech Cambodia PTO_PC
+    {
+      src:'//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
+      async: true,
+
     },
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
