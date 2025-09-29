@@ -76,6 +76,7 @@ const currentCategory = (
   ))
 ).data[0];
 
+
 if (!currentCategory) {
   throw createError({
     statusCode: 404,
