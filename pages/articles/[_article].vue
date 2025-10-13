@@ -1,10 +1,17 @@
 <!-- pages/articles/[_article].vue -->
 <template>
-  <!-- damrei popup -->
-  <div id="gax-inpage-async-1700709882" v-if="Math.random() < 0.7"></div>
-  <!-- gpas pop up-->
-  <!-- <ins v-else data-revive-zoneid="554" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
-  <ins v-else data-revive-zoneid="570" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  <!-- Damrei popup -->
+  <template v-if="Math.random() < 0.7">
+    <div id="gax-inpage-async-1700709882"></div>
+  </template>
+
+  <!-- GPAS popup -->
+  <template v-else>
+    <ins
+      data-revive-zoneid="570"
+      data-revive-id="2d10743d9880200bf17a894cfa35dba0"
+    ></ins>
+  </template>
    <!-- damrei popup PC -->
   <div id="gax-inpage-async-1706776197"></div>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
@@ -151,6 +158,7 @@ useHead({
     {
       src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
       async: true,
+      defer: true,
     },
     // Tech Cambodia PTO_PC
     {
