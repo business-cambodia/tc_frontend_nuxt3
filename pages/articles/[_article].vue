@@ -3,7 +3,8 @@
   <!-- damrei popup -->
   <div id="gax-inpage-async-1700709882" v-if="Math.random() < 0.7"></div>
   <!-- gpas pop up-->
-  <ins v-else data-revive-zoneid="554" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  <!-- <ins v-else data-revive-zoneid="554" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
+  <ins v-else data-revive-zoneid="570" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
    <!-- damrei popup PC -->
   <div id="gax-inpage-async-1706776197"></div>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
