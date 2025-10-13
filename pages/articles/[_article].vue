@@ -158,7 +158,7 @@ useHead({
     {
       src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
       async: true,
-      defer: true,
+      // defer: true,
     },
     // Tech Cambodia PTO_PC
     {
