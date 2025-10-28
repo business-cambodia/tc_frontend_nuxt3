@@ -1,7 +1,7 @@
 <!-- pages/articles/[_article].vue -->
 <template>
   <!-- Damrei popup -->
-  <template v-if="Math.random() < 0.7">
+  <template v-if="Math.random() < 0.5">
     <div id="gax-inpage-async-1700709882"></div>
   </template>
 
