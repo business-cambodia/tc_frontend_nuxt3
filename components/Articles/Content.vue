@@ -87,7 +87,7 @@
             <AdsBody :ads="secondParagraphAds" id="paragraph-2" :page="page" :body="2" />
             <div v-html="splitBody().secondPart" class="article_body"></div>
             <!--Mobile Underlay - Zone 2-->
-            <div id="gax-inpage-async-1706848793"></div>
+            <!-- <div id="gax-inpage-async-1706848793"></div> -->
           </div>
 
           <div id="part-3">
@@ -107,6 +107,8 @@
               </button>
             </div>
             <div v-html="splitBody().thirdPart" class="article_body"></div>
+            <!--Mobile Underlay - Zone 2-->
+            <div id="gax-inpage-async-1706848793"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
 
