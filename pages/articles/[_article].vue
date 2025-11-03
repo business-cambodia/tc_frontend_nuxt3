@@ -1,17 +1,17 @@
 <!-- pages/articles/[_article].vue -->
 <template>
   <!-- Damrei popup -->
-  <template v-if="Math.random() < 0.7">
+  <template v-if="Math.random() < 0.5">
     <div id="gax-inpage-async-1700709882"></div>
   </template>
 
-  <!-- GPAS popup -->
-  <!-- <template v-else>
-    <ins
-      data-revive-zoneid="570"
-      data-revive-id="2d10743d9880200bf17a894cfa35dba0"
-    ></ins>
-  </template> -->
+   <!-- GPAS popup -->
+    <template v-else>
+      <ins
+        data-revive-zoneid="570"
+        data-revive-id="2d10743d9880200bf17a894cfa35dba0"
+      ></ins>
+    </template>
    <!-- damrei popup PC -->
   <div id="gax-inpage-async-1706776197"></div>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
