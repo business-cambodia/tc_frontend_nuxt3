@@ -115,8 +115,8 @@
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->
             <div id="div-ad-innity-102478/0" class="flex justify-center"></div>
             <!-- GPAS MR1 -->
-            <ins class="flex justify-center" data-revive-zoneid="86"
-              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            <!-- <ins class="flex justify-center" data-revive-zoneid="86"
+              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
           </div>
 
           <div id="the-rest">
