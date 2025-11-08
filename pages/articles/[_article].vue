@@ -168,11 +168,11 @@ useHead({
       // defer: true,
     },
     // Tech Cambodia PTO_PC
-    {
-      src:'//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
-      async: true,
+    // {
+    //   src:'//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
+    //   async: true,
 
-    },
+    // },
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
@@ -276,16 +276,35 @@ const bottomAd = ads.filter((a) => {
 
 const router = useRouter();
 
-onMounted(() => {
-  // for facebook comment plugin
-  if (window.FB) {
-    window.FB.XFBML.parse();
+declare global {
+  interface Window {
+    gammatag?: {
+      cmd: Array<() => void>;
+      defineZone?: (config: any) => void;
+      sendRequest?: () => void;
+    };
   }
-  // infinite scroll
-  // window.addEventListener("scroll", handleScrollPagination);
-  handleArticleViewed(articles.value[0]);
-  // handleElementSeen();
-});
+}
+
+  onMounted(() => {
+
+    if (window.gammatag && window.gammatag.cmd) {
+      // Refresh Damrei popup zone every 60 seconds
+      setInterval(() => {
+        window.gammatag!.cmd.push(() => {
+          window.gammatag!.sendRequest?.();
+        });
+      }, 60000);
+    }
+    // for facebook comment plugin
+    if (window.FB) {
+      window.FB.XFBML.parse();
+    }
+    // infinite scroll
+    // window.addEventListener("scroll", handleScrollPagination);
+    handleArticleViewed(articles.value[0]);
+    // handleElementSeen();
+  });
 
 // watch url changes for facebook comment plugin
 watch(
