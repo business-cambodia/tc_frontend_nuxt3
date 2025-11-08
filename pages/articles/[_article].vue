@@ -4,9 +4,10 @@
   <!-- <template v-if="Math.random() < 0.5">
     <div id="gax-inpage-async-1700709882"></div>
   </template> -->
-  <template v-if="showDamrei">
-    <div id="gax-inpage-async-1700709882"></div>
-  </template>
+<ClientOnly>
+  <div id="gax-inpage-async-1700709882"></div>
+</ClientOnly>
+
 
    <!-- GPAS popup -->
     <!-- <template v-else>
