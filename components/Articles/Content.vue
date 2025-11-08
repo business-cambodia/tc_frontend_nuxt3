@@ -137,6 +137,9 @@
       <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />
       <!-- MR1 Desktop Tech Cambodia -->
       <div id="gax-inpage-async-1709623758" class="flex justify-center my-4"></div>
+      <div id="gax-inpage-async-1750151641" class="flex justify-center my-4"></div>
+
+      
 
     </div>
   </div>
