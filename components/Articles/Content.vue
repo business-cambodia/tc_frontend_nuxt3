@@ -1,3 +1,4 @@
+<!-- components/Articles/COntent.vue -->
 <template>
   <AdsAboveArticle :ads="aboveArticleAds" id="type_above-article" type="above-article" :page="page" />
 
@@ -134,6 +135,9 @@
     </div>
     <div class="col-span-4 md:px-2 lg:px-8">
       <AdsSideBarRight :ads="sideBarAds" id="side-bar" :page="page" />
+      <!-- MR1 Desktop Tech Cambodia -->
+      <div id="gax-inpage-async-1709623758" class="flex justify-center my-4"></div>
+
     </div>
   </div>
 

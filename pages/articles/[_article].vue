@@ -148,7 +148,9 @@ useHead({
       } else {
         gammatag.cmd.push(function() {
           // MR1 desktop
-          gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
+          // gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
+          // MR1 Tech Cambodia (new)
+          gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
           // Popup Tech Cambodia PC
           gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
           
