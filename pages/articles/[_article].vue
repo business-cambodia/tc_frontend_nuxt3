@@ -104,10 +104,10 @@ useHead({
     //   async: true,
     //   defer: true,
     // },
-    {
-      src: '//gamma.cachefly.net/js/gaxpt.min.js',
-      async: true,
-    },
+    // {
+    //   src: '//gamma.cachefly.net/js/gaxpt.min.js',
+    //   async: true,
+    // },
     {
       type: 'text/javascript',
       innerHTML: `
@@ -167,12 +167,7 @@ useHead({
       async: true,
       // defer: true,
     },
-    // Tech Cambodia PTO_PC
-    // {
-    //   src:'//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
-    //   async: true,
-
-    // },
+   
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
