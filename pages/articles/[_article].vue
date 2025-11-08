@@ -4,7 +4,7 @@
   <!-- <template v-if="Math.random() < 0.5">
     <div id="gax-inpage-async-1700709882"></div>
   </template> -->
-  <template>
+  <template v-if="showDamrei">
     <div id="gax-inpage-async-1700709882"></div>
   </template>
 
@@ -50,6 +50,7 @@ import { IAd } from '~~/types/ad';
 import { IResponse } from '~~/types/api';
 import { IArticle } from '~~/types/article';
 const route = useRoute();
+const showDamrei = true
 let currentPage = 0;
 let requesting = false;
 
