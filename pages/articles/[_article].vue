@@ -4,44 +4,31 @@
   <!-- <template v-if="Math.random() < 0.5">
     <div id="gax-inpage-async-1700709882"></div>
   </template> -->
-<ClientOnly>
-  <div id="gax-inpage-async-1700709882"></div>
-</ClientOnly>
+    <div v-if="Math.random() < 0.7" id="gax-inpage-async-1700709882"></div>
+    <ins v-else data-revive-zoneid="624" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
 
 
-   <!-- GPAS popup -->
-    <!-- <template v-else>
+  <!-- GPAS popup -->
+  <!-- <template v-else>
       <ins
         data-revive-zoneid="570"
         data-revive-id="2d10743d9880200bf17a894cfa35dba0"
       ></ins>
     </template> -->
-   <!-- damrei popup PC -->
+  <!-- damrei popup PC -->
   <div id="gax-inpage-async-1706776197"></div>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
-      <ArticlesContent
-        :aboveArticleAds="aboveArticleAds"
-        :article="article"
-        id="content"
-        :firstParagraphAds="firstParagraphAds"
-        :secondParagraphAds="secondParagraphAds"
-        :thirdParagraphAds="thirdParagraphAds"
-        :sideBarAds="sideBarAds"
-        :aboveThumbnailAds="aboveThumbnailAds"
-        :showElements="showElements"
-        :page="index"
-      />
+      <ArticlesContent :aboveArticleAds="aboveArticleAds" :article="article" id="content"
+        :firstParagraphAds="firstParagraphAds" :secondParagraphAds="secondParagraphAds"
+        :thirdParagraphAds="thirdParagraphAds" :sideBarAds="sideBarAds" :aboveThumbnailAds="aboveThumbnailAds"
+        :showElements="showElements" :page="index" />
     </div>
     <!--Damrei - Footer-->
     <div id="gax-inpage-async-1700710572"></div>
     <!--Footer-->
     <div id="gax-inpage-async-1718360117"></div>
-    <ArticlesNext
-      :articles="nextArticles"
-      title="បន្តអានអត្ថបទបន្ទាប់"
-      to="/latest"
-    />
+    <ArticlesNext :articles="nextArticles" title="បន្តអានអត្ថបទបន្ទាប់" to="/latest" />
     <!-- <AdsBottom :ad="bottomAd" /> -->
   </div>
 </template>
@@ -167,7 +154,7 @@ useHead({
       async: true,
       // defer: true,
     },
-   
+
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
@@ -281,25 +268,25 @@ declare global {
   }
 }
 
-  onMounted(() => {
+onMounted(() => {
 
-    if (window.gammatag && window.gammatag.cmd) {
-      // Refresh Damrei popup zone every 60 seconds
-      setInterval(() => {
-        window.gammatag!.cmd.push(() => {
-          window.gammatag!.sendRequest?.();
-        });
-      }, 60000);
-    }
-    // for facebook comment plugin
-    if (window.FB) {
-      window.FB.XFBML.parse();
-    }
-    // infinite scroll
-    // window.addEventListener("scroll", handleScrollPagination);
-    handleArticleViewed(articles.value[0]);
-    // handleElementSeen();
-  });
+  if (window.gammatag && window.gammatag.cmd) {
+    // Refresh Damrei popup zone every 60 seconds
+    setInterval(() => {
+      window.gammatag!.cmd.push(() => {
+        window.gammatag!.sendRequest?.();
+      });
+    }, 60000);
+  }
+  // for facebook comment plugin
+  if (window.FB) {
+    window.FB.XFBML.parse();
+  }
+  // infinite scroll
+  // window.addEventListener("scroll", handleScrollPagination);
+  handleArticleViewed(articles.value[0]);
+  // handleElementSeen();
+});
 
 // watch url changes for facebook comment plugin
 watch(
