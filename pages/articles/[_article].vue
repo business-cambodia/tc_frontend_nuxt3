@@ -4,10 +4,10 @@
   <!-- <template v-if="Math.random() < 0.5">
     <div id="gax-inpage-async-1700709882"></div>
   </template> -->
-    <div v-if="Math.random() < 0.7" id="gax-inpage-async-1700709882"></div>
-    <ins v-else data-revive-zoneid="624" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-
-
+  <!-- Damrei popup -->
+  <div v-if="showDamreiPopup" id="gax-inpage-async-1700709882"></div>
+  <!-- GPAS popup -->
+  <ins v-else id="gpas-popup-624" data-revive-zoneid="624" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
   <!-- GPAS popup -->
   <!-- <template v-else>
       <ins
@@ -34,6 +34,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch, onMounted, nextTick, onBeforeUnmount } from 'vue';
 import { IAd } from '~~/types/ad';
 import { IResponse } from '~~/types/api';
 import { IArticle } from '~~/types/article';
@@ -267,36 +268,100 @@ declare global {
     };
   }
 }
+// popup control
 
-onMounted(() => {
+const showDamreiPopup = ref(true);
+let damreiInterval: number | undefined;
 
-  if (window.gammatag && window.gammatag.cmd) {
-    // Refresh Damrei popup zone every 60 seconds
-    setInterval(() => {
+const pickPopupOnce = () => {
+  showDamreiPopup.value = Math.random() < 0.7;
+};
+
+const startDamreiRefreshIfNeeded = () => {
+  if (damreiInterval) {
+    clearInterval(damreiInterval);
+    damreiInterval = undefined;
+  }
+
+  if (!showDamreiPopup.value) return;
+
+  if (window.gammatag?.cmd) {
+    damreiInterval = window.setInterval(() => {
       window.gammatag!.cmd.push(() => {
         window.gammatag!.sendRequest?.();
       });
     }, 60000);
   }
-  // for facebook comment plugin
-  if (window.FB) {
-    window.FB.XFBML.parse();
+};
+
+const refreshGpasIfNeeded = async () => {
+  if (showDamreiPopup.value) return;
+
+  await nextTick();
+
+  const w = window as any;
+  if (typeof w.oxAsyncRequest === 'function') {
+    try { w.oxAsyncRequest(); } catch {}
   }
-  // infinite scroll
-  // window.addEventListener("scroll", handleScrollPagination);
+};
+
+const setupPopup = async () => {
+  pickPopupOnce();
+  await refreshGpasIfNeeded();
+  startDamreiRefreshIfNeeded();
+};
+
+onMounted(async () => {
+  await setupPopup();
+  if (window.FB) window.FB.XFBML.parse();
   handleArticleViewed(articles.value[0]);
-  // handleElementSeen();
 });
 
-// watch url changes for facebook comment plugin
 watch(
-  () => router.currentRoute.value.fullPath,
-  () => {
-    if (window.FB) {
-      window.FB.XFBML.parse();
-    }
+  () => route.params._article,
+  async () => {
+    await setupPopup();
+    if (window.FB) window.FB.XFBML.parse();
   }
 );
+
+onBeforeUnmount(() => {
+  if (damreiInterval) clearInterval(damreiInterval);
+});
+
+
+
+// end popup control
+
+// onMounted(() => {
+
+//   if (window.gammatag && window.gammatag.cmd) {
+//     // Refresh Damrei popup zone every 60 seconds
+//     setInterval(() => {
+//       window.gammatag!.cmd.push(() => {
+//         window.gammatag!.sendRequest?.();
+//       });
+//     }, 60000);
+//   }
+//   // for facebook comment plugin
+//   if (window.FB) {
+//     window.FB.XFBML.parse();
+//   }
+//   // infinite scroll
+//   // window.addEventListener("scroll", handleScrollPagination);
+//   handleArticleViewed(articles.value[0]);
+//   // handleElementSeen();
+// });
+
+// watch url changes for facebook comment plugin
+// watch(
+//   () => router.currentRoute.value.fullPath,
+//   () => {
+//     if (window.FB) {
+//       window.FB.XFBML.parse();
+//     }
+//   }
+// );
 
 const handleArticleViewed = async (article: IArticle) => {
   const slug = article.slug;
