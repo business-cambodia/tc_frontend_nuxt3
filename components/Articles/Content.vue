@@ -113,11 +113,14 @@
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
 
+            <!-- GPAS Mobile Underlay -->
+            <ins data-revive-zoneid="621" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->
             <div id="div-ad-innity-102478/0" class="flex justify-center"></div>
             <!-- GPAS MR1 -->
-            <!-- <ins class="flex justify-center" data-revive-zoneid="86"
-              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
+            <ins class="flex justify-center" data-revive-zoneid="618"
+              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
           </div>
 
           <div id="the-rest">
