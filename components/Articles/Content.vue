@@ -89,6 +89,8 @@
             <div v-html="splitBody().secondPart" class="article_body"></div>
             <!--Mobile Underlay - Zone 2-->
             <!-- <div id="gax-inpage-async-1706848793"></div> -->
+            <!-- GPAS Mobile Underlay -->
+            <ins data-revive-zoneid="621" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
           </div>
 
           <div id="part-3">
@@ -113,8 +115,7 @@
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
 
-            <!-- GPAS Mobile Underlay -->
-            <ins data-revive-zoneid="621" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+
 
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->
             <div id="div-ad-innity-102478/0" class="flex justify-center"></div>
