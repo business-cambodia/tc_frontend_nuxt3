@@ -236,89 +236,18 @@ onMounted(() => {
   checkIfFavorite();
 });
 
-// Cleanup function for GPAS underlay/overlay ads
-const cleanupGpasAds = () => {
-  // Remove all Revive Adserver related elements
-  const selectors = [
-    '[id^="revive"]',
-    '[class*="revive"]',
-    '[id*="rv_"]',
-    '[class*="rv_"]',
-    'div[id^="ox_"]',
-    'div[id^="oad_"]',
-    'ins[data-revive-zoneid]',
-    // Underlay specific elements
-    '.bodybg',
-    '[style*="background"][style*="fixed"]',
-    // GPAS specific
-    '[id*="gpas"]',
-    '[class*="gpas"]',
-  ];
-
-  selectors.forEach((selector) => {
-    try {
-      document.querySelectorAll(selector).forEach((el) => {
-        // Don't remove elements inside our component
-        if (!document.getElementById('article-body')?.contains(el)) {
-          el.remove();
-        }
-      });
-    } catch (e) {
-      // Ignore selector errors
-    }
-  });
-
-  // Remove any iframes from ad servers
-  document.querySelectorAll('iframe').forEach((iframe) => {
-    const src = iframe.src || '';
-    if (src.includes('adservermsa.gpas.co') || src.includes('revive') || src.includes('delivery')) {
-      iframe.remove();
-    }
-  });
-
-  // Remove fixed/absolute positioned elements that look like ad overlays (outside our component)
-  document.querySelectorAll('body > div[style*="position: fixed"], body > div[style*="position: absolute"]').forEach((el) => {
-    const style = el.getAttribute('style') || '';
-    const id = el.id || '';
-    const className = el.className || '';
-    // Check if it's likely an ad overlay
-    if (
-      style.includes('z-index') &&
-      (style.includes('background') || id.includes('revive') || className.includes('revive') ||
-        id.includes('ox_') || id.includes('oad_') || el.querySelector('iframe'))
-    ) {
-      el.remove();
-    }
-  });
-
-  // Reset body and html styles that might have been modified by underlay ads
-  document.body.style.backgroundImage = '';
-  document.body.style.backgroundColor = '';
-  document.body.style.background = '';
-  document.documentElement.style.backgroundImage = '';
-  document.documentElement.style.backgroundColor = '';
-  document.documentElement.style.background = '';
-
-  // Remove any dynamically added style tags for underlay
-  document.querySelectorAll('style').forEach((style) => {
-    if (style.textContent?.includes('revive') || style.textContent?.includes('bodybg')) {
-      style.remove();
-    }
-  });
-};
-
-// Watch for route changes to cleanup ads
-const route = useRoute();
-watch(() => route.fullPath, () => {
-  cleanupGpasAds();
-});
+// Use global cleanup function from plugin
+const nuxtApp = useNuxtApp();
 
 // Cleanup GPAS underlay/overlay ads when leaving the article page
 onBeforeUnmount(() => {
-  cleanupGpasAds();
-  // Also run cleanup after a short delay to catch any late-injected elements
-  setTimeout(cleanupGpasAds, 100);
-  setTimeout(cleanupGpasAds, 500);
+  const cleanup = nuxtApp.$cleanupGpasAds as (() => void) | undefined;
+  if (cleanup && typeof cleanup === 'function') {
+    cleanup();
+    setTimeout(() => cleanup(), 100);
+    setTimeout(() => cleanup(), 500);
+    setTimeout(() => cleanup(), 1000);
+  }
 });
 
 const isMobile = ref(false);
