@@ -235,6 +235,30 @@ const handleToggleFavorite = () => {
 onMounted(() => {
   checkIfFavorite();
 });
+
+// Cleanup GPAS underlay/overlay ads when leaving the article page
+onBeforeUnmount(() => {
+  // Remove Revive Adserver overlay/underlay elements
+  const reviveOverlays = document.querySelectorAll('[id^="revive-"], [class*="revive-"], .revive-0-bodybg, .revive-0-bg');
+  reviveOverlays.forEach((el) => el.remove());
+
+  // Remove any GPAS/Revive iframes that might be injected
+  const gpasIframes = document.querySelectorAll('iframe[src*="adservermsa.gpas.co"], iframe[src*="revive"]');
+  gpasIframes.forEach((el) => el.remove());
+
+  // Remove any fixed/absolute positioned ad overlays
+  const adOverlays = document.querySelectorAll('[style*="position: fixed"][style*="z-index"]');
+  adOverlays.forEach((el) => {
+    if (el.innerHTML.includes('revive') || el.id.includes('revive') || el.className.includes('revive')) {
+      el.remove();
+    }
+  });
+
+  // Reset body styles that might have been modified by underlay ads
+  document.body.style.backgroundImage = '';
+  document.body.style.backgroundColor = '';
+});
+
 const isMobile = ref(false);
 
 
