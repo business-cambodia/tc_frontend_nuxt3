@@ -236,27 +236,89 @@ onMounted(() => {
   checkIfFavorite();
 });
 
-// Cleanup GPAS underlay/overlay ads when leaving the article page
-onBeforeUnmount(() => {
-  // Remove Revive Adserver overlay/underlay elements
-  const reviveOverlays = document.querySelectorAll('[id^="revive-"], [class*="revive-"], .revive-0-bodybg, .revive-0-bg');
-  reviveOverlays.forEach((el) => el.remove());
+// Cleanup function for GPAS underlay/overlay ads
+const cleanupGpasAds = () => {
+  // Remove all Revive Adserver related elements
+  const selectors = [
+    '[id^="revive"]',
+    '[class*="revive"]',
+    '[id*="rv_"]',
+    '[class*="rv_"]',
+    'div[id^="ox_"]',
+    'div[id^="oad_"]',
+    'ins[data-revive-zoneid]',
+    // Underlay specific elements
+    '.bodybg',
+    '[style*="background"][style*="fixed"]',
+    // GPAS specific
+    '[id*="gpas"]',
+    '[class*="gpas"]',
+  ];
 
-  // Remove any GPAS/Revive iframes that might be injected
-  const gpasIframes = document.querySelectorAll('iframe[src*="adservermsa.gpas.co"], iframe[src*="revive"]');
-  gpasIframes.forEach((el) => el.remove());
+  selectors.forEach((selector) => {
+    try {
+      document.querySelectorAll(selector).forEach((el) => {
+        // Don't remove elements inside our component
+        if (!document.getElementById('article-body')?.contains(el)) {
+          el.remove();
+        }
+      });
+    } catch (e) {
+      // Ignore selector errors
+    }
+  });
 
-  // Remove any fixed/absolute positioned ad overlays
-  const adOverlays = document.querySelectorAll('[style*="position: fixed"][style*="z-index"]');
-  adOverlays.forEach((el) => {
-    if (el.innerHTML.includes('revive') || el.id.includes('revive') || el.className.includes('revive')) {
+  // Remove any iframes from ad servers
+  document.querySelectorAll('iframe').forEach((iframe) => {
+    const src = iframe.src || '';
+    if (src.includes('adservermsa.gpas.co') || src.includes('revive') || src.includes('delivery')) {
+      iframe.remove();
+    }
+  });
+
+  // Remove fixed/absolute positioned elements that look like ad overlays (outside our component)
+  document.querySelectorAll('body > div[style*="position: fixed"], body > div[style*="position: absolute"]').forEach((el) => {
+    const style = el.getAttribute('style') || '';
+    const id = el.id || '';
+    const className = el.className || '';
+    // Check if it's likely an ad overlay
+    if (
+      style.includes('z-index') &&
+      (style.includes('background') || id.includes('revive') || className.includes('revive') ||
+        id.includes('ox_') || id.includes('oad_') || el.querySelector('iframe'))
+    ) {
       el.remove();
     }
   });
 
-  // Reset body styles that might have been modified by underlay ads
+  // Reset body and html styles that might have been modified by underlay ads
   document.body.style.backgroundImage = '';
   document.body.style.backgroundColor = '';
+  document.body.style.background = '';
+  document.documentElement.style.backgroundImage = '';
+  document.documentElement.style.backgroundColor = '';
+  document.documentElement.style.background = '';
+
+  // Remove any dynamically added style tags for underlay
+  document.querySelectorAll('style').forEach((style) => {
+    if (style.textContent?.includes('revive') || style.textContent?.includes('bodybg')) {
+      style.remove();
+    }
+  });
+};
+
+// Watch for route changes to cleanup ads
+const route = useRoute();
+watch(() => route.fullPath, () => {
+  cleanupGpasAds();
+});
+
+// Cleanup GPAS underlay/overlay ads when leaving the article page
+onBeforeUnmount(() => {
+  cleanupGpasAds();
+  // Also run cleanup after a short delay to catch any late-injected elements
+  setTimeout(cleanupGpasAds, 100);
+  setTimeout(cleanupGpasAds, 500);
 });
 
 const isMobile = ref(false);
