@@ -5,7 +5,7 @@
     <div id="gax-inpage-async-1700709882"></div>
   </template> -->
   <!-- Damrei popup -->
-  <div v-if="showDamreiPopup" id="gax-inpage-async-1700709882"></div>
+  <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
   <!-- GPAS popup -->
   <ins v-else id="gpas-popup-624" data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
   <!-- GPAS popup -->
@@ -42,7 +42,7 @@ const route = useRoute();
 const showDamrei = true
 let currentPage = 0;
 let requesting = false;
-
+const randPopUp = Math.floor(Math.random() * 10);
 const ads: IAd[] = (
   await (<Promise<IResponse<IAd[]>>>(
     useApi(
