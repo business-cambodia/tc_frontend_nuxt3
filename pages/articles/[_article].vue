@@ -7,7 +7,7 @@
   <!-- Damrei popup -->
   <div v-if="showDamreiPopup" id="gax-inpage-async-1700709882"></div>
   <!-- GPAS popup -->
-  <ins v-else id="gpas-popup-624" data-revive-zoneid="624" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  <ins v-else id="gpas-popup-624" data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
   <!-- GPAS popup -->
   <!-- <template v-else>
       <ins
