@@ -94,8 +94,7 @@
             <!--Mobile Underlay - Zone 2-->
             <!-- <div id="gax-inpage-async-1706848793"></div> -->
             <!-- GPAS Mobile Underlay -->
-            <!-- Angkor Underlay Feb-2026 V2 - TC -->
-            <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+          
             <!-- End Gpas Mobile Underlay -->
           </div>
 
@@ -116,6 +115,8 @@
               </button>
             </div>
             <div v-html="splitBody().thirdPart" class="article_body"></div>
+              <!-- Angkor Underlay Feb-2026 V2 - TC -->
+            <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
             <!--Mobile Underlay - Zone 2-->
             <div id="gax-inpage-async-1706848793"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
@@ -125,12 +126,16 @@
 
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->
             <div id="div-ad-innity-102478/0" class="flex justify-center"></div>
+
             <!-- GPAS MR1 -->
-            <ins class="flex justify-center" data-revive-zoneid="618"
-              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            <div class="flex justify-center my-4 min-h-[250px]">
+              <ins data-revive-zoneid="618" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            </div>
+
             <!-- Angkor MR1 Feb-2026 - TC -->
-            <ins class="flex justify-center" data-revive-zoneid="684"
-              data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            <div class="flex justify-center my-4 min-h-[250px]">
+              <ins data-revive-zoneid="684" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            </div>
           </div>
 
           <div id="the-rest">
@@ -237,6 +242,16 @@ const handleToggleFavorite = () => {
 
 onMounted(() => {
   checkIfFavorite();
+
+  // Refresh GPAS ads when component mounts
+  const w = window as any;
+  if (typeof w.oxAsyncRequest === 'function') {
+    try {
+      w.oxAsyncRequest();
+    } catch (e) {
+      console.error('GPAS content refresh error:', e);
+    }
+  }
 });
 
 // Use global cleanup function from plugin

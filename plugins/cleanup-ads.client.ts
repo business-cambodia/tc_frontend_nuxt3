@@ -93,12 +93,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         cleanupGpasAds();
     });
 
-    nuxtApp.hook('page:finish', () => {
-        // Run cleanup after page loads in case ads were injected late
-        setTimeout(cleanupGpasAds, 100);
-        setTimeout(cleanupGpasAds, 300);
-    });
-
     // Also use router beforeEach
     const router = useRouter();
     router.beforeEach((to, from) => {

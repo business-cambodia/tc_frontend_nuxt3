@@ -7,7 +7,7 @@
   <!-- Damrei popup -->
   <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
   <!-- GPAS popup -->
-  <ins v-else  data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  <ins v-else data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
   <!-- GPAS popup -->
   <!-- <template v-else>
       <ins
@@ -295,13 +295,15 @@ const startDamreiRefreshIfNeeded = () => {
 };
 
 const refreshGpasIfNeeded = async () => {
-  if (showDamreiPopup.value) return;
-
   await nextTick();
 
   const w = window as any;
   if (typeof w.oxAsyncRequest === 'function') {
-    try { w.oxAsyncRequest(); } catch {}
+    try {
+      w.oxAsyncRequest();
+    } catch (e) {
+      console.error('GPAS refresh error:', e);
+    }
   }
 };
 
