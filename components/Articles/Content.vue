@@ -266,32 +266,46 @@ onMounted(async () => {
 
     // Method 1: reviveAsync (Revive Adserver async API)
     if (w.reviveAsync && typeof w.reviveAsync === 'object') {
-      console.log('[GPAS Debug] reviveAsync found, keys:', Object.keys(w.reviveAsync));
+      const keys = Object.keys(w.reviveAsync);
+      console.log('[GPAS Debug] reviveAsync found, keys:', keys);
 
-      // The ads are already loaded (innerHTML has content)
-      // Check body background
+      // Try to call methods on each Revive instance
+      keys.forEach(key => {
+        const instance = w.reviveAsync[key];
+        if (instance) {
+          const instanceKeys = Object.keys(instance);
+          console.log(`[GPAS Debug] Instance ${key} methods:`, instanceKeys);
+
+          // Try refresh methods
+          if (typeof instance.refresh === 'function') {
+            console.log(`[GPAS Debug] Calling ${key}.refresh()`);
+            instance.refresh();
+          }
+          if (typeof instance.run === 'function') {
+            console.log(`[GPAS Debug] Calling ${key}.run()`);
+            instance.run();
+          }
+          if (typeof instance.apply === 'function') {
+            console.log(`[GPAS Debug] Calling ${key}.apply()`);
+            instance.apply();
+          }
+        }
+      });
+
+      // Check body background after delay
       setTimeout(() => {
         const bodyBg = document.body.style.backgroundImage;
         const htmlBg = document.documentElement.style.backgroundImage;
         console.log('[GPAS Debug] Body background:', bodyBg || 'none');
         console.log('[GPAS Debug] HTML background:', htmlBg || 'none');
 
-        // Check for underlay elements
-        const reviveEls = document.querySelectorAll('[id^="revive"], [class*="revive"], .bodybg, [id^="ox_"]');
-        console.log('[GPAS Debug] Revive/bodybg elements:', reviveEls.length);
-        reviveEls.forEach((el, i) => {
-          console.log(`[GPAS Debug] El ${i}:`, el.tagName, el.id || el.className);
+        // Check ins tags again after refresh
+        const insTags2 = document.querySelectorAll('ins[data-revive-zoneid]');
+        insTags2.forEach((ins, i) => {
+          const zoneId = ins.getAttribute('data-revive-zoneid');
+          console.log(`[GPAS Debug] After delay - ins[${i}] zoneid=${zoneId}, innerHTML length=${ins.innerHTML.length}`);
         });
-
-        // Check for iframes from GPAS
-        const iframes = document.querySelectorAll('iframe');
-        iframes.forEach((iframe, i) => {
-          const src = iframe.src || '';
-          if (src.includes('gpas') || src.includes('revive') || src.includes('delivery')) {
-            console.log(`[GPAS Debug] GPAS iframe ${i}:`, src.substring(0, 100));
-          }
-        });
-      }, 2000);
+      }, 3000);
 
       return true;
     }
