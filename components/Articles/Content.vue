@@ -248,85 +248,45 @@ onMounted(async () => {
   await nextTick();
   const w = window as any;
 
-  // DEBUG: Log initial state
-  console.log('[GPAS Debug] Component mounted');
-  console.log('[GPAS Debug] oxAsyncRequest available:', typeof w.oxAsyncRequest === 'function');
-  console.log('[GPAS Debug] reviveAsync available:', typeof w.reviveAsync);
-
-  // DEBUG: Check for ins tags
-  const insTags = document.querySelectorAll('ins[data-revive-zoneid]');
-  console.log('[GPAS Debug] Found ins tags:', insTags.length);
-  insTags.forEach((ins, i) => {
-    const zoneId = ins.getAttribute('data-revive-zoneid');
-    console.log(`[GPAS Debug] ins[${i}] zoneid=${zoneId}, innerHTML length=${ins.innerHTML.length}`);
-  });
-
   const trigger = () => {
-    console.log('[GPAS Debug] Attempting to refresh ads...');
-
     // Method 1: reviveAsync (Revive Adserver async API)
     if (w.reviveAsync && typeof w.reviveAsync === 'object') {
       const keys = Object.keys(w.reviveAsync);
-      console.log('[GPAS Debug] reviveAsync found, keys:', keys);
 
-      // Try to call methods on each Revive instance
+      // Call refresh on each Revive instance (skip apply() - it's broken)
       keys.forEach(key => {
         const instance = w.reviveAsync[key];
-        if (instance) {
-          const instanceKeys = Object.keys(instance);
-          console.log(`[GPAS Debug] Instance ${key} methods:`, instanceKeys);
-
-          // Try refresh methods
-          if (typeof instance.refresh === 'function') {
-            console.log(`[GPAS Debug] Calling ${key}.refresh()`);
+        if (instance && typeof instance.refresh === 'function') {
+          try {
             instance.refresh();
-          }
-          if (typeof instance.run === 'function') {
-            console.log(`[GPAS Debug] Calling ${key}.run()`);
-            instance.run();
-          }
-          if (typeof instance.apply === 'function') {
-            console.log(`[GPAS Debug] Calling ${key}.apply()`);
-            instance.apply();
+          } catch (e) {
+            // Ignore refresh errors
           }
         }
       });
-
-      // Check body background after delay
-      setTimeout(() => {
-        const bodyBg = document.body.style.backgroundImage;
-        const htmlBg = document.documentElement.style.backgroundImage;
-        console.log('[GPAS Debug] Body background:', bodyBg || 'none');
-        console.log('[GPAS Debug] HTML background:', htmlBg || 'none');
-
-        // Check ins tags again after refresh
-        const insTags2 = document.querySelectorAll('ins[data-revive-zoneid]');
-        insTags2.forEach((ins, i) => {
-          const zoneId = ins.getAttribute('data-revive-zoneid');
-          console.log(`[GPAS Debug] After delay - ins[${i}] zoneid=${zoneId}, innerHTML length=${ins.innerHTML.length}`);
-        });
-      }, 3000);
 
       return true;
     }
 
     // Method 2: oxAsyncRequest (older API)
     if (typeof w.oxAsyncRequest === 'function') {
-      console.log('[GPAS Debug] Calling oxAsyncRequest()');
-      w.oxAsyncRequest();
+      try {
+        w.oxAsyncRequest();
+      } catch (e) {
+        // Ignore errors
+      }
       return true;
     }
 
-    console.log('[GPAS Debug] No refresh method available');
     return false;
   };
 
+  // Try once immediately, then retry a few times if needed
   if (!trigger()) {
     let attempts = 0;
     const interval = setInterval(() => {
       attempts++;
-      console.log(`[GPAS Debug] Retry attempt ${attempts}/10`);
-      if (trigger() || attempts > 10) {
+      if (trigger() || attempts > 5) {
         clearInterval(interval);
       }
     }, 1000);
