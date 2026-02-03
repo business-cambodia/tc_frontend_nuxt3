@@ -247,14 +247,45 @@ onMounted(async () => {
   // Refresh GPAS ads when component mounts
   await nextTick();
   const w = window as any;
+
+  // DEBUG: Log initial state
+  console.log('[GPAS Debug] Component mounted');
+  console.log('[GPAS Debug] oxAsyncRequest available:', typeof w.oxAsyncRequest === 'function');
+  console.log('[GPAS Debug] reviveAsync available:', typeof w.reviveAsync);
+
+  // DEBUG: Check for ins tags
+  const insTags = document.querySelectorAll('ins[data-revive-zoneid]');
+  console.log('[GPAS Debug] Found ins tags:', insTags.length);
+  insTags.forEach((ins, i) => {
+    const zoneId = ins.getAttribute('data-revive-zoneid');
+    console.log(`[GPAS Debug] ins[${i}] zoneid=${zoneId}, innerHTML length=${ins.innerHTML.length}`);
+  });
+
   const trigger = () => {
+    console.log('[GPAS Debug] Attempting oxAsyncRequest...');
     if (typeof w.oxAsyncRequest === 'function') {
       try {
         w.oxAsyncRequest();
+        console.log('[GPAS Debug] oxAsyncRequest called successfully');
+
+        // DEBUG: Check body background after call
+        setTimeout(() => {
+          const bodyBg = document.body.style.backgroundImage;
+          const htmlBg = document.documentElement.style.backgroundImage;
+          console.log('[GPAS Debug] After oxAsyncRequest - body bg:', bodyBg || 'none');
+          console.log('[GPAS Debug] After oxAsyncRequest - html bg:', htmlBg || 'none');
+
+          // Check for revive elements
+          const reviveEls = document.querySelectorAll('[id^="revive"], [class*="revive"], .bodybg');
+          console.log('[GPAS Debug] Revive/bodybg elements found:', reviveEls.length);
+        }, 2000);
+
         return true;
       } catch (e) {
-        console.error('GPAS content refresh error:', e);
+        console.error('[GPAS Debug] oxAsyncRequest error:', e);
       }
+    } else {
+      console.log('[GPAS Debug] oxAsyncRequest not available yet');
     }
     return false;
   };
@@ -263,14 +294,16 @@ onMounted(async () => {
     let attempts = 0;
     const interval = setInterval(() => {
       attempts++;
+      console.log(`[GPAS Debug] Retry attempt ${attempts}/15`);
       if (trigger() || attempts > 15) {
+        if (attempts > 15) {
+          console.log('[GPAS Debug] Max retries reached - oxAsyncRequest never became available');
+        }
         clearInterval(interval);
       }
     }, 1000);
   }
 });
-
-const nuxtApp = useNuxtApp();
 
 const isMobile = ref(false);
 
