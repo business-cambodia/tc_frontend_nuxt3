@@ -294,22 +294,38 @@ const startDamreiRefreshIfNeeded = () => {
   }
 };
 
-const refreshGpasIfNeeded = async () => {
+const refreshGpasAds = async () => {
   await nextTick();
-
   const w = window as any;
-  if (typeof w.oxAsyncRequest === 'function') {
-    try {
-      w.oxAsyncRequest();
-    } catch (e) {
-      console.error('GPAS refresh error:', e);
+
+  const trigger = () => {
+    if (typeof w.oxAsyncRequest === 'function') {
+      try {
+        w.oxAsyncRequest();
+        return true;
+      } catch (e) {
+        console.error('GPAS refresh error:', e);
+      }
     }
+    return false;
+  };
+
+  // Try immediately
+  if (!trigger()) {
+    // If not ready, retry a few times (useful for production script loading)
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      if (trigger() || attempts > 10) {
+        clearInterval(interval);
+      }
+    }, 500);
   }
 };
 
 const setupPopup = async () => {
   pickPopupOnce();
-  await refreshGpasIfNeeded();
+  await refreshGpasAds();
   startDamreiRefreshIfNeeded();
 };
 

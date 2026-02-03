@@ -94,7 +94,7 @@
             <!--Mobile Underlay - Zone 2-->
             <!-- <div id="gax-inpage-async-1706848793"></div> -->
             <!-- GPAS Mobile Underlay -->
-          
+
             <!-- End Gpas Mobile Underlay -->
           </div>
 
@@ -115,7 +115,7 @@
               </button>
             </div>
             <div v-html="splitBody().thirdPart" class="article_body"></div>
-              <!-- Angkor Underlay Feb-2026 V2 - TC -->
+            <!-- Angkor Underlay Feb-2026 V2 - TC -->
             <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
             <!--Mobile Underlay - Zone 2-->
             <div id="gax-inpage-async-1706848793"></div>
@@ -240,17 +240,32 @@ const handleToggleFavorite = () => {
   toggleFavorite(isFavorite, props.article);
 };
 
-onMounted(() => {
+onMounted(async () => {
   checkIfFavorite();
 
   // Refresh GPAS ads when component mounts
+  await nextTick();
   const w = window as any;
-  if (typeof w.oxAsyncRequest === 'function') {
-    try {
-      w.oxAsyncRequest();
-    } catch (e) {
-      console.error('GPAS content refresh error:', e);
+  const trigger = () => {
+    if (typeof w.oxAsyncRequest === 'function') {
+      try {
+        w.oxAsyncRequest();
+        return true;
+      } catch (e) {
+        console.error('GPAS content refresh error:', e);
+      }
     }
+    return false;
+  };
+
+  if (!trigger()) {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      if (trigger() || attempts > 5) {
+        clearInterval(interval);
+      }
+    }, 1000);
   }
 });
 

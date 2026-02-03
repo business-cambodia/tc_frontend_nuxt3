@@ -79,30 +79,24 @@ export default defineNuxtPlugin((nuxtApp) => {
         document.documentElement.style.backgroundColor = '';
         document.documentElement.style.background = '';
 
-        // Remove any dynamically added style tags for underlay
-        document.querySelectorAll('style').forEach((style) => {
-            const content = style.textContent?.toLowerCase() || '';
-            if (content.includes('revive') || content.includes('bodybg') || content.includes('underlay')) {
-                style.remove();
-            }
-        });
+        // NOTE: We avoid removing all style tags containing 'revive' or 'underlay' 
+        // as they might contain valid component styles via tailwind or scoped CSS.
+        // The individual element removal above handles the bulk of the cleanup.
     };
 
-    // Cleanup on route change
-    nuxtApp.hook('page:start', () => {
-        cleanupGpasAds();
-    });
-
-    // Also use router beforeEach
+    // Cleanup on route navigation
     const router = useRouter();
     router.beforeEach((to, from) => {
-        // Only cleanup when navigating AWAY from article pages
-        if (from.path.includes('/articles/') || from.path.includes('/article/')) {
+        // Only cleanup when navigating AWAY from an article page to another page
+        // OR when the path definitely changes (to clear old ad artifacts)
+        if (from.path !== to.path) {
             cleanupGpasAds();
-            setTimeout(cleanupGpasAds, 50);
-            setTimeout(cleanupGpasAds, 200);
-            setTimeout(cleanupGpasAds, 500);
         }
+    });
+
+    // Also cleanup on page:start hook for safety during internal Nuxt transitions
+    nuxtApp.hook('page:start', () => {
+        cleanupGpasAds();
     });
 
     // Provide cleanup function globally
