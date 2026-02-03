@@ -262,31 +262,48 @@ onMounted(async () => {
   });
 
   const trigger = () => {
-    console.log('[GPAS Debug] Attempting oxAsyncRequest...');
-    if (typeof w.oxAsyncRequest === 'function') {
-      try {
-        w.oxAsyncRequest();
-        console.log('[GPAS Debug] oxAsyncRequest called successfully');
+    console.log('[GPAS Debug] Attempting to refresh ads...');
 
-        // DEBUG: Check body background after call
-        setTimeout(() => {
-          const bodyBg = document.body.style.backgroundImage;
-          const htmlBg = document.documentElement.style.backgroundImage;
-          console.log('[GPAS Debug] After oxAsyncRequest - body bg:', bodyBg || 'none');
-          console.log('[GPAS Debug] After oxAsyncRequest - html bg:', htmlBg || 'none');
+    // Method 1: reviveAsync (Revive Adserver async API)
+    if (w.reviveAsync && typeof w.reviveAsync === 'object') {
+      console.log('[GPAS Debug] reviveAsync found, keys:', Object.keys(w.reviveAsync));
 
-          // Check for revive elements
-          const reviveEls = document.querySelectorAll('[id^="revive"], [class*="revive"], .bodybg');
-          console.log('[GPAS Debug] Revive/bodybg elements found:', reviveEls.length);
-        }, 2000);
+      // The ads are already loaded (innerHTML has content)
+      // Check body background
+      setTimeout(() => {
+        const bodyBg = document.body.style.backgroundImage;
+        const htmlBg = document.documentElement.style.backgroundImage;
+        console.log('[GPAS Debug] Body background:', bodyBg || 'none');
+        console.log('[GPAS Debug] HTML background:', htmlBg || 'none');
 
-        return true;
-      } catch (e) {
-        console.error('[GPAS Debug] oxAsyncRequest error:', e);
-      }
-    } else {
-      console.log('[GPAS Debug] oxAsyncRequest not available yet');
+        // Check for underlay elements
+        const reviveEls = document.querySelectorAll('[id^="revive"], [class*="revive"], .bodybg, [id^="ox_"]');
+        console.log('[GPAS Debug] Revive/bodybg elements:', reviveEls.length);
+        reviveEls.forEach((el, i) => {
+          console.log(`[GPAS Debug] El ${i}:`, el.tagName, el.id || el.className);
+        });
+
+        // Check for iframes from GPAS
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach((iframe, i) => {
+          const src = iframe.src || '';
+          if (src.includes('gpas') || src.includes('revive') || src.includes('delivery')) {
+            console.log(`[GPAS Debug] GPAS iframe ${i}:`, src.substring(0, 100));
+          }
+        });
+      }, 2000);
+
+      return true;
     }
+
+    // Method 2: oxAsyncRequest (older API)
+    if (typeof w.oxAsyncRequest === 'function') {
+      console.log('[GPAS Debug] Calling oxAsyncRequest()');
+      w.oxAsyncRequest();
+      return true;
+    }
+
+    console.log('[GPAS Debug] No refresh method available');
     return false;
   };
 
@@ -294,11 +311,8 @@ onMounted(async () => {
     let attempts = 0;
     const interval = setInterval(() => {
       attempts++;
-      console.log(`[GPAS Debug] Retry attempt ${attempts}/15`);
-      if (trigger() || attempts > 15) {
-        if (attempts > 15) {
-          console.log('[GPAS Debug] Max retries reached - oxAsyncRequest never became available');
-        }
+      console.log(`[GPAS Debug] Retry attempt ${attempts}/10`);
+      if (trigger() || attempts > 10) {
         clearInterval(interval);
       }
     }, 1000);
