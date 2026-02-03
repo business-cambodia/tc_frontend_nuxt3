@@ -71,17 +71,10 @@ export default defineNuxtPlugin((nuxtApp) => {
             }
         });
 
-        // Reset body and html background styles
-        document.body.style.backgroundImage = '';
-        document.body.style.backgroundColor = '';
-        document.body.style.background = '';
-        document.documentElement.style.backgroundImage = '';
-        document.documentElement.style.backgroundColor = '';
-        document.documentElement.style.background = '';
-
-        // NOTE: We avoid removing all style tags containing 'revive' or 'underlay' 
-        // as they might contain valid component styles via tailwind or scoped CSS.
-        // The individual element removal above handles the bulk of the cleanup.
+        // NOTE: DO NOT reset body/html background styles here!
+        // GPAS underlays work by setting a background on the body element.
+        // Clearing these styles will remove the underlay.
+        // The cleanup of actual overlay elements above is sufficient.
     };
 
     // Cleanup on route navigation
