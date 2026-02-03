@@ -73,6 +73,9 @@
 
         <!-- article body -->
         <div class="text-lg lg:text-xl list-disc font-light dark:text-white break-words" id="article-body">
+          <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
+          <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+
           <div>
             <AdsBody :ads="firstParagraphAds" id="paragraph-1" :page="page" :body="1" />
             <div id="part-1">
@@ -115,8 +118,6 @@
               </button>
             </div>
             <div v-html="splitBody().thirdPart" class="article_body"></div>
-            <!-- Angkor Underlay Feb-2026 V2 - TC -->
-            <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
             <!--Mobile Underlay - Zone 2-->
             <div id="gax-inpage-async-1706848793"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
@@ -262,26 +263,14 @@ onMounted(async () => {
     let attempts = 0;
     const interval = setInterval(() => {
       attempts++;
-      if (trigger() || attempts > 5) {
+      if (trigger() || attempts > 15) {
         clearInterval(interval);
       }
     }, 1000);
   }
 });
 
-// Use global cleanup function from plugin
 const nuxtApp = useNuxtApp();
-
-// Cleanup GPAS underlay/overlay ads when leaving the article page
-onBeforeUnmount(() => {
-  const cleanup = nuxtApp.$cleanupGpasAds as (() => void) | undefined;
-  if (cleanup && typeof cleanup === 'function') {
-    cleanup();
-    setTimeout(() => cleanup(), 100);
-    setTimeout(() => cleanup(), 500);
-    setTimeout(() => cleanup(), 1000);
-  }
-});
 
 const isMobile = ref(false);
 

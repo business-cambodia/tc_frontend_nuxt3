@@ -316,7 +316,7 @@ const refreshGpasAds = async () => {
     let attempts = 0;
     const interval = setInterval(() => {
       attempts++;
-      if (trigger() || attempts > 10) {
+      if (trigger() || attempts > 20) {
         clearInterval(interval);
       }
     }, 500);

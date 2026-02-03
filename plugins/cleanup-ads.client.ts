@@ -94,11 +94,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
     });
 
-    // Also cleanup on page:start hook for safety during internal Nuxt transitions
-    nuxtApp.hook('page:start', () => {
-        cleanupGpasAds();
-    });
-
     // Provide cleanup function globally
     return {
         provide: {
