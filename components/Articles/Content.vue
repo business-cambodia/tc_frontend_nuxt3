@@ -74,7 +74,9 @@
         <!-- article body -->
         <div class="text-lg lg:text-xl list-disc font-light dark:text-white break-words" id="article-body">
           <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
-          <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+          <ClientOnly>
+            <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+          </ClientOnly>
 
           <div>
             <AdsBody :ads="firstParagraphAds" id="paragraph-1" :page="page" :body="1" />
@@ -86,7 +88,9 @@
             <div id="gax-inpage-async-1700709319"></div>
             <!-- GPAS Mobile Underlay -->
             <!-- Sting Underlay -->
-            <ins data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            <ClientOnly>
+              <ins v-if="adsReady" data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            </ClientOnly>
 
             <!-- <ins data-revive-zoneid="125" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
           </div>
@@ -130,12 +134,16 @@
 
             <!-- GPAS MR1 -->
             <div class="flex justify-center my-4 min-h-[250px]">
-              <ins data-revive-zoneid="618" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              <ClientOnly>
+                <ins v-if="adsReady" data-revive-zoneid="618" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              </ClientOnly>
             </div>
 
             <!-- Angkor MR1 Feb-2026 - TC -->
             <div class="flex justify-center my-4 min-h-[250px]">
-              <ins data-revive-zoneid="684" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              <ClientOnly>
+                <ins v-if="adsReady" data-revive-zoneid="684" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              </ClientOnly>
             </div>
           </div>
 
@@ -179,6 +187,9 @@ const { toggleFavorite } = useFavorite();
 
 // Favorite state
 const isFavorite = ref(false);
+
+// Ads ready state - prevents postMessage null errors by delaying ad render until DOM is ready
+const adsReady = ref(false);
 
 // Check if the article is already in favorites
 const checkIfFavorite = () => {
@@ -244,8 +255,15 @@ const handleToggleFavorite = () => {
 onMounted(async () => {
   checkIfFavorite();
 
-  // Refresh GPAS ads when component mounts
+  // Wait for DOM to be fully ready
   await nextTick();
+
+  // Enable ads rendering - this allows the ClientOnly wrapped ads to render
+  adsReady.value = true;
+
+  // Wait another tick for ads to be rendered in DOM
+  await nextTick();
+
   const w = window as any;
 
   const trigger = () => {
@@ -260,7 +278,7 @@ onMounted(async () => {
           try {
             instance.refresh();
           } catch (e) {
-            // Ignore refresh errors
+            // Ignore refresh errors - the ad script might not be fully loaded yet
           }
         }
       });
@@ -281,16 +299,19 @@ onMounted(async () => {
     return false;
   };
 
-  // Try once immediately, then retry a few times if needed
-  if (!trigger()) {
-    let attempts = 0;
-    const interval = setInterval(() => {
-      attempts++;
-      if (trigger() || attempts > 5) {
-        clearInterval(interval);
-      }
-    }, 1000);
-  }
+  // Give Revive script time to fully initialize before triggering refresh
+  // This prevents postMessage null errors from scripts trying to communicate before iframes exist
+  setTimeout(() => {
+    if (!trigger()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (trigger() || attempts > 5) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  }, 500);
 });
 
 const isMobile = ref(false);
