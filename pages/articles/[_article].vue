@@ -5,9 +5,11 @@
     <div id="gax-inpage-async-1700709882"></div>
   </template> -->
   <!-- Damrei popup -->
-  <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
-  <!-- GPAS popup -->
-  <ins v-else data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  <ClientOnly>
+    <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
+    <!-- GPAS popup -->
+    <ins v-else data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+  </ClientOnly>
   <!-- GPAS popup -->
   <!-- <template v-else>
       <ins
@@ -16,7 +18,9 @@
       ></ins>
     </template> -->
   <!-- damrei popup PC -->
-  <div id="gax-inpage-async-1706776197"></div>
+  <ClientOnly>
+    <div id="gax-inpage-async-1706776197"></div>
+  </ClientOnly>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent :aboveArticleAds="aboveArticleAds" :article="article" id="content"
@@ -25,9 +29,11 @@
         :showElements="showElements" :page="index" />
     </div>
     <!--Damrei - Footer-->
-    <div id="gax-inpage-async-1700710572"></div>
-    <!--Footer-->
-    <div id="gax-inpage-async-1718360117"></div>
+    <ClientOnly>
+      <div id="gax-inpage-async-1700710572"></div>
+      <!--Footer-->
+      <div id="gax-inpage-async-1718360117"></div>
+    </ClientOnly>
     <ArticlesNext :articles="nextArticles" title="បន្តអានអត្ថបទបន្ទាប់" to="/latest" />
     <!-- <AdsBottom :ad="bottomAd" /> -->
   </div>
@@ -299,28 +305,49 @@ const refreshGpasAds = async () => {
   const w = window as any;
 
   const trigger = () => {
+    // Method 1: oxAsyncRequest (GPAS API)
     if (typeof w.oxAsyncRequest === 'function') {
       try {
         w.oxAsyncRequest();
         return true;
       } catch (e) {
-        console.error('GPAS refresh error:', e);
+        // Ignore errors - script might not be fully loaded yet
       }
     }
+
+    // Method 2: reviveAsync (Revive Adserver async API)
+    if (w.reviveAsync && typeof w.reviveAsync === 'object') {
+      const keys = Object.keys(w.reviveAsync);
+      keys.forEach(key => {
+        const instance = w.reviveAsync[key];
+        if (instance && typeof instance.refresh === 'function') {
+          try {
+            instance.refresh();
+          } catch (e) {
+            // Ignore refresh errors
+          }
+        }
+      });
+      return true;
+    }
+
     return false;
   };
 
-  // Try immediately
-  if (!trigger()) {
-    // If not ready, retry a few times (useful for production script loading)
-    let attempts = 0;
-    const interval = setInterval(() => {
-      attempts++;
-      if (trigger() || attempts > 20) {
-        clearInterval(interval);
-      }
-    }, 500);
-  }
+  // Add initial delay to give external scripts time to initialize
+  // This prevents "Cannot read properties of null" errors
+  setTimeout(() => {
+    if (!trigger()) {
+      // If not ready, retry a few times (useful for production script loading)
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (trigger() || attempts > 10) {
+          clearInterval(interval);
+        }
+      }, 500);
+    }
+  }, 500);
 };
 
 const setupPopup = async () => {
