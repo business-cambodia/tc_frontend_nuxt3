@@ -158,8 +158,8 @@ useHead({
     },
     {
       src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
-      async: true,
-      // defer: true,
+      // async: true,
+      defer: true,
     },
 
     {
