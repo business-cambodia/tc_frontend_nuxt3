@@ -73,10 +73,7 @@
 
         <!-- article body -->
         <div class="text-lg lg:text-xl list-disc font-light dark:text-white break-words" id="article-body">
-          <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
-          <ClientOnly>
-            <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-          </ClientOnly>
+
 
           <div>
             <AdsBody :ads="firstParagraphAds" id="paragraph-1" :page="page" :body="1" />
@@ -134,11 +131,14 @@
 
             <!-- GPAS MR1 -->
             <div class="flex justify-center my-4 min-h-[250px]">
-              <ClientOnly>
+              <!-- <ClientOnly>
                 <ins v-if="adsReady" data-revive-zoneid="618" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-              </ClientOnly>
+              </ClientOnly> -->
             </div>
-
+            <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
+            <ClientOnly>
+              <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            </ClientOnly>
             <!-- Angkor MR1 Feb-2026 - TC -->
             <div class="flex justify-center my-4 min-h-[250px]">
               <ClientOnly>
