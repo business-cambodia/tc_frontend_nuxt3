@@ -89,6 +89,7 @@
               <ins v-if="adsReady" data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
             </ClientOnly>
 
+
             <!-- <ins data-revive-zoneid="125" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
           </div>
 
@@ -98,7 +99,10 @@
             <!--Mobile Underlay - Zone 2-->
             <!-- <div id="gax-inpage-async-1706848793"></div> -->
             <!-- GPAS Mobile Underlay -->
-
+               <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
+            <ClientOnly>
+              <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+            </ClientOnly>
             <!-- End Gpas Mobile Underlay -->
           </div>
 
@@ -135,8 +139,7 @@
                 <ins v-if="adsReady" data-revive-zoneid="618" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
               </ClientOnly> -->
             </div>
-            <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
-           <ins data-revive-zoneid="690" id="2d10743d9880200bf17a894cfa35dba0"></ins>
+         
             <!-- Angkor MR1 Feb-2026 - TC -->
             <div class="flex justify-center my-4 min-h-[250px]">
               <ClientOnly>
