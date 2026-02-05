@@ -136,9 +136,7 @@
               </ClientOnly> -->
             </div>
             <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
-            <ClientOnly>
-              <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-            </ClientOnly>
+           <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
             <!-- Angkor MR1 Feb-2026 - TC -->
             <div class="flex justify-center my-4 min-h-[250px]">
               <ClientOnly>
