@@ -85,9 +85,11 @@
             <div id="gax-inpage-async-1700709319"></div>
             <!-- GPAS Mobile Underlay -->
             <!-- Sting Underlay -->
-            <ClientOnly>
-              <ins v-if="adsReady" data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-            </ClientOnly>
+            <div class="underlay-ad underlay-ad--sting">
+              <ClientOnly>
+                <ins v-if="adsReady" data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              </ClientOnly>
+            </div>
 
 
             <!-- <ins data-revive-zoneid="125" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
@@ -99,10 +101,12 @@
             <!--Mobile Underlay - Zone 2-->
             <!-- <div id="gax-inpage-async-1706848793"></div> -->
             <!-- GPAS Mobile Underlay -->
-               <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
-            <ClientOnly>
-              <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-            </ClientOnly>
+            <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
+            <div class="underlay-ad underlay-ad--angkor">
+              <ClientOnly>
+                <ins v-if="adsReady" data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              </ClientOnly>
+            </div>
             <!-- End Gpas Mobile Underlay -->
           </div>
 
@@ -411,6 +415,27 @@ onMounted(() => {
 <style>
 iframe {
   max-width: 100%;
+}
+
+.underlay-ad {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.underlay-ad ins {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.underlay-ad iframe,
+.underlay-ad img {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 .article_body a {
