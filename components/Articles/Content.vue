@@ -108,6 +108,12 @@
                 <ins data-revive-zoneid="690" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
               </ClientOnly>
             </div>
+            <!-- GPAS Mobile Underlay Angkor CNY Underlay Feb-2026 - TC- -->
+            <div class="underlay-ad underlay-ad--angkor">
+              <ClientOnly>
+                <ins data-revive-zoneid="673" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
+              </ClientOnly>
+            </div>
             <!-- End Gpas Mobile Underlay -->
           </div>
 
@@ -128,12 +134,7 @@
               </button>
             </div>
             <div v-html="splitBody().thirdPart" class="article_body"></div>
-            <!-- GPAS Mobile Underlay Angkor CNY Underlay Feb-2026 - TC- -->
-            <div class="underlay-ad underlay-ad--angkor">
-              <ClientOnly>
-                <ins data-revive-zoneid="673" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-              </ClientOnly>
-            </div>
+
             <!--Mobile Underlay - Zone 2-->
             <div id="gax-inpage-async-1706848793"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
