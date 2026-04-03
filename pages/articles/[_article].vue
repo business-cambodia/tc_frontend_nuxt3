@@ -69,11 +69,9 @@ const articles = ref(
   ).data
 );
 
-if (articles.value.length === 0)
-  throw createError({
-    statusCode: 404,
-    message: 'Article not found',
-  });
+if (!articles.value || articles.value.length === 0) {
+  throw createError({ statusCode: 404, statusMessage: 'Article Not Found', "fatal": true });
+}
 
 const nextArticles = ref(
   (
