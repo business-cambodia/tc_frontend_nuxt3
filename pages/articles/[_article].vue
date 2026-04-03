@@ -85,7 +85,7 @@ const nextArticles = ref(
     ))
   ).data
 );
-let thumbnail = articles.value[0].thumbnail;
+let thumbnail = articles.value[0].thumbnail_facebook || articles.value[0].thumbnail;
 
 useHead({
   script: [
@@ -188,24 +188,20 @@ useHead({
   ],
   title: articles.value[0].title,
   meta: [
-    {
-      property: 'og:image',
-      content: 'https://tech-cambodia.com/cms' + '/assets/' + thumbnail,
-    },
-    {
-      hid: 'og:description',
-      name: 'og:description',
-      content: articles.value[0].body.replace(/<[^>]+>/g, ''),
-    },
-    {
-      hid: 'og:title',
-      name: 'og:title',
-      content: articles.value[0].title,
-    },
+    { property: 'og:title', content: articles.value[0].title },
+    { property: 'og:description', content: articles.value[0].body.replace(/<[^>]+>/g, "").replace(/\n|\r/g, " ").replace(/"/g, '&quot;').substring(0, 300) },
+    { property: 'og:image', content: `https://tech-cambodia.com/cms/assets/${thumbnail}.jpg` },
+    { property: 'og:image:secure_url', content: `https://tech-cambodia.com/cms/assets/${thumbnail}.jpg` },
+    { property: 'og:image:type', content: 'image/jpeg' },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: articles.value[0].title },
+    { property: 'og:url', content: `https://tech-cambodia.com/articles/${articles.value[0].slug}` },
+    { property: 'og:type', content: 'article' },
     {
       hid: 'description',
       name: 'description',
-      content: articles.value[0].body.replace(/<[^>]+>/g, ''),
+      content: articles.value[0].body.replace(/<[^>]+>/g, "").replace(/\n|\r/g, " ").replace(/"/g, '&quot;').substring(0, 300),
     },
     {
       hid: 'keywords',
