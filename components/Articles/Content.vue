@@ -86,11 +86,11 @@
 
 
             <!-- Sting Underlay -->
-            <div class="underlay-ad underlay-ad--sting">
+            <!-- <div class="underlay-ad underlay-ad--sting">
               <ClientOnly>
                 <ins data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
               </ClientOnly>
-            </div>
+            </div> -->
 
 
             <!-- <ins data-revive-zoneid="125" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
@@ -103,11 +103,11 @@
             <!-- <div id="gax-inpage-async-1706848793"></div> -->
             <!-- GPAS Mobile Underlay -->
             <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
-            <div class="underlay-ad underlay-ad--angkor">
+            <!-- <div class="underlay-ad underlay-ad--angkor">
               <ClientOnly>
                 <ins data-revive-zoneid="705" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
               </ClientOnly>
-            </div>
+            </div> -->
             <!-- End Gpas Mobile Underlay -->
           </div>
 
