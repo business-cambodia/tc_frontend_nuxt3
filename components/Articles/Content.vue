@@ -100,7 +100,7 @@
             <AdsBody :ads="secondParagraphAds" id="paragraph-2" :page="page" :body="2" />
             <div v-html="splitBody().secondPart" class="article_body"></div>
             <!--Mobile Underlay - Zone 2-->
-            <!-- <div id="gax-inpage-async-1706848793"></div> -->
+            <div id="gax-inpage-async-1706848793"></div>
             <!-- GPAS Mobile Underlay -->
             <!-- Angkor Underlay Feb-2026 V2 - TC (Moved to top for better loading) -->
             <!-- <div class="underlay-ad underlay-ad--angkor">
@@ -114,7 +114,7 @@
           <div id="part-3">
             <AdsBody :ads="thirdParagraphAds" id="paragraph-3" :page="page" :body="3" />
             <!-- Updated AI summary button with animation -->
-            <div class="flex items-center justify-between dark:text-white ml-2">
+            <!-- <div class="flex items-center justify-between dark:text-white ml-2">
               <button @click="summarizeArticle"
                 class="relative overflow-hidden bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 group"
                 :disabled="isSummarizing">
@@ -122,15 +122,12 @@
                   <Icon icon="fluent:arrow-right-12-filled" width="24" height="24" /> {{ isSummarizing ?
                     'កំពុងសង្ខេប...' : 'សង្ខេបអត្ថបទប្រើ AI ' }}
                 </span>
-                <!-- Button background animation -->
+
                 <span
                   class="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-size-200 animate-gradient-x"></span>
               </button>
-            </div>
+            </div> -->
             <div v-html="splitBody().thirdPart" class="article_body"></div>
-
-            <!--Mobile Underlay - Zone 2-->
-            <div id="gax-inpage-async-1706848793"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
 
