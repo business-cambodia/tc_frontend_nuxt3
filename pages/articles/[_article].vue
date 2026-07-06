@@ -155,11 +155,11 @@ useHead({
       }
       `,
     },
-    {
-      src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
-      // async: true,
-      defer: true,
-    },
+    // {
+    //   src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
+    //   // async: true,
+    //   defer: true,
+    // },
 
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
@@ -347,7 +347,19 @@ const refreshGpasAds = async () => {
 
 const setupPopup = async () => {
   pickPopupOnce();
-  await refreshGpasAds();
+  // await refreshGpasAds();
+
+  const w = window as any;
+  if (w.gammatag && w.gammatag.cmd) {
+    try {
+      w.gammatag.cmd.push(() => {
+        w.gammatag.sendRequest?.();
+      });
+    } catch (e) {
+      // Ignore
+    }
+  }
+
   startDamreiRefreshIfNeeded();
 };
 

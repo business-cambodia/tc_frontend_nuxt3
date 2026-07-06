@@ -316,6 +316,17 @@ onMounted(async () => {
       }, 1000);
     }
   }, 500);
+
+  // Trigger Gammatag request immediately on component mount
+  if (w.gammatag && w.gammatag.cmd) {
+    try {
+      w.gammatag.cmd.push(() => {
+        w.gammatag.sendRequest?.();
+      });
+    } catch (e) {
+      // Ignore
+    }
+  }
 });
 
 const isMobile = ref(false);
