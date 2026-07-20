@@ -7,7 +7,8 @@
   <!-- Damrei popup -->
     <!-- <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
       -->
-    <div  id="gax-inpage-async-1700709882"></div>
+    <!-- Damrey mobile popup — hidden when MSA wins the 30% slot -->
+    <div v-if="!showMSAPopup" id="gax-inpage-async-1700709882"></div>
 
     <!-- GPAS popup -->
     <!-- <ins v-else data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
@@ -18,9 +19,9 @@
         data-revive-id="2d10743d9880200bf17a894cfa35dba0"
       ></ins>
     </template> -->
-  <!-- damrei popup PC -->
+  <!-- Damrey popup PC — hidden when MSA wins the 30% slot -->
   <ClientOnly>
-    <div id="gax-inpage-async-1706776197"></div>
+    <div v-if="!showMSAPopup" id="gax-inpage-async-1706776197"></div>
   </ClientOnly>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
@@ -116,8 +117,10 @@ useHead({
         gammatag.cmd.push(function() {
           // Popup Tech Cambodia PC
 
-          // Popup
-          gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
+          // Popup — null-guarded: div may not exist when MSA popup wins the 30% slot
+          if (document.getElementById('gax-inpage-async-1700709882')) {
+            gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
+          }
           
           // Mobile Underlay - Zone 1
           gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
@@ -146,8 +149,10 @@ useHead({
           gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
           // MR1 Tech Cambodia (new)
           gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
-          // Popup Tech Cambodia PC
-          gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
+          // Popup Tech Cambodia PC — null-guarded: div may not exist when MSA popup wins the 30% slot
+          if (document.getElementById('gax-inpage-async-1706776197')) {
+            gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
+          }
           
           gammatag.sendRequest();
         }); 
@@ -272,10 +277,28 @@ declare global {
 // popup control
 
 const showDamreiPopup = ref(true);
+const showMSAPopup = ref(false);
 let damreiInterval: number | undefined;
 
 const pickPopupOnce = () => {
-  showDamreiPopup.value = Math.random() < 0.7;
+  const rand = Math.random();
+  // rand < 0.70  → Damrey (Gamma) popup
+  // rand >= 0.70 → MSA Angkor July popup
+  showDamreiPopup.value = rand < 0.7;
+  showMSAPopup.value = rand >= 0.7;
+
+  if (showMSAPopup.value) {
+    useHead({
+      script: [
+        {
+          src: 'https://msacam.com/ads/revive-popup.js?v=7',
+          defer: true,
+          'data-zone': '70',
+          tagPosition: 'head',
+        },
+      ],
+    });
+  }
 };
 
 const startDamreiRefreshIfNeeded = () => {
