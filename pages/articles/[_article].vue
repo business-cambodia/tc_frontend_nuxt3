@@ -288,12 +288,15 @@ const pickPopupOnce = () => {
   showMSAPopup.value = rand >= 0.7;
 
   if (showMSAPopup.value) {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     useHead({
       script: [
         {
-          src: 'https://msacam.com/ads/revive-popup.js?v=7',
+          src: isMobile
+            ? 'https://msacam.com/ads/revive-popup.js?v=7'
+            : 'https://msacam.com/ads/revive-popup-pc.js?v=2',
           defer: true,
-          'data-zone': '70',
+          'data-zone': isMobile ? '70' : '78',
           tagPosition: 'head',
         },
       ],
