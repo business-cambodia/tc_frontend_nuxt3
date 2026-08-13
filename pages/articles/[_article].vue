@@ -23,6 +23,9 @@
   <ClientOnly>
     <div v-if="!showMSAPopup" id="gax-inpage-async-1706776197"></div>
   </ClientOnly>
+
+  <AdsMSAPopup v-if="showMSAPopup" />
+
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent :aboveArticleAds="aboveArticleAds" :article="article" id="content"
@@ -288,19 +291,7 @@ const pickPopupOnce = () => {
   showMSAPopup.value = rand >= 0.7;
 
   if (showMSAPopup.value) {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    useHead({
-      script: [
-        {
-          src: isMobile
-            ? 'https://msacam.com/ads/revive-popup.js?v=7'
-            : 'https://msacam.com/ads/revive-popup-pc.js?v=2',
-          defer: true,
-          'data-zone': isMobile ? '70' : '78',
-          tagPosition: 'head',
-        },
-      ],
-    });
+    // The MSA popup component handles the injection of its scripts internally.
   }
 };
 
@@ -375,16 +366,7 @@ const setupPopup = async () => {
   pickPopupOnce();
   // await refreshGpasAds();
 
-  const w = window as any;
-  if (w.gammatag && w.gammatag.cmd) {
-    try {
-      w.gammatag.cmd.push(() => {
-        w.gammatag.sendRequest?.();
-      });
-    } catch (e) {
-      // Ignore
-    }
-  }
+
 
   startDamreiRefreshIfNeeded();
 };
