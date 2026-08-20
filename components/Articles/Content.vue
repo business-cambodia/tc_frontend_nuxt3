@@ -85,8 +85,7 @@
             <div id="gax-inpage-async-1700709319"></div>
 
 
-            <!-- Sting Underlay (Zone 117) - TC -->
-            <AdsMsaunderlay />
+
           </div>
 
           <div id="part-2">
@@ -123,7 +122,8 @@
             <div v-html="splitBody().thirdPart" class="article_body"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
-
+            <!-- Sting Underlay (Zone 117) - TC -->
+            <AdsMsaunderlay />
 
 
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->
