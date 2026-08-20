@@ -85,15 +85,8 @@
             <div id="gax-inpage-async-1700709319"></div>
 
 
-            <!-- Sting Underlay -->
-            <!-- <div class="underlay-ad underlay-ad--sting">
-              <ClientOnly>
-                <ins data-revive-zoneid="665" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins>
-              </ClientOnly>
-            </div> -->
-
-
-            <!-- <ins data-revive-zoneid="125" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
+            <!-- Sting Underlay (Zone 117) - TC -->
+            <AdsMsaunderlay />
           </div>
 
           <div id="part-2">
