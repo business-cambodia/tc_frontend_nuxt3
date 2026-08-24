@@ -7,7 +7,7 @@
   <!-- Damrei popup -->
     <!-- <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
       -->
-    <!-- Damrey mobile popup — hidden when MSA wins the 30% slot -->
+    <!-- Damrey mobile popup (80%) — hidden when MSA wins the 20% slot -->
     <div v-if="!showMSAPopup" id="gax-inpage-async-1700709882"></div>
 
     <!-- GPAS popup -->
@@ -19,7 +19,7 @@
         data-revive-id="2d10743d9880200bf17a894cfa35dba0"
       ></ins>
     </template> -->
-  <!-- Damrey popup PC — hidden when MSA wins the 30% slot -->
+  <!-- Damrey popup PC (80%) — hidden when MSA wins the 20% slot -->
   <ClientOnly>
     <div v-if="!showMSAPopup" id="gax-inpage-async-1706776197"></div>
   </ClientOnly>
@@ -120,7 +120,7 @@ useHead({
         gammatag.cmd.push(function() {
           // Popup Tech Cambodia PC
 
-          // Popup — null-guarded: div may not exist when MSA popup wins the 30% slot
+          // Popup — null-guarded: div may not exist when MSA popup wins the 20% slot
           if (document.getElementById('gax-inpage-async-1700709882')) {
             gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
           }
@@ -152,7 +152,7 @@ useHead({
           gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
           // MR1 Tech Cambodia (new)
           gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
-          // Popup Tech Cambodia PC — null-guarded: div may not exist when MSA popup wins the 30% slot
+          // Popup Tech Cambodia PC — null-guarded: div may not exist when MSA popup wins the 20% slot
           if (document.getElementById('gax-inpage-async-1706776197')) {
             gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
           }
@@ -285,10 +285,10 @@ let damreiInterval: number | undefined;
 
 const pickPopupOnce = () => {
   const rand = Math.random();
-  // rand < 0.70  → Damrey (Gamma) popup
-  // rand >= 0.70 → MSA Angkor July popup
-  showDamreiPopup.value = rand < 0.7;
-  showMSAPopup.value = rand >= 0.7;
+  // rand < 0.80  → Damrey (Gamma) popup (80%)
+  // rand >= 0.80 → MSA popup (20%)
+  showDamreiPopup.value = rand < 0.8;
+  showMSAPopup.value = rand >= 0.8;
 
   if (showMSAPopup.value) {
     // The MSA popup component handles the injection of its scripts internally.
