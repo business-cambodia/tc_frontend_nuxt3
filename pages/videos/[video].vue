@@ -187,10 +187,10 @@ useHead({
       type: 'text/javascript',
       innerHTML: `
       gammatag.cmd.push(function() {
-        <!--Mobile Underlay - Zone 1-->
+        // Mobile Underlay - Zone 1
         gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
 
-        <!--Mobile Underlay - Zone 2-->
+        // Mobile Underlay - Zone 2
         gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
         
         //MR1 Desktop

@@ -143,10 +143,10 @@ useHead({
       innerHTML: `
       if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         gammatag.cmd.push(function() {
-          <!--Mobile Underlay - Zone 1-->
+          // Mobile Underlay - Zone 1
           gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
 
-          <!--Mobile Underlay - Zone 2-->
+          // Mobile Underlay - Zone 2
           gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
           
           //MR1
@@ -167,33 +167,33 @@ useHead({
       }
       `,
     },
-    {
-      src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
-      async: true,
-    },
+    // {
+    //   src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
+    //   async: true,
+    // },
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
       async: true,
     },
-    {
-      type: 'text/javascript',
-      innerHTML: import.meta.server
-        ? `
-                var m3_u = (location.protocol=='https:'?'https://adservermsa.gpas.co/www/delivery/ajs.php':'http://adservermsa.gpas.co/www/delivery/ajs.php');
-                var m3_r = Math.floor(Math.random()*99999999999);
-                if (!document.MAX_used) document.MAX_used = ',';
-                document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-                document.write ("?zoneid=133");
-                document.write ('&amp;cb=' + m3_r);
-                if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-                document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-                document.write ("&amp;loc=" + escape(window.location));
-                if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-                if (document.context) document.write ("&context=" + escape(document.context));
-                document.write ("'><\/scr"+"ipt>");
-           `
-        : '',
-    },
+    // {
+    //   type: 'text/javascript',
+    //   innerHTML: import.meta.server
+    //     ? `
+    //             var m3_u = (location.protocol=='https:'?'https://adservermsa.gpas.co/www/delivery/ajs.php':'http://adservermsa.gpas.co/www/delivery/ajs.php');
+    //             var m3_r = Math.floor(Math.random()*99999999999);
+    //             if (!document.MAX_used) document.MAX_used = ',';
+    //             document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+    //             document.write ("?zoneid=133");
+    //             document.write ('&amp;cb=' + m3_r);
+    //             if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+    //             document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+    //             document.write ("&amp;loc=" + escape(window.location));
+    //             if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+    //             if (document.context) document.write ("&context=" + escape(document.context));
+    //             document.write ("'><\/scr"+"ipt>");
+    //        `
+    //     : '',
+    // },
     {
       async: true,
       defer: true,

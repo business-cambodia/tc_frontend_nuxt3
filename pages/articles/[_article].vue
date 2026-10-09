@@ -7,7 +7,8 @@
   <!-- Damrei popup -->
     <!-- <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
       -->
-    <div  id="gax-inpage-async-1700709882"></div>
+    <!-- Damrey mobile popup (80%) — hidden when MSA wins the 20% slot -->
+    <div v-if="!showMSAPopup" id="gax-inpage-async-1700709882"></div>
 
     <!-- GPAS popup -->
     <!-- <ins v-else data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
@@ -18,8 +19,10 @@
         data-revive-id="2d10743d9880200bf17a894cfa35dba0"
       ></ins>
     </template> -->
-  <!-- damrei popup PC -->
-  <div id="gax-inpage-async-1706776197"></div>
+  <!-- Damrey popup PC (80%) — hidden when MSA wins the 20% slot -->
+  <div v-if="!showMSAPopup" id="gax-inpage-async-1706776197"></div>
+
+  <AdsMSAPopup v-if="showMSAPopup" />
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent :aboveArticleAds="aboveArticleAds" :article="article" id="content"
@@ -112,13 +115,15 @@ useHead({
         gammatag.cmd.push(function() {
           // Popup Tech Cambodia PC
 
-          // Popup
-          gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
+          // Popup — null-guarded: div may not exist when MSA popup wins the 20% slot
+          if (document.getElementById('gax-inpage-async-1700709882')) {
+            gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
+          }
           
-          <!--Mobile Underlay - Zone 1-->
+          // Mobile Underlay - Zone 1
           gammatag.defineZone({code:"gax-inpage-async-1700709319",size:[640,1386],params:{siteId:"1700707438",zoneId:"1700709319",zoneType:"Inpage"}});
 
-          <!--Mobile Underlay - Zone 2-->
+          // Mobile Underlay - Zone 2
           gammatag.defineZone({code:"gax-inpage-async-1706848793",size:[640,1386],params:{siteId:"1700707438",zoneId:"1706848793",zoneType:"Inpage"}});
           
           //MR1
@@ -142,8 +147,10 @@ useHead({
           gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
           // MR1 Tech Cambodia (new)
           gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
-          // Popup Tech Cambodia PC
-          gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
+          // Popup Tech Cambodia PC — null-guarded: div may not exist when MSA popup wins the 20% slot
+          if (document.getElementById('gax-inpage-async-1706776197')) {
+            gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
+          }
           
           gammatag.sendRequest();
         }); 
@@ -151,11 +158,11 @@ useHead({
       }
       `,
     },
-    {
-      src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
-      // async: true,
-      defer: true,
-    },
+    // {
+    //   src: '//adservermsa.gpas.co/www/delivery/asyncjs.php',
+    //   // async: true,
+    //   defer: true,
+    // },
 
     {
       src: '//ssp-cdn.gammaplatform.com/js/gaxpt.min.js',
@@ -268,10 +275,19 @@ declare global {
 // popup control
 
 const showDamreiPopup = ref(true);
+const showMSAPopup = ref(false);
 let damreiInterval: number | undefined;
 
 const pickPopupOnce = () => {
-  showDamreiPopup.value = Math.random() < 0.7;
+  const rand = Math.random();
+  // rand < 0.80  → Damrey (Gamma) popup (80%)
+  // rand >= 0.80 → MSA popup (20%)
+  showDamreiPopup.value = rand < 0.8;
+  showMSAPopup.value = rand >= 0.8;
+
+  if (showMSAPopup.value) {
+    // The MSA popup component handles the injection of its scripts internally.
+  }
 };
 
 const startDamreiRefreshIfNeeded = () => {
@@ -343,7 +359,10 @@ const refreshGpasAds = async () => {
 
 const setupPopup = async () => {
   pickPopupOnce();
-  await refreshGpasAds();
+  // await refreshGpasAds();
+
+
+
   startDamreiRefreshIfNeeded();
 };
 
