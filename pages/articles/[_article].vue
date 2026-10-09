@@ -19,9 +19,7 @@
       ></ins>
     </template> -->
   <!-- damrei popup PC -->
-  <ClientOnly>
-    <div id="gax-inpage-async-1706776197"></div>
-  </ClientOnly>
+  <div id="gax-inpage-async-1706776197"></div>
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent :aboveArticleAds="aboveArticleAds" :article="article" id="content"
@@ -30,11 +28,9 @@
         :showElements="showElements" :page="index" />
     </div>
     <!--Damrei - Footer-->
-    <ClientOnly>
-      <div id="gax-inpage-async-1700710572"></div>
-      <!--Footer-->
-      <div id="gax-inpage-async-1718360117"></div>
-    </ClientOnly>
+    <div id="gax-inpage-async-1700710572"></div>
+    <!--Footer-->
+    <div id="gax-inpage-async-1718360117"></div>
     <ArticlesNext :articles="nextArticles" title="បន្តអានអត្ថបទបន្ទាប់" to="/latest" />
     <!-- <AdsBottom :ad="bottomAd" /> -->
   </div>
@@ -362,6 +358,14 @@ watch(
   async () => {
     await setupPopup();
     if (window.FB) window.FB.XFBML.parse();
+    const w = window as any;
+    if (w.gammatag && w.gammatag.cmd) {
+      try {
+        w.gammatag.cmd.push(() => {
+          w.gammatag.sendRequest?.();
+        });
+      } catch (e) {}
+    }
   }
 );
 
