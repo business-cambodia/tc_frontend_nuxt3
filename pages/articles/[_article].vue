@@ -7,8 +7,8 @@
   <!-- Damrei popup -->
     <!-- <div v-if="randPopUp < 7" id="gax-inpage-async-1700709882"></div>
       -->
-    <!-- Damrey mobile popup (100%) -->
-    <div id="gax-inpage-async-1700709882"></div>
+    <!-- Damrey mobile popup (80%) — hidden when MSA wins the 20% slot -->
+    <div v-if="!showMSAPopup" id="gax-inpage-async-1700709882"></div>
 
     <!-- GPAS popup -->
     <!-- <ins v-else data-revive-zoneid="655" data-revive-id="2d10743d9880200bf17a894cfa35dba0"></ins> -->
@@ -19,11 +19,11 @@
         data-revive-id="2d10743d9880200bf17a894cfa35dba0"
       ></ins>
     </template> -->
-  <!-- Damrey popup PC (100%) -->
-  <div id="gax-inpage-async-1706776197"></div>
+  <!-- Damrey popup PC (80%) — hidden when MSA wins the 20% slot -->
+  <div v-if="!showMSAPopup" id="gax-inpage-async-1706776197"></div>
 
-  <!-- MSA popup (turned off) -->
-  <!-- <AdsMSAPopup v-if="showMSAPopup" /> -->
+  <!-- Viya Health Popup (Zone 70 Mobile, Zone 78 Desktop) - MSA (20%) -->
+  <AdsMSAPopup v-if="showMSAPopup" />
   <div class="pt-16 lg:pt-20 dark:bg-dark" id="article_detail">
     <div v-for="(article, index) in articles" :key="index">
       <ArticlesContent :aboveArticleAds="aboveArticleAds" :article="article" id="content"
@@ -114,7 +114,7 @@ useHead({
       innerHTML: `
       if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         gammatag.cmd.push(function() {
-          // Mobile Popup (100% Damrey)
+          // Mobile Popup (80% Damrey)
           if (document.getElementById('gax-inpage-async-1700709882')) {
             gammatag.defineZone({code:"gax-inpage-async-1700709882",size:[282,370],params:{siteId:"1700707438",zoneId:"1700709882",zoneType:"Inpage"}});
           }
@@ -146,7 +146,7 @@ useHead({
           gammatag.defineZone({code:"gax-inpage-async-1750151641",size:[300,250],params:{siteId:"1706775465",zoneId:"1750151641",zoneType:"Inpage"}});
           // MR1 Tech Cambodia (new)
           gammatag.defineZone({code:"gax-inpage-async-1709623758",size:[300,250],params:{siteId:"1706775465",zoneId:"1709623758",zoneType:"Inpage"}});
-          // Popup desktop (100% Damrey)
+          // Popup desktop (80% Damrey)
           if (document.getElementById('gax-inpage-async-1706776197')) {
             gammatag.defineZone({code: "gax-inpage-async-1706776197",size: [1600, 900],params: {siteId: "1706775465",zoneId: "1706776197",zoneType: "Inpage"}});
           }
@@ -278,13 +278,11 @@ const showMSAPopup = ref(false);
 let damreiInterval: number | undefined;
 
 const pickPopupOnce = () => {
-  // 100% Damrey popup, MSA popup turned off
-  showDamreiPopup.value = true;
-  showMSAPopup.value = false;
-
-  // if (showMSAPopup.value) {
-  //   // The MSA popup component handles the injection of its scripts internally.
-  // }
+  const rand = Math.random();
+  // rand < 0.80  → Damrey (Gamma) popup (80%)
+  // rand >= 0.80 → MSA popup (20%)
+  showDamreiPopup.value = rand < 0.8;
+  showMSAPopup.value = rand >= 0.8;
 };
 
 const startDamreiRefreshIfNeeded = () => {

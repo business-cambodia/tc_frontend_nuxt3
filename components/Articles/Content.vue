@@ -122,8 +122,8 @@
             <div v-html="splitBody().thirdPart" class="article_body"></div>
             <!-- Zone Tag : Technology Cambodia Mobile Overlay UT-->
             <div id="div-ad-innity-101010/0"></div>
-            <!-- Sting Underlay (Zone 117) - TC -->
-            <AdsMsaunderlay />
+            <!-- Sting Underlay (Zone 117) - TC (turned off) -->
+            <!-- <AdsMsaunderlay /> -->
 
 
             <!-- Zone Tag : Technology Cambodia Rectangle UT-->

@@ -5,7 +5,7 @@
 
     <div class="msa-popup-container" :class="isDesktop ? 'msa-popup-desktop' : 'msa-popup-mobile'">
       <div class="msa-ad-slot" ref="adSlot">
-        <!-- Mobile popup (zone 70) -->
+        <!-- Viya Health Mobile popup (zone 70) - 1st to 30th Nov 2026 -->
         <ins v-if="!isDesktop"
           data-revive-zoneid="70"
           data-revive-id="787804e582d413f05180b1bcf7b4d832"
