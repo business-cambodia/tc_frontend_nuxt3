@@ -59,13 +59,46 @@ const startCountdown = () => {
 
 const checkCreative = () => {
   if (!adSlot.value) return false;
-  // If ad server returns an iframe
-  if (adSlot.value.querySelector('iframe, img, video, object, embed')) {
+
+  // 1. Check for iframe with valid dimensions
+  const iframe = adSlot.value.querySelector('iframe');
+  if (iframe) {
+    const w = parseInt(iframe.getAttribute('width') || '0', 10);
+    const h = parseInt(iframe.getAttribute('height') || '0', 10);
+    if ((w > 0 && h > 0) || iframe.offsetWidth > 10) return true;
+  }
+
+  // 2. Check for real images (exclude Revive 0x0 beacon tracking pixels)
+  const imgs = adSlot.value.querySelectorAll('img');
+  for (const img of imgs) {
+    const src = img.getAttribute('src') || '';
+    const isBeacon =
+      src.includes('lg.php') ||
+      src.includes('bannerid=0') ||
+      img.closest('[id^="beacon_"]') !== null ||
+      (img.getAttribute('width') === '0' && img.getAttribute('height') === '0');
+
+    if (!isBeacon && src.length > 0) {
+      return true;
+    }
+  }
+
+  // 3. Check for video, object, embed, canvas
+  if (adSlot.value.querySelector('video, object, embed, canvas')) {
     return true;
   }
-  // If ad server fills the ins tag with raw HTML
+
+  // 4. Check if ins tag has real content other than beacon divs
   const ins = adSlot.value.querySelector('ins');
-  return ins && ins.innerHTML && ins.innerHTML.trim().length > 0;
+  if (ins) {
+    const clone = ins.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll('[id^="beacon_"], script, style').forEach((el) => el.remove());
+    if (clone.innerHTML.trim().length > 0 && clone.innerText.trim().length > 0) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 const loadReviveScript = () => {
@@ -170,6 +203,12 @@ onMounted(() => {
 
 .msa-ad-slot :deep(iframe) {
   max-width: 100%;
+  display: block;
+}
+
+.msa-ad-slot :deep(img) {
+  max-width: 100%;
+  height: auto;
   display: block;
 }
 
